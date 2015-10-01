@@ -3,9 +3,9 @@ iMap4: An Open Source Toolbox for the Statistical Fixation Mapping of Eye Moveme
 
 Junpeng Lao<sup>1</sup>, Sébastien Miellet<sup>1,2</sup>, Cyril Pernet<sup>3</sup>, Nayla Sokhn<sup>1</sup>, and Roberto Caldara<sup>1</sup>
 
-1 Department of Psychology, University of Fribourg, Fribourg, Switzerland
-2 Department of Psychology, Bournemouth University, UK
-3 Centre for Clinical Brain Sciences, Neuroimaging Sciences, University of Edinburgh, Edinburgh, UK
+<sup>1</sup> Department of Psychology, University of Fribourg, Fribourg, Switzerland
+<sup>2</sup> Department of Psychology, Bournemouth University, UK
+<sup>3</sup> Centre for Clinical Brain Sciences, Neuroimaging Sciences, University of Edinburgh, Edinburgh, UK
 
 Please read the guidebook for more information of how to use the toolbox.
 
