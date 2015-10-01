@@ -1,7 +1,8 @@
 % Junpeng Lao (2012)
 % University of Fribourg
 % junpeng.lao@unifr.ch
-
+%--------------------------------------------------------------------------
+% Copyright (C) iMap Team 2015
 function RGB_M=indtorgb(datasetmap,cmin,cmax,datasetcmat_temp)
 
 mapmin=min(datasetmap(:));

@@ -1,3 +1,5 @@
+%--------------------------------------------------------------------------
+% Copyright (C) iMap Team 2015
 %% remove NaN
 remv=find(isnan(FixMap(:,1,1)));
 FixMap(remv,:,:)=[];

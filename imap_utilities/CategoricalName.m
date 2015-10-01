@@ -1,5 +1,7 @@
 function [CatePredictor,contrast]=CategoricalName(LMMmap)
 % get catigorical predictor from model beta combination
+%--------------------------------------------------------------------------
+% Copyright (C) iMap Team 2015
 tbl=LMMmap.Variables;
 DesignMatrix=LMMmap.modelX;
 if isa(tbl,'dataset')

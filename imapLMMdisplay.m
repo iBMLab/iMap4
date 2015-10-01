@@ -22,7 +22,7 @@ function imapLMMdisplay(StatMap,normalized,backgroundfile,cmap,colormaprange,dis
 % See also imapLMM, imapLMMcontrast
 %
 % 2015-02-12 Junpeng Lao, University of Fribourg.
-%
+%--------------------------------------------------------------------------
 % Copyright (C) iMap Team 2015
 
 %%

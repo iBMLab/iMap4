@@ -1,0 +1,148 @@
+<deployment-project plugin="plugin.apptool" plugin-version="1.0">
+  <configuration build-checksum="4200490022" file="\\bigdata\arts\Psycho\iBMLab\Charles\imap4_v0.2\iMAP.prj" location="\\bigdata\arts\Psycho\iBMLab\Charles\imap4_v0.2" name="iMAP" target="target.mlapps" target-name="Package App">
+    <param.appname>iMAP</param.appname>
+    <param.authnamewatermark>Junpeng Lao &amp; Nayla Sokhn</param.authnamewatermark>
+    <param.email>junpeng.lao@unifr.ch</param.email>
+    <param.company>iBMLab, University of Fribourg</param.company>
+    <param.icon>${PROJECT_ROOT}\iMAP_resources\icon_24.png</param.icon>
+    <param.icons>
+      <file>${PROJECT_ROOT}\iMAP_resources\icon_48.png</file>
+      <file>${PROJECT_ROOT}\iMAP_resources\icon_24.png</file>
+      <file>${PROJECT_ROOT}\iMAP_resources\icon_16.png</file>
+    </param.icons>
+    <param.summary>Spatial mapping of smoothed 2D fixation maps using Linear Mixed Models</param.summary>
+    <param.description>iMap4: An Open Source Toolbox for the Statistical Fixation Mapping of Eye Movement data with Linear Mixed Modeling
+
+Junpeng Lao1, Sébastien Miellet1,2, Cyril Pernet3, Nayla Sokhn1, and Roberto Caldara1
+1Department of Psychology, University of Fribourg, Fribourg, Switzerland
+2Department of Psychology, Bournemouth University, Bournemouth, UK
+3Centre for Clinical Brain Sciences, Neuroimaging Sciences, University of Edinburgh, Edinburgh, UK
+
+A major challenge in modern eye movement research is to statistically map where observers are looking at, as well as isolating statistical significant differences between groups and conditions. Compared to signals of contemporary neuroscience measures, such as M/EEG and fMRI, eye movement data are sparser with much larger variations across trials and participants. As a result, the implementation of a conventional linear modeling approach on two-dimensional fixation distributions often returns unstable estimations and underpowered results, leaving this statistical problem unresolved.
+
+Here, we tackled this issue by using the statistical framework implemented in diverse state-of-the-art neuroimaging data processing toolboxes: Statistical Parametric Mapping (SPM), Fieldtrip and LIMO EEG. We applied a univariate, pixel-wise Linear Mixed Models (LMM) on the smoothed fixation data with each subject as a random effect, which offers the flexibility to code for multiple between- and within- subject comparisons. After this step, our approach allows to perform all the possible linear contrasts for the fixed effects (main effects, interactions, etc.). Importantly, we also introduced a novel spatial cluster test based on bootstrapping to assess the statistical significance of the linear contrasts. Finally, we validated this approach by using both experimental and computer simulation data with a Monte Carlo approach.
+
+iMap4 is a freely available MATLAB open source toolbox for the statistical fixation mapping of eye movement data, with a user-friendly interface providing straightforward, easy to interpret statistical graphical outputs and matching the standards in robust statistical neuroimaging methods. iMap4 represents a major step in the processing of eye movement fixation data, paving the way to a routine use of robust data-driven analyses in this important field of vision sciences.</param.description>
+    <param.screenshot>${PROJECT_ROOT}\GUI\logo_imap.png</param.screenshot>
+    <param.version>4.03</param.version>
+    <param.products.name>
+      <item>Statistics Toolbox</item>
+      <item>MATLAB</item>
+      <item>Image Processing Toolbox</item>
+    </param.products.name>
+    <param.products.id>
+      <item>19</item>
+      <item>1</item>
+      <item>17</item>
+    </param.products.id>
+    <param.products.version>
+      <item>8.3</item>
+      <item>8.2</item>
+      <item>8.3</item>
+    </param.products.version>
+    <param.platforms />
+    <param.output>${PROJECT_ROOT}\iMAP.mlappinstall</param.output>
+    <param.guid>19554b2a-6209-4007-98ea-cf9f6f6fb96d</param.guid>
+    <unset>
+      <param.platforms />
+    </unset>
+    <fileset.main>
+      <file>${PROJECT_ROOT}\GUI\iMAP.m</file>
+    </fileset.main>
+    <fileset.depfun>
+      <file>${PROJECT_ROOT}\GUI\allcombs.m</file>
+      <file>${PROJECT_ROOT}\GUI\char2cell.m</file>
+      <file>${PROJECT_ROOT}\GUI\check_columns_file.m</file>
+      <file>${PROJECT_ROOT}\GUI\create_new_data.m</file>
+      <file>${PROJECT_ROOT}\GUI\create_subject.m</file>
+      <file>${PROJECT_ROOT}\GUI\descriptive_part.m</file>
+      <file>${PROJECT_ROOT}\GUI\findseq.m</file>
+      <file>${PROJECT_ROOT}\GUI\function_contrast_one_tail.m</file>
+      <file>${PROJECT_ROOT}\GUI\function_extension_file.m</file>
+      <file>${PROJECT_ROOT}\GUI\function_extension_multiplefile.m</file>
+      <file>${PROJECT_ROOT}\GUI\function_find_fixation.m</file>
+      <file>${PROJECT_ROOT}\GUI\function_select_predictors_stat.m</file>
+      <file>${PROJECT_ROOT}\GUI\iMAP.fig</file>
+      <file>${PROJECT_ROOT}\GUI\IMAP.png</file>
+      <file>${PROJECT_ROOT}\GUI\imap_gui.fig</file>
+      <file>${PROJECT_ROOT}\GUI\imap_gui.m</file>
+      <file>${PROJECT_ROOT}\GUI\implode.m</file>
+      <file>${PROJECT_ROOT}\GUI\inputsdlg.m</file>
+      <file>${PROJECT_ROOT}\GUI\logo_imap.png</file>
+      <file>${PROJECT_ROOT}\GUI\manual_GUI.pdf</file>
+      <file>${PROJECT_ROOT}\GUI\model_plot.m</file>
+      <file>${PROJECT_ROOT}\GUI\modelling_analysis.m</file>
+      <file>${PROJECT_ROOT}\GUI\modelling_part.m</file>
+      <file>${PROJECT_ROOT}\GUI\multiple_comparison_tab.m</file>
+      <file>${PROJECT_ROOT}\GUI\nominal_predictorM.m</file>
+      <file>${PROJECT_ROOT}\GUI\normalization.m</file>
+      <file>${PROJECT_ROOT}\GUI\reset_variables.m</file>
+      <file>${PROJECT_ROOT}\GUI\retrieve_table_conditions.m</file>
+      <file>${PROJECT_ROOT}\GUI\save_LMM.m</file>
+      <file>${PROJECT_ROOT}\GUI\select_condition_model.m</file>
+      <file>${PROJECT_ROOT}\GUI\select_conditions.m</file>
+      <file>${PROJECT_ROOT}\GUI\select_delimitation.m</file>
+      <file>${PROJECT_ROOT}\GUI\select_mask_parameter.m</file>
+      <file>${PROJECT_ROOT}\GUI\select_option_bootstrap.m</file>
+      <file>${PROJECT_ROOT}\GUI\select_option_cluster.m</file>
+      <file>${PROJECT_ROOT}\GUI\select_option_fdr.m</file>
+      <file>${PROJECT_ROOT}\GUI\select_option_mcc.m</file>
+      <file>${PROJECT_ROOT}\GUI\select_option_randomfield.m</file>
+      <file>${PROJECT_ROOT}\GUI\select_parameters.m</file>
+      <file>${PROJECT_ROOT}\GUI\select_scale_parameter.m</file>
+      <file>${PROJECT_ROOT}\GUI\select_smoothing2.m</file>
+      <file>${PROJECT_ROOT}\GUI\txtimapout.m</file>
+      <file>${PROJECT_ROOT}\GUI\type_fixation.m</file>
+      <file>${PROJECT_ROOT}\imap_utilities\CategoricalName.m</file>
+      <file>${PROJECT_ROOT}\imap_utilities\CIforFixed.m</file>
+      <file>${PROJECT_ROOT}\imap_utilities\CiVol.m</file>
+      <file>${PROJECT_ROOT}\imap_utilities\clustertest2D.m</file>
+      <file>${PROJECT_ROOT}\imap_utilities\covproj.m</file>
+      <file>${PROJECT_ROOT}\imap_utilities\Descriptive.m</file>
+      <file>${PROJECT_ROOT}\imap_utilities\fdr.m</file>
+      <file>${PROJECT_ROOT}\imap_utilities\HalfMax.m</file>
+      <file>${PROJECT_ROOT}\imap_utilities\histfitimap.m</file>
+      <file>${PROJECT_ROOT}\imap_utilities\indtorgb.m</file>
+      <file>${PROJECT_ROOT}\imap_utilities\limo_OrthogContrasts.m</file>
+      <file>${PROJECT_ROOT}\imap_utilities\maincontrast.m</file>
+      <file>${PROJECT_ROOT}\imap_utilities\mcc2d.m</file>
+      <file>${PROJECT_ROOT}\imap_utilities\stat_threshold.m</file>
+      <file>${PROJECT_ROOT}\imap_utilities\tfce2d.m</file>
+      <file>${PROJECT_ROOT}\imap_utilities\winsored_fixmap.m</file>
+    </fileset.depfun>
+    <fileset.resources>
+      <file>${PROJECT_ROOT}\GUI</file>
+      <file>${PROJECT_ROOT}\imap_utilities</file>
+      <file>${PROJECT_ROOT}\imapLMM.m</file>
+      <file>${PROJECT_ROOT}\imapLMMcontrast.m</file>
+      <file>${PROJECT_ROOT}\imapLMMdisplay.m</file>
+      <file>${PROJECT_ROOT}\imapLMMmcc.m</file>
+      <file>${PROJECT_ROOT}\imapLMMposthoc.m</file>
+      <file>${PROJECT_ROOT}\imapLMMresample.m</file>
+    </fileset.resources>
+    <fileset.package />
+    <build-deliverables>
+      <file location="\\bigdata\arts\Psycho\iBMLab\Charles\imap4_v0.2" name="iMAP.mlappinstall" optional="false">\\bigdata\arts\Psycho\iBMLab\Charles\imap4_v0.2\iMAP.mlappinstall</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>C:\Program Files\MATLAB\R2014b</root>
+      <toolboxes />
+    </matlab>
+    <platform>
+      <unix>false</unix>
+      <mac>false</mac>
+      <windows>true</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>false</linux>
+      <solaris>false</solaris>
+      <osver>6.2</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>win64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>

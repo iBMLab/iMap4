@@ -20,7 +20,7 @@ function [ResampStat]=imapLMMresample(FixMap,LMMmap,c,h,effect,method,nboot,grou
 % 2014-09-14 Junpeng Lao, University of Fribourg.
 % 2014-12-02 Option implemented for random with replacement within group
 %            during bootstrap
-%
+%--------------------------------------------------------------------------
 % Copyright (C) iMap Team 2015
 v=ver;
 has_fsolve=any(strcmp({v.Name},'Parallel Computing Toolbox'));

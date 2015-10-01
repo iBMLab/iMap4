@@ -15,7 +15,7 @@ function [StatMap_c]=imapLMMmcc(StatMap,LMMmap,mccopt,varargin)
 %               enhancement developed by Smith & Nichols, 2009
 %
 % 2015-02-12 Junpeng Lao, University of Fribourg.
-%
+%--------------------------------------------------------------------------
 % Copyright (C) iMap Team 2015
 
 warning('off','all');

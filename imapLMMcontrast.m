@@ -19,7 +19,7 @@ function [StatMap]=imapLMMcontrast(LMMmap,opt)
 % see also imapLMM, imapLMMdisplay
 %
 % 2015-02-12 Junpeng Lao, University of Fribourg.
-%
+%--------------------------------------------------------------------------
 % Copyright (C) iMap Team 2015
 
 StatMap=struct;

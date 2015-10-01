@@ -1,4 +1,6 @@
 function proj=covproj(c,covb)
+%--------------------------------------------------------------------------
+% Copyright (C) iMap Team 2015
 % Compute k*G*k' for multidimension G
 [~,~,np]=size(covb);
 [m,rho]=size(c);

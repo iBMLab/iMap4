@@ -1,3 +1,12 @@
+iMap4 is a freely available MATLAB open source toolbox for the statistical 
+fixation mapping of eye movement data, with a user-friendly interface 
+providing straightforward, easy to interpret statistical graphical outputs 
+and matching the standards in robust statistical neuroimaging methods. 
+This program is a collaborative works between authors from the Univeristy of Fribourg (JL, NS, RC)
+Bournemouth University (SM), and University of Edinburgh (CP)
+Copyright (C) 2015  Junpeng Lao, Sebastien Miellet, Cyril Pernet, Nayla Sokhn, and Roberto Caldara
+
+
                     GNU GENERAL PUBLIC LICENSE
                        Version 2, June 1991
 
@@ -290,7 +299,13 @@ to attach them to the start of each source file to most effectively
 convey the exclusion of warranty; and each file should have at least
 the "copyright" line and a pointer to where the full notice is found.
 
-    {description
+    iMap4 is a freely available MATLAB open source toolbox for the statistical 
+    fixation mapping of eye movement data, with a user-friendly interface 
+    providing straightforward, easy to interpret statistical graphical outputs 
+    and matching the standards in robust statistical neuroimaging methods. 
+    This program is a collaborative works between authors from the Univeristy of Fribourg (JL, NS, RC)
+    Bournemouth University (SM), and University of Edinburgh (CP)
+
     Copyright (C) 2015 iMap Team
 
     This program is free software; you can redistribute it and/or modify

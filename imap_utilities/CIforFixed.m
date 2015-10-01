@@ -2,6 +2,8 @@ function masknew=CIforFixed(StatMap,baseline)
 % Confidence Interval for fixed effect beta
 % size(StatMap_c.betaCI)
 % size(StatMap_c.resampMat.resBeta)
+%--------------------------------------------------------------------------
+% Copyright (C) iMap Team 2015
 cmax=max(StatMap.betaCI(:));
 cmin=min(StatMap.betaCI(:));
 scrsz=get(0,'ScreenSize');% get screen size for output display

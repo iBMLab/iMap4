@@ -11,7 +11,7 @@ function [Posthoc]=imapLMMposthoc(StatMap,FixMap,LMMmap,method,flag,formula2)
 % See also imapLMM, imapLMMcontrast, imapLMMdisplay
 %
 % 2015-02-12 Junpeng Lao, University of Fribourg.
-%
+%--------------------------------------------------------------------------
 % Copyright (C) iMap Team 2015
 
 scrsz=get(0,'ScreenSize');% get screen size for output display

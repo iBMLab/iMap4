@@ -1,4 +1,6 @@
 function Pmask=clustertest2D(Fvalue,Pmap,alpha,thresMass,thresSize,thresDens)
+%--------------------------------------------------------------------------
+% Copyright (C) iMap Team 2015
 tmpMsk=Pmap<alpha;
 [L,num]=bwlabel(tmpMsk,4);
 if ~isempty(thresDens)

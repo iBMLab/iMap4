@@ -19,7 +19,8 @@ function tfce_score = tfce2d(varargin)
 %
 % Cyril Pernet 18-10-2011
 % GAR 21-02-2012: made 2d version for classification images using bwlabel
-%                 changed check for negative values to min(data(:)) >= 0   
+%                 changed check for negative values to min(data(:)) >= 0  
+% modified by Junpeng Lao for iMap4
 % -----------------------------
 % Copyright (C) LIMO Team 2010
 

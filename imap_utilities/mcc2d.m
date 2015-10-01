@@ -7,7 +7,8 @@ function [mask,cthred]=mcc2d(Statmap,pmap,alpha,method)
 %          pmap: p values
 %         alpha: default .05
 %        method: estimate all effect separetely -1; together -2
-
+%--------------------------------------------------------------------------
+% Copyright (C) iMap Team 2015
 if nargin < 2
     error(message('Too Few Inputs'));
 end

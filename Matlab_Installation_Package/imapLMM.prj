@@ -1,0 +1,143 @@
+<deployment-project plugin="plugin.toolbox" plugin-version="1.0">
+  <configuration build-checksum="3043303519" file="\\bigdata\arts\Psycho\iBMLab\Charles\imap4_v0.2\imapLMM.prj" location="\\bigdata\arts\Psycho\iBMLab\Charles\imap4_v0.2" name="imapLMM" target="target.toolbox" target-name="Package Toolbox">
+    <param.appname>imapLMM</param.appname>
+    <param.authnamewatermark>Junpeng Lao &amp; Nayla Sokhn</param.authnamewatermark>
+    <param.email>Junpeng.lao@unifr.ch</param.email>
+    <param.company>iBMLab, University of Fribourg</param.company>
+    <param.summary>Spatial mapping of smoothed 2D fixation maps using Linear Mixed Models</param.summary>
+    <param.description>iMap4: An Open Source Toolbox for the Statistical Fixation Mapping of Eye Movement data with Linear Mixed Modeling
+
+Junpeng Lao1, SÃ©bastien Miellet1,2, Cyril Pernet3, Nayla Sokhn1, and Roberto Caldara1
+1Department of Psychology, University of Fribourg, Fribourg, Switzerland
+2Department of Psychology, Bournemouth University, Bournemouth, UK
+3Centre for Clinical Brain Sciences, Neuroimaging Sciences, University of Edinburgh, Edinburgh, UK
+
+A major challenge in modern eye movement research is to statistically map where observers are looking at, as well as isolating statistical significant differences between groups and conditions. Compared to signals of contemporary neuroscience measures, such as M/EEG and fMRI, eye movement data are sparser with much larger variations across trials and participants. As a result, the implementation of a conventional linear modeling approach on two-dimensional fixation distributions often returns unstable estimations and underpowered results, leaving this statistical problem unresolved.
+
+Here, we tackled this issue by using the statistical framework implemented in diverse state-of-the-art neuroimaging data processing toolboxes: Statistical Parametric Mapping (SPM), Fieldtrip and LIMO EEG. We applied a univariate, pixel-wise Linear Mixed Models (LMM) on the smoothed fixation data with each subject as a random effect, which offers the flexibility to code for multiple between- and within- subject comparisons. After this step, our approach allows to perform all the possible linear contrasts for the fixed effects (main effects, interactions, etc.). Importantly, we also introduced a novel spatial cluster test based on bootstrapping to assess the statistical significance of the linear contrasts. Finally, we validated this approach by using both experimental and computer simulation data with a Monte Carlo approach.
+
+iMap4 is a freely available MATLAB open source toolbox for the statistical fixation mapping of eye movement data, with a user-friendly interface providing straightforward, easy to interpret statistical graphical outputs and matching the standards in robust statistical neuroimaging methods. iMap4 represents a major step in the processing of eye movement fixation data, paving the way to a routine use of robust data-driven analyses in this important field of vision sciences.</param.description>
+    <param.screenshot>${PROJECT_ROOT}\GUI\IMAP.png</param.screenshot>
+    <param.version>4.03</param.version>
+    <param.output>${PROJECT_ROOT}\imapLMM.mltbx</param.output>
+    <param.products.name>
+      <item>MATLAB</item>
+      <item>Image Processing Toolbox</item>
+      <item>Statistics Toolbox</item>
+    </param.products.name>
+    <param.products.id>
+      <item>1</item>
+      <item>17</item>
+      <item>19</item>
+    </param.products.id>
+    <param.products.version>
+      <item>8.4</item>
+      <item>9.1</item>
+      <item>9.1</item>
+    </param.products.version>
+    <param.platforms />
+    <param.guid>9d5cdcab-c4b7-4419-a472-a1f5bad0071c</param.guid>
+    <param.exclude.filters>% List files contained in your toolbox folder that you would like to exclude
+% from packaging.  Excludes should be listed relative to the toolbox folder.
+% Some examples of how to specify excludes are provided below:
+%
+% A single file in the toolbox folder:
+iMAP.prj
+imap4.prj
+imapLMM.prj
+iMAP.mlappinstall
+%
+% A single file in a subfolder of the toolbox folder:
+% example/.svn
+%
+% All files in a subfolder of the toolbox folder:
+**/iMAP_resources
+%
+% All files of a certain name in all subfolders of the toolbox folder:
+% **/.svn
+%
+% All files matching a pattern in all subfolders of the toolbox folder:
+% **/*.bak
+%</param.exclude.filters>
+    <param.examples>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;examples/&gt;</param.examples>
+    <param.demosxml />
+    <param.apps>
+      <file>${PROJECT_ROOT}\iMAP.mlappinstall</file>
+    </param.apps>
+    <param.docs />
+    <unset>
+      <param.output />
+      <param.platforms />
+      <param.demosxml />
+      <param.docs />
+    </unset>
+    <fileset.rootdir>
+      <file>\\bigdata\Arts\Psycho\iBMLab\Charles\imap4_v0.2</file>
+    </fileset.rootdir>
+    <fileset.rootfiles>
+      <file>${PROJECT_ROOT}\.DS_Store</file>
+      <file>${PROJECT_ROOT}\GUI</file>
+      <file>${PROJECT_ROOT}\imap_utilities</file>
+      <file>${PROJECT_ROOT}\imapLMM.m</file>
+      <file>${PROJECT_ROOT}\imapLMMcontrast.m</file>
+      <file>${PROJECT_ROOT}\imapLMMdisplay.m</file>
+      <file>${PROJECT_ROOT}\imapLMMmcc.m</file>
+      <file>${PROJECT_ROOT}\imapLMMposthoc.m</file>
+      <file>${PROJECT_ROOT}\imapLMMresample.m</file>
+    </fileset.rootfiles>
+    <fileset.depfun.included />
+    <fileset.depfun.excluded>
+      <file>\\bigdata\Arts\Psycho\iBMLab\toolbox\eeglab13_1_1b\functions\sigprocfunc\quantile.m</file>
+      <file>\\bigdata\Arts\Psycho\iBMLab\toolbox\eeglab13_1_1b\plugins\biosig4octmat-2.88\biosig\t200_FileAccess\str2double.m</file>
+      <file>\\bigdata\Arts\Psycho\iBMLab\toolbox\eeglab13_1_1b\plugins\fileio-20140117\fileio-20140117\@uint64\abs.m</file>
+      <file>\\bigdata\Arts\Psycho\iBMLab\toolbox\eeglab13_1_1b\plugins\fileio-20140117\fileio-20140117\@uint64\all.m</file>
+      <file>\\bigdata\Arts\Psycho\iBMLab\toolbox\eeglab13_1_1b\plugins\fileio-20140117\fileio-20140117\@uint64\any.m</file>
+      <file>\\bigdata\Arts\Psycho\iBMLab\toolbox\eeglab13_1_1b\plugins\fileio-20140117\fileio-20140117\@uint64\diff.m</file>
+      <file>\\bigdata\Arts\Psycho\iBMLab\toolbox\eeglab13_1_1b\plugins\fileio-20140117\fileio-20140117\@uint64\max.m</file>
+      <file>\\bigdata\Arts\Psycho\iBMLab\toolbox\eeglab13_1_1b\plugins\fileio-20140117\fileio-20140117\@uint64\min.m</file>
+      <file>\\bigdata\Arts\Psycho\iBMLab\toolbox\eeglab13_1_1b\plugins\fileio-20140117\fileio-20140117\@uint64\minus.m</file>
+      <file>\\bigdata\Arts\Psycho\iBMLab\toolbox\eeglab13_1_1b\plugins\fileio-20140117\fileio-20140117\@uint64\plus.m</file>
+      <file>\\bigdata\Arts\Psycho\iBMLab\toolbox\eeglab13_1_1b\plugins\fileio-20140117\fileio-20140117\@uint64\rdivide.m</file>
+      <file>\\bigdata\Arts\Psycho\iBMLab\toolbox\eeglab13_1_1b\plugins\fileio-20140117\fileio-20140117\@uint64\times.m</file>
+      <file>\\bigdata\Arts\Psycho\iBMLab\toolbox\fieldtrip-20140114\fileio\@uint64\abs.m</file>
+      <file>\\bigdata\Arts\Psycho\iBMLab\toolbox\fieldtrip-20140114\fileio\@uint64\all.m</file>
+      <file>\\bigdata\Arts\Psycho\iBMLab\toolbox\fieldtrip-20140114\fileio\@uint64\any.m</file>
+      <file>\\bigdata\Arts\Psycho\iBMLab\toolbox\fieldtrip-20140114\fileio\@uint64\diff.m</file>
+      <file>\\bigdata\Arts\Psycho\iBMLab\toolbox\fieldtrip-20140114\fileio\@uint64\max.m</file>
+      <file>\\bigdata\Arts\Psycho\iBMLab\toolbox\fieldtrip-20140114\fileio\@uint64\min.m</file>
+      <file>\\bigdata\Arts\Psycho\iBMLab\toolbox\fieldtrip-20140114\fileio\@uint64\minus.m</file>
+      <file>\\bigdata\Arts\Psycho\iBMLab\toolbox\fieldtrip-20140114\fileio\@uint64\plus.m</file>
+      <file>\\bigdata\Arts\Psycho\iBMLab\toolbox\fieldtrip-20140114\fileio\@uint64\rdivide.m</file>
+      <file>\\bigdata\Arts\Psycho\iBMLab\toolbox\fieldtrip-20140114\fileio\@uint64\times.m</file>
+      <file>\\bigdata\Arts\Psycho\iBMLab\toolbox\fieldtrip-20140114\src\nanmean.m</file>
+      <file>\\bigdata\Arts\Psycho\iBMLab\toolbox\fieldtrip-20140114\src\nanmean.mexw64</file>
+      <file>\\bigdata\Arts\Psycho\iBMLab\toolbox\fieldtrip-20140114\src\nansum.m</file>
+      <file>\\bigdata\Arts\Psycho\iBMLab\toolbox\fieldtrip-20140114\src\nansum.mexw64</file>
+    </fileset.depfun.excluded>
+    <fileset.package />
+    <build-deliverables>
+      <file location="\\bigdata\arts\Psycho\iBMLab\Charles\imap4_v0.2" name="imapLMM.mltbx" optional="false">\\bigdata\arts\Psycho\iBMLab\Charles\imap4_v0.2\imapLMM.mltbx</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>C:\Program Files\MATLAB\R2014b</root>
+      <toolboxes />
+    </matlab>
+    <platform>
+      <unix>false</unix>
+      <mac>false</mac>
+      <windows>true</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>false</linux>
+      <solaris>false</solaris>
+      <osver>6.2</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>win64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>

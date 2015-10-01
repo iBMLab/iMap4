@@ -25,7 +25,7 @@ function [LMMmap,lmexample]=imapLMM(FixMap,PredictorM,Mask,opt,formula,varargin)
 %
 % 2014-11-08 Code updated to sort out compatible issue with Matlab 2014b
 % 2015-02-12 Junpeng Lao, University of Fribourg.
-%
+%--------------------------------------------------------------------------
 % Copyright (C) iMap Team 2015
 %% check Matlab version and toolbox before start
 v=ver;

@@ -1,4 +1,6 @@
 function [contrast,hypothesis]=maincontrast(coefname,maplabel)
+%--------------------------------------------------------------------------
+% Copyright (C) iMap Team 2015
 %%
 % first unify catigorical predictor in interactions
 coefname2=cell(size(coefname));
