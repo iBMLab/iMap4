@@ -1,10 +1,11 @@
 # imap4
 iMap4: An Open Source Toolbox for the Statistical Fixation Mapping of Eye Movement data with Linear Mixed Modeling
 
-Junpeng Lao1*, Sébastien Miellet1,2, Cyril Pernet3, Nayla Sokhn1, and Roberto Caldara1*
-1Department of Psychology, University of Fribourg, Fribourg, Switzerland
+Junpeng Lao<sup>1</sup>, Sébastien Miellet<sup>1,2</sup>, Cyril Pernet<sup>3</sup>, Nayla Sokhn<sup>1</sup>, and Roberto Caldara<sup>1</sup>
+
+1 Department of Psychology, University of Fribourg, Fribourg, Switzerland
 2 Department of Psychology, Bournemouth University, UK
-3Centre for Clinical Brain Sciences, Neuroimaging Sciences, University of Edinburgh, Edinburgh, UK
+3 Centre for Clinical Brain Sciences, Neuroimaging Sciences, University of Edinburgh, Edinburgh, UK
 
 Please read the guidebook for more information of how to use the toolbox.
 
