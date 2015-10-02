@@ -7,6 +7,8 @@ Junpeng Lao<sup>1</sup>, Sébastien Miellet<sup>1,2</sup>, Cyril Pernet<sup>3</s
 <sup>2</sup> Department of Psychology, Bournemouth University, UK.
 <sup>3</sup> Centre for Clinical Brain Sciences, Neuroimaging Sciences, University of Edinburgh, Edinburgh, UK.
 
+For installation, please download ./Matlab_Installation_Package and intall the toolbox as a Matlab Application
+
 Please read the guidebook for more information of how to use the toolbox.
 
 Updates and new release will be announced on our lab website: http://perso.unifr.ch/roberto.caldara/index.php?page=3 
