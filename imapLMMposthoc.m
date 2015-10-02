@@ -51,7 +51,9 @@ categyprediname=VarNames(categypredi);
 % remove subject/grouping/random predictor if there is any
 exclu1=zeros(length(categyprediname),1);
 for icate=1:length(categyprediname)
-    if isempty(strmatch(categyprediname{icate},coefname))
+    catename=categyprediname{icate};
+    logictmp=strncmp(catename,coefname,length(catename));
+    if sum(logictmp)==0
         exclu1(icate)=1;
     end
 end

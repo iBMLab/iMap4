@@ -59,13 +59,17 @@ exclu1=zeros(length(categyprediname),1);
 exclu2=zeros(length(contiuprediname),1);
 
 for icate=1:length(categyprediname)
-    if isempty(strmatch(categyprediname{icate},coefname))
+    catename=categyprediname{icate};
+    logictmp=strncmp(catename,coefname,length(catename));
+    if sum(logictmp)==0
         exclu1(icate)=1;
     end
 end
 categyprediname(exclu1==1)=[];
 for iconu=1:length(contiuprediname)
-    if isempty(strmatch(contiuprediname{iconu},coefname))
+    conuname=contiuprediname{iconu};
+    logictmp=strncmp(conuname,coefname,length(conuname));
+    if sum(logictmp)==0
         exclu2(iconu)=1;
     end
 end
