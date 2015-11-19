@@ -25,12 +25,15 @@ function [LMMmap,lmexample]=imapLMM(FixMap,PredictorM,Mask,opt,formula,varargin)
 %
 % 2014-11-08 Code updated to sort out compatible issue with Matlab 2014b
 % 2015-02-12 Junpeng Lao, University of Fribourg.
-%--------------------------------------------------------------------------
+%
 % Copyright (C) iMap Team 2015
 %% check Matlab version and toolbox before start
 v=ver;
+if size(PredictorM,1)~=size(FixMap,1)
+    error('Number of items/trials mismatch between PredictorM and FixMap, please double check your input matrix.')
+end
 if exist('LinearMixedModel')==0
-    error('some crucial toolboxes are missing in your current version of Matlab for imapLMM to run')
+    error('Some crucial toolboxes are missing in your current version of Matlab for imapLMM to run.')
 end
 has_fsolve=any(strcmp({v.Name},'Parallel Computing Toolbox'));
 if has_fsolve==1
@@ -39,12 +42,12 @@ if has_fsolve==1
     else
         gridname=opt.parallelname;
     end
-    disp('imapLMM will be computed in parallel mode, you machine might become quite slow during the computation')
+    disp('imapLMM will be computed in parallel mode, you machine might become quite slow during the computation.')
 end
 if isfield(opt,'singlepredi')==1;
     singlep=opt.singlepredi;
     if singlep~=0
-        disp('Single predictor beta for each categorical condition will be computed')
+        disp('Single predictor beta for each categorical condition will be computed.')
     end
 end
 % create save structure
@@ -71,7 +74,7 @@ elseif isa(tbl,'table')
     VarNames=tbl.Properties.VariableNames;
     tbl= table2dataset(tbl);
 else 
-    error('Please reform your input predictor matrix as dataset')
+    error('Please reform your input predictor matrix as dataset!')
 end
 lmexample = LinearMixedModel.fit(tbl,formula,varargin{:});
 [~,~,randstat]=randomEffects(lmexample);
@@ -79,7 +82,7 @@ time=toc;
 disp(lmexample)
 estimatime=time*numCompute*(2-(singlep==0))/60;
 disp(['The total computation time is around ' num2str(estimatime) ... 
-    ' minutes without parallel computation'])
+    ' minutes without parallel computation.'])
 % save information
 LMMmap.VariableInfo=lmexample.VariableInfo;
 LMMmap.Variables=tbl;
@@ -122,9 +125,7 @@ if singlep~=0
     % remove subject/grouping/random predictor if there is any
     exclu1=zeros(length(categyprediname),1);
     for icate=1:length(categyprediname)
-        catename=categyprediname{icate};
-        logictmp=strncmp(catename,coefname,length(catename));
-        if sum(logictmp)==0
+        if isempty(strmatch(categyprediname{icate},coefname))
             exclu1(icate)=1;
         end
     end
