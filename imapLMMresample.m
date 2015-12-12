@@ -138,6 +138,43 @@ switch effect2
         % the LMM estimation)
         % beta=(reshape(DX\Y(:,:),size(DX,2),size(FixMap,2),size(FixMap,3)));
         
+        % find subject vector
+        [~,b]=find(Zx~=1&Zx~=0);
+        if ~isempty(b)
+            Zx(:,b)=[];
+        end
+        
+        indxsbj=full(Zx);
+        if sum(indxsbj(:)==1)==Nitem
+            indxsbj(Zx==1)=1:Nitem;
+        else
+            try
+                Nmatrix=round(sum(indxsbj(:)==1)/Nitem);
+                columnsum=sum(indxsbj,1);
+                matrixblock=zeros(size(columnsum));
+                tmpsum=0;blocktype=1;
+                for ii=1:size(columnsum,2)
+                    tmpsum=tmpsum+columnsum(ii);
+                    if tmpsum<=Nitem
+                        matrixblock(ii)=blocktype;
+                    elseif tmpsum>Nitem
+                        blocktype=blocktype+1;
+                        tmpsum=0;
+                        matrixblock(ii)=blocktype;
+                    end
+                end
+                NNmatrix=zeros(Nmatrix,1);
+                for iN=1:Nmatrix
+                    NNmatrix(iN)=sum(matrixblock==iN);
+                end
+                sbjindxtmp=matrixblock==find(NNmatrix==max(NNmatrix));
+                indxsbj(:,~sbjindxtmp)=[];
+                indxsbj(indxsbj==1)=1:Nitem;
+            catch
+                error('imapLMMresample error: Can not retrieve Subject column for resampling.')
+            end
+        end
+        
         % take data within mask.
         npixel=size(Yfixed,2);
         switch method
@@ -177,12 +214,24 @@ switch effect2
                     % We dont do sign flips
                     B=1;
                     boot_index1=zeros(nboot+500,Nitem);
-                    while size(unique(boot_index1,'rows'),1)<nboot+1
-                        tmp = randperm(Nitem);
-                        boot_index1(B,:)=tmp;
-                        B=B+1;
+                    if length(GroupPredictor)>1 % more than 1 groups
+                        while size(unique(boot_index1,'rows'),1)<nboot+1
+                            tmp = [];
+                            for ig=1:length(GroupPredictor)
+                                sbjtmp=find(grouping==GroupPredictor(ig));
+                                tmp=[tmp sbjtmp(randperm(length(sbjtmp)))'];
+                            end
+                            boot_index1(B,:) = tmp;
+                            B=B+1;
+                        end
+                    else
+                        while size(unique(boot_index1,'rows'),1)<nboot+1
+                            tmp = randperm(Nitem);
+                            boot_index1(B,:)=tmp;
+                            B=B+1;
+                        end
                     end
-                    boot_index=unique(boot_index1(boot_index1(:,1)~=0,:),'rows');
+                    boot_index=unique(boot_index1(boot_index1(:,1)~=0,:),'rows');                    
                     ResampStat.resTABLE=boot_index;
                     
                     % orignial statistic for the fixed effect (revisit)
@@ -336,42 +385,6 @@ switch effect2
                 
                 % contruct bootstrap table
                 % random with replacement for all subject
-                % find subject vector
-                [~,b]=find(Zx~=1&Zx~=0);
-                if ~isempty(b)
-                    Zx(:,b)=[];
-                end
-                
-                indxsbj=full(Zx);
-                if sum(indxsbj(:)==1)==Nitem
-                    indxsbj(Zx==1)=1:Nitem;
-                else
-                    try
-                        Nmatrix=round(sum(indxsbj(:)==1)/Nitem);
-                        columnsum=sum(indxsbj,1);
-                        matrixblock=zeros(size(columnsum));
-                        tmpsum=0;blocktype=1;
-                        for ii=1:size(columnsum,2)
-                            tmpsum=tmpsum+columnsum(ii);
-                            if tmpsum<=Nitem
-                                matrixblock(ii)=blocktype;
-                            elseif tmpsum>Nitem
-                                blocktype=blocktype+1;
-                                tmpsum=0;
-                                matrixblock(ii)=blocktype;
-                            end
-                        end
-                        NNmatrix=zeros(Nmatrix,1);
-                        for iN=1:Nmatrix
-                            NNmatrix(iN)=sum(matrixblock==iN);
-                        end
-                        sbjindxtmp=matrixblock==find(NNmatrix==max(NNmatrix));
-                        indxsbj(:,~sbjindxtmp)=[];
-                        indxsbj(indxsbj==1)=1:Nitem;
-                    catch
-                        error('imapLMMresample error: Can not retrieve Subject column for resampling.')
-                    end
-                end
                 Ns=rank(indxsbj); % number of subject
                 
                 % sample with replacement, create boot_table
@@ -379,7 +392,7 @@ switch effect2
                 B=1;
                 boot_index=zeros(nboot,Ns);
                 while B~=nboot+1
-                    if length(GroupPredictor)>1 % more than 2 groups
+                    if length(GroupPredictor)>1 % more than 1 groups
                         tmp = [];
                         for ig=1:length(GroupPredictor)
                             sbjtmp=find(sum(indxsbj(grouping==GroupPredictor(ig),:))~=0);

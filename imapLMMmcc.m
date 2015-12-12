@@ -3,9 +3,9 @@ function [StatMap_c]=imapLMMmcc(StatMap,LMMmap,mccopt,varargin)
 % mccopt.methods  - fdr/bonferroni/randomfield/cluster/
 %                   bootstrap/permutation
 % mccopt.bootopt  - 1 cluster mass, 2 cluster size, 3 both, 4 dense
-% mccopt.bootgroup- grouping variable for bootstrap (to keep group variance
-%                   constant). Input must be a cell specifying the grouping
-%                   variables in the PredictorM
+% mccopt.bootgroup- grouping variable for bootstrap and permutation (to 
+%                   keep group variance constant). Input must be a cell 
+%                   specifying the grouping variables in the PredictorM
 % mccopt.nboot    - number of resampling for bootstrap or permutation
 % mccopt.sigma    - smoothing parameter (for Random field test)
 % mccopt.clustSize- cluster size threshold (for cluster test)
@@ -262,7 +262,27 @@ if strcmp(statopt.type,'model')~=1
             StatMap.resampMat=ResampStat;
         case 'permutation'
             %%
-            grouping=ones(size(tbl,1),1);
+            grouping=nominal(ones(size(tbl,1),1));
+            if isfield(mccopt,'bootgroup')==1
+                Ng=length(mccopt.bootgroup);
+                grouping1=nominal(zeros(size(tbl,1),Ng));
+                for ig=1:Ng
+                    groupingtmp=mccopt.bootgroup{ig};
+                    if ~isempty(groupingtmp)
+                    grouptmp=eval(['tbl.' groupingtmp]);
+                    grouping1(:,ig)=nominal(grouptmp);
+                    end
+                end
+                if Ng>1
+                    for ii=1:length(grouping1)
+                        tmp=char(grouping1(ii,:));
+                        tmp=tmp';
+                        grouping(ii,:)=cellstr(tmp(:)');
+                    end
+                else
+                    grouping=grouping1;
+                end
+            end
             nboot=mccopt.nboot;
             c=statopt.c;
             h=statopt.h;
