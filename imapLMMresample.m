@@ -211,26 +211,26 @@ switch effect2
                     % et al (2014). Permutation inference for the general
                     % linear model. Neuroimage, 92, 381-397.
                     %
-                    % We dont do sign flips
+                    % We dont do sign flips or block permutation
                     B=1;
                     boot_index1=zeros(nboot+500,Nitem);
-                    if length(GroupPredictor)>1 % more than 1 groups
-                        while size(unique(boot_index1,'rows'),1)<nboot+1
-                            tmp = [];
-                            for ig=1:length(GroupPredictor)
-                                sbjtmp=find(grouping==GroupPredictor(ig));
-                                tmp=[tmp sbjtmp(randperm(length(sbjtmp)))'];
-                            end
-                            boot_index1(B,:) = tmp;
-                            B=B+1;
-                        end
-                    else
+                    % if length(GroupPredictor)>1 % more than 1 groups
+                    %     while size(unique(boot_index1,'rows'),1)<nboot+1
+                    %         tmp = [];
+                    %         for ig=1:length(GroupPredictor)
+                    %             sbjtmp=find(grouping==GroupPredictor(ig));
+                    %             tmp=[tmp sbjtmp(randperm(length(sbjtmp)))'];
+                    %         end
+                    %         boot_index1(B,:) = tmp;
+                    %         B=B+1;
+                    %     end
+                    % else
                         while size(unique(boot_index1,'rows'),1)<nboot+1
                             tmp = randperm(Nitem);
                             boot_index1(B,:)=tmp;
                             B=B+1;
                         end
-                    end
+                    % end
                     boot_index=unique(boot_index1(boot_index1(:,1)~=0,:),'rows');                    
                     ResampStat.resTABLE=boot_index;
                     
