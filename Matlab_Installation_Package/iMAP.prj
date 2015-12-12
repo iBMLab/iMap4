@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.apptool" plugin-version="1.0">
-  <configuration build-checksum="4200490022" file="\\bigdata\arts\Psycho\iBMLab\Charles\imap4_v0.2\iMAP.prj" location="\\bigdata\arts\Psycho\iBMLab\Charles\imap4_v0.2" name="iMAP" target="target.mlapps" target-name="Package App">
+  <configuration build-checksum="1504969703" file="\\bigdata\Arts\Psycho\iBMLab\Charles\imap4_v0.2\iMAP.prj" location="\\bigdata\Arts\Psycho\iBMLab\Charles\imap4_v0.2" name="iMAP" target="target.mlapps" target-name="Package App">
     <param.appname>iMAP</param.appname>
     <param.authnamewatermark>Junpeng Lao &amp; Nayla Sokhn</param.authnamewatermark>
     <param.email>junpeng.lao@unifr.ch</param.email>
@@ -24,7 +24,7 @@ Here, we tackled this issue by using the statistical framework implemented in di
 
 iMap4 is a freely available MATLAB open source toolbox for the statistical fixation mapping of eye movement data, with a user-friendly interface providing straightforward, easy to interpret statistical graphical outputs and matching the standards in robust statistical neuroimaging methods. iMap4 represents a major step in the processing of eye movement fixation data, paving the way to a routine use of robust data-driven analyses in this important field of vision sciences.</param.description>
     <param.screenshot>${PROJECT_ROOT}\GUI\logo_imap.png</param.screenshot>
-    <param.version>4.03</param.version>
+    <param.version>4.04</param.version>
     <param.products.name>
       <item>Statistics Toolbox</item>
       <item>MATLAB</item>
@@ -122,7 +122,7 @@ iMap4 is a freely available MATLAB open source toolbox for the statistical fixat
     </fileset.resources>
     <fileset.package />
     <build-deliverables>
-      <file location="\\bigdata\arts\Psycho\iBMLab\Charles\imap4_v0.2" name="iMAP.mlappinstall" optional="false">\\bigdata\arts\Psycho\iBMLab\Charles\imap4_v0.2\iMAP.mlappinstall</file>
+      <file location="\\bigdata\Arts\Psycho\iBMLab\Charles\imap4_v0.2" name="iMAP.mlappinstall" optional="false">\\bigdata\Arts\Psycho\iBMLab\Charles\imap4_v0.2\iMAP.mlappinstall</file>
     </build-deliverables>
     <workflow />
     <matlab>

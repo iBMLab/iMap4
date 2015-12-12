@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.toolbox" plugin-version="1.0">
-  <configuration build-checksum="3043303519" file="\\bigdata\arts\Psycho\iBMLab\Charles\imap4_v0.2\imapLMM.prj" location="\\bigdata\arts\Psycho\iBMLab\Charles\imap4_v0.2" name="imapLMM" target="target.toolbox" target-name="Package Toolbox">
+  <configuration build-checksum="3346284157" file="\\bigdata\Arts\Psycho\iBMLab\Charles\imap4_v0.2\imapLMM.prj" location="\\bigdata\Arts\Psycho\iBMLab\Charles\imap4_v0.2" name="imapLMM" target="target.toolbox" target-name="Package Toolbox">
     <param.appname>imapLMM</param.appname>
     <param.authnamewatermark>Junpeng Lao &amp; Nayla Sokhn</param.authnamewatermark>
     <param.email>Junpeng.lao@unifr.ch</param.email>
@@ -18,7 +18,7 @@ Here, we tackled this issue by using the statistical framework implemented in di
 
 iMap4 is a freely available MATLAB open source toolbox for the statistical fixation mapping of eye movement data, with a user-friendly interface providing straightforward, easy to interpret statistical graphical outputs and matching the standards in robust statistical neuroimaging methods. iMap4 represents a major step in the processing of eye movement fixation data, paving the way to a routine use of robust data-driven analyses in this important field of vision sciences.</param.description>
     <param.screenshot>${PROJECT_ROOT}\GUI\IMAP.png</param.screenshot>
-    <param.version>4.03</param.version>
+    <param.version>4.04</param.version>
     <param.output>${PROJECT_ROOT}\imapLMM.mltbx</param.output>
     <param.products.name>
       <item>MATLAB</item>
@@ -28,12 +28,10 @@ iMap4 is a freely available MATLAB open source toolbox for the statistical fixat
     <param.products.id>
       <item>1</item>
       <item>17</item>
-      <item>19</item>
     </param.products.id>
     <param.products.version>
-      <item>8.4</item>
-      <item>9.1</item>
-      <item>9.1</item>
+      <item>8.6</item>
+      <item>9.3</item>
     </param.products.version>
     <param.platforms />
     <param.guid>9d5cdcab-c4b7-4419-a472-a1f5bad0071c</param.guid>
@@ -79,12 +77,15 @@ iMAP.mlappinstall
       <file>${PROJECT_ROOT}\.DS_Store</file>
       <file>${PROJECT_ROOT}\GUI</file>
       <file>${PROJECT_ROOT}\imap_utilities</file>
+      <file>${PROJECT_ROOT}\imapGLMM.m</file>
       <file>${PROJECT_ROOT}\imapLMM.m</file>
       <file>${PROJECT_ROOT}\imapLMMcontrast.m</file>
       <file>${PROJECT_ROOT}\imapLMMdisplay.m</file>
       <file>${PROJECT_ROOT}\imapLMMmcc.m</file>
       <file>${PROJECT_ROOT}\imapLMMposthoc.m</file>
       <file>${PROJECT_ROOT}\imapLMMresample.m</file>
+      <file>${PROJECT_ROOT}\LICENSE</file>
+      <file>${PROJECT_ROOT}\README.md</file>
     </fileset.rootfiles>
     <fileset.depfun.included />
     <fileset.depfun.excluded>
@@ -117,7 +118,7 @@ iMAP.mlappinstall
     </fileset.depfun.excluded>
     <fileset.package />
     <build-deliverables>
-      <file location="\\bigdata\arts\Psycho\iBMLab\Charles\imap4_v0.2" name="imapLMM.mltbx" optional="false">\\bigdata\arts\Psycho\iBMLab\Charles\imap4_v0.2\imapLMM.mltbx</file>
+      <file location="\\bigdata\Arts\Psycho\iBMLab\Charles\imap4_v0.2" name="imapLMM.mltbx" optional="false">\\bigdata\Arts\Psycho\iBMLab\Charles\imap4_v0.2\imapLMM.mltbx</file>
     </build-deliverables>
     <workflow />
     <matlab>
