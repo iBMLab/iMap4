@@ -1,6 +1,6 @@
-# *i* Map4
+# *i*Map4
 
-*i* Map4: An Open Source Toolbox for the Statistical Fixation Mapping of Eye Movement data with Linear Mixed Modeling
+*i*Map4: An Open Source Toolbox for the Statistical Fixation Mapping of Eye Movement data with Linear Mixed Modeling
 
 Junpeng Lao<sup>1</sup>, Sébastien Miellet<sup>1,2</sup>, Cyril Pernet<sup>3</sup>, Nayla Sokhn<sup>1</sup>, and Roberto Caldara<sup>1</sup>
 
