@@ -9,6 +9,7 @@ c=statopt.c;
 % h=statopt.h;
 Pmap=StatMap.Pmap;
 mapvalue=StatMap.map;
+nboot=mccopt.nboot;
 
 if strcmp(mccopt.methods,'bootstrap')==1
     ResampStat=StatMap.resampMat;
