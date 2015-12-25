@@ -1,4 +1,4 @@
-function imapLMMdisplay(StatMap,normalized,backgroundfile,cmap,colormaprange,distplot)
+function imapLMMdisplay(StatMap,normalized,backgroundfile,cmap,colormaprange,distplot,foldername)
 % Usage: imapLMMdisplay(StatMap,normalized,backgroundfile,colourmap,colormaprange,distplot)
 % display result after contrast test. Input result from imapLMMcontrast
 % input structure format {opt} {Pmap} {Pmask} {F/Tmap} {betamap(optional)}
@@ -72,6 +72,10 @@ if nargin<6 || isempty(distplot) || isnan(distplot)
     distplot=0;
 end
 
+if nargin<7
+    foldername=['imapLMMoutput-' opt.type];
+end
+
 label=StatMap.label;
 maptemp=StatMap.map;
 if ~ismatrix(maptemp)
@@ -83,7 +87,7 @@ cr=colormaprange;
 switch opt.type
     case 'model'% output model fitting and criterion map
         %% create folder
-        mkdir(['imapLMMoutput-' opt.type])
+        mkdir(foldername)
         % Rsquared
         figure('NumberTitle','off','Name','R^2 of model','Position',[1 1 scrsz(3) scrsz(4)/2]);
         maprangetmp=sort(squeeze(max(abs(maptemp(1:2,mask)))));
@@ -101,7 +105,7 @@ switch opt.type
             set(gca,'XTick',[],'YTick',[])
             title(label{ip})
         end
-        cd(['./imapLMMoutput-' opt.type]);print('-depsc2','-r300','R^2 of model');cd('..');
+        cd(['./' foldername]);print('-depsc2','-r300','R^2 of model');cd('..');
         % Model Criterion
         figure('NumberTitle','off','Name','Model Criterion','Position',scrsz);
         for ip=1:4
@@ -120,7 +124,7 @@ switch opt.type
             set(gca,'XTick',[],'YTick',[])
             title(label{ip+2})
         end
-        cd(['./imapLMMoutput-' opt.type]);print('-depsc2','-r300','Model Criterion');cd('..');
+        cd(['./' foldername]);print('-depsc2','-r300','Model Criterion');cd('..');
         if ~isempty(im3D)
             im3D2=imresize(im3D,[size(maptemp,2),size(maptemp,3)],'box');
             % Rsquared
@@ -141,7 +145,7 @@ switch opt.type
                 set(gca,'XTick',[],'YTick',[])
                 title(label{ip})
             end
-            cd(['./imapLMMoutput-' opt.type]);print('-depsc2','-r300','R^2 of model(with background)');cd('..');
+            cd(['./' foldername]);print('-depsc2','-r300','R^2 of model(with background)');cd('..');
             % Model Criterion
             figure('NumberTitle','off','Name','Model Criterion(with background)','Position',scrsz);
             for ip=1:4
@@ -163,11 +167,11 @@ switch opt.type
                 set(gca,'XTick',[],'YTick',[])
                 title(label{ip+2})
             end
-            cd(['./imapLMMoutput-' opt.type]);print('-depsc2','-r300','Model Criterion(with background)');cd('..');
+            cd(['./' foldername]);print('-depsc2','-r300','Model Criterion(with background)');cd('..');
         end
     case 'fixed'% output Fvalue map and mask according to MCC
         %% create folder
-        mkdir(['imapLMMoutput-' opt.type])
+        mkdir(foldername)
         % pmptemp=StatMap.Pmap;
         msktemp=StatMap.Pmask;
         % output Statvalue map, Statvalue map with P<0.05 and Statvalue map
@@ -213,7 +217,7 @@ switch opt.type
                 imshow(toimagesg)
                 set(gca,'XTick',[],'YTick',[])
                 title('Significant area marked by dark line')
-                cd(['./imapLMMoutput-' opt.type]);print('-depsc2','-r300',genvarname(label{ip}));cd('..');
+                cd(['./' foldername]);print('-depsc2','-r300',genvarname(label{ip}));cd('..');
                 if ~isempty(im3D)
                     figure('NumberTitle','off','Name',[label{ip} '(with background)'] ,'Position',[1 1 scrsz(3) scrsz(4)/2]);
                     subplot(1,2,1);
@@ -234,13 +238,13 @@ switch opt.type
                     imcontour(1:size(masktmp,2),1:size(masktmp,1),masktmp,1,'k','LineWidth',1);
                     set(gca,'XTick',[],'YTick',[])
                     title('Significant area marked by dark line')
-                    cd(['./imapLMMoutput-' opt.type]);print('-depsc2','-r300',[genvarname(label{ip}) '(with background)']);cd('..');
+                    cd(['./' foldername]);print('-depsc2','-r300',[genvarname(label{ip}) '(with background)']);cd('..');
                 end
             end
         end
     case 'random'% output Fvalue map, beta map and mask according to MCC
         %% create folder
-        mkdir(['imapLMMoutput-' opt.type])
+        mkdir(foldername)
         % pmptemp=StatMap.Pmap;
         msktemp=StatMap.Pmask;
         % output Statvalue map, Statvalue map with P<0.05 and Statvalue map
@@ -275,12 +279,12 @@ switch opt.type
                 h=colorbar;set(h,'ylim',range2)
                 set(gca,'XTick',[],'YTick',[])
                 title('Significant area marked by white line')
-                cd(['./imapLMMoutput-' opt.type]);print('-dpng','-r300',genvarname(label{ip}));cd('..');
+                cd(['./' foldername]);print('-dpng','-r300',genvarname(label{ip}));cd('..');
             end
         end
     case {'predictor beta', 'model beta'} % output F/Tvalue map, beta map, pvalue map, and mask according to MCC
         %% create folder
-        mkdir(['imapLMMoutput-' opt.type])
+        mkdir(foldername)
         betatmp=StatMap.beta;
         % pmptemp=StatMap.Pmap;
         msktemp=StatMap.Pmask;
@@ -352,7 +356,7 @@ switch opt.type
                     set(gca,'XTick',[],'YTick',[])
                     title('Significant area marked by dark line')
                 end
-                cd(['./imapLMMoutput-' opt.type]);print('-depsc2','-r300',genvarname(label{ip}));cd('..');
+                cd(['./' foldername]);print('-depsc2','-r300',genvarname(label{ip}));cd('..');
                 if ~isempty(im3D)
                     figure('NumberTitle','off','Name',[label{ip} '(with background)'] ,'Position',scrsz);
                     
@@ -395,7 +399,7 @@ switch opt.type
                         set(gca,'XTick',[],'YTick',[])
                         title('Significant area marked by dark line')
                     end
-                    cd(['./imapLMMoutput-' opt.type]);print('-depsc2','-r300',[genvarname(label{ip}) '(with background)']);cd('..');
+                    cd(['./' foldername]);print('-depsc2','-r300',[genvarname(label{ip}) '(with background)']);cd('..');
                 end
             end
         end
@@ -427,7 +431,7 @@ if distplot~=0
         set(gca,'yscale','log');% Change scale
         title(label{ip})
     end
-    cd(['./imapLMMoutput-' opt.type]);print('-depsc2','-r300','Map value distribution');cd('..');
+    cd(['./' foldername]);print('-depsc2','-r300','Map value distribution');cd('..');
     if isfield(StatMap,'beta')==1
         figure('NumberTitle','off','Name','Beta value distribution','Position',scrsz);
         for ip=1:length(label)
@@ -451,6 +455,6 @@ if distplot~=0
             set(gca,'yscale','log');% Change scale
             title(label{ip})
         end
-        cd(['./imapLMMoutput-' opt.type]);print('-depsc2','-r300','Beta value distribution');cd('..');
+        cd(['./' foldername]);print('-depsc2','-r300','Beta value distribution');cd('..');
     end
 end
