@@ -1,0 +1,154 @@
+<deployment-project plugin="plugin.apptool" plugin-version="1.0">
+  <configuration build-checksum="2658351498" file="D:\Charles\imap4\Matlab_Installation_Package\iMap4.prj" location="D:\Charles\imap4\Matlab_Installation_Package" name="iMap4" target="target.mlapps" target-name="Package App">
+    <param.appname>iMap4</param.appname>
+    <param.authnamewatermark>Junpeng Lao &amp; Nayla Sokhn</param.authnamewatermark>
+    <param.email>junpeng.lao@unifr.ch</param.email>
+    <param.company>iBMLab, University of Fribourg</param.company>
+    <param.icon>${PROJECT_ROOT}\iMap4_resources\icon_24.png</param.icon>
+    <param.icons>
+      <file>${PROJECT_ROOT}\iMap4_resources\icon_48.png</file>
+      <file>${PROJECT_ROOT}\iMap4_resources\icon_24.png</file>
+      <file>${PROJECT_ROOT}\iMap4_resources\icon_16.png</file>
+    </param.icons>
+    <param.summary>Spatial mapping of smoothed 2D fixation maps using Linear Mixed Models</param.summary>
+    <param.description>iMap4: An Open Source Toolbox for the Statistical Fixation Mapping of Eye Movement data with Linear Mixed Modeling
+
+Junpeng Lao1, Sébastien Miellet1,2, Cyril Pernet3, Nayla Sokhn1, and Roberto Caldara1
+1Department of Psychology, University of Fribourg, Fribourg, Switzerland
+2Department of Psychology, Bournemouth University, Bournemouth, UK
+3Centre for Clinical Brain Sciences, Neuroimaging Sciences, University of Edinburgh, Edinburgh, UK
+
+A major challenge in modern eye movement research is to statistically map where observers are looking at, as well as isolating statistical significant differences between groups and conditions. Compared to signals of contemporary neuroscience measures, such as M/EEG and fMRI, eye movement data are sparser with much larger variations across trials and participants. As a result, the implementation of a conventional linear modeling approach on two-dimensional fixation distributions often returns unstable estimations and underpowered results, leaving this statistical problem unresolved.
+
+Here, we tackled this issue by using the statistical framework implemented in diverse state-of-the-art neuroimaging data processing toolboxes: Statistical Parametric Mapping (SPM), Fieldtrip and LIMO EEG. We applied a univariate, pixel-wise Linear Mixed Models (LMM) on the smoothed fixation data with each subject as a random effect, which offers the flexibility to code for multiple between- and within- subject comparisons. After this step, our approach allows to perform all the possible linear contrasts for the fixed effects (main effects, interactions, etc.). Importantly, we also introduced a novel spatial cluster test based on bootstrapping to assess the statistical significance of the linear contrasts. Finally, we validated this approach by using both experimental and computer simulation data with a Monte Carlo approach.
+
+iMap4 is a freely available MATLAB open source toolbox for the statistical fixation mapping of eye movement data, with a user-friendly interface providing straightforward, easy to interpret statistical graphical outputs and matching the standards in robust statistical neuroimaging methods. iMap4 represents a major step in the processing of eye movement fixation data, paving the way to a routine use of robust data-driven analyses in this important field of vision sciences.</param.description>
+    <param.screenshot>${PROJECT_ROOT}\iMap4_resources\iBMLab.png</param.screenshot>
+    <param.version>4.05</param.version>
+    <param.products.name>
+      <item>MATLAB</item>
+      <item>Curve Fitting Toolbox</item>
+      <item>Image Processing Toolbox</item>
+      <item>Statistics Toolbox</item>
+    </param.products.name>
+    <param.products.id>
+      <item>'1'</item>
+      <item>'60'</item>
+      <item>'17'</item>
+      <item>'19'</item>
+    </param.products.id>
+    <param.products.version>
+      <item>8.4</item>
+      <item>3.5</item>
+      <item>9.1</item>
+      <item>9.1</item>
+    </param.products.version>
+    <param.platforms />
+    <param.output>${PROJECT_ROOT}\iMap4.mlappinstall</param.output>
+    <param.guid>f37f8f7a-43d1-48c2-ae93-6730bc8da80d</param.guid>
+    <unset>
+      <param.platforms />
+    </unset>
+    <fileset.main>
+      <file>D:\Charles\imap4\GUI\iMAP.m</file>
+    </fileset.main>
+    <fileset.depfun>
+      <file>D:\Charles\imap4\GUI\allcombs.m</file>
+      <file>D:\Charles\imap4\GUI\char2cell.m</file>
+      <file>D:\Charles\imap4\GUI\check_columns_file.m</file>
+      <file>D:\Charles\imap4\GUI\create_new_data.m</file>
+      <file>D:\Charles\imap4\GUI\create_subject.m</file>
+      <file>D:\Charles\imap4\GUI\descriptive_part.m</file>
+      <file>D:\Charles\imap4\GUI\findseq.m</file>
+      <file>D:\Charles\imap4\GUI\function_contrast_one_tail.m</file>
+      <file>D:\Charles\imap4\GUI\function_extension_file.m</file>
+      <file>D:\Charles\imap4\GUI\function_extension_multiplefile.m</file>
+      <file>D:\Charles\imap4\GUI\function_find_fixation.m</file>
+      <file>D:\Charles\imap4\GUI\function_select_predictors_stat.m</file>
+      <file>D:\Charles\imap4\GUI\iMAP.fig</file>
+      <file>D:\Charles\imap4\GUI\IMAP.png</file>
+      <file>D:\Charles\imap4\GUI\imap_gui.fig</file>
+      <file>D:\Charles\imap4\GUI\imap_gui.m</file>
+      <file>D:\Charles\imap4\GUI\implode.m</file>
+      <file>D:\Charles\imap4\GUI\inputsdlg.m</file>
+      <file>D:\Charles\imap4\GUI\logo_imap.png</file>
+      <file>D:\Charles\imap4\GUI\manual_GUI.pdf</file>
+      <file>D:\Charles\imap4\GUI\model_plot.m</file>
+      <file>D:\Charles\imap4\GUI\modelling_analysis.m</file>
+      <file>D:\Charles\imap4\GUI\modelling_part.m</file>
+      <file>D:\Charles\imap4\GUI\multiple_comparison_tab.m</file>
+      <file>D:\Charles\imap4\GUI\nominal_predictorM.m</file>
+      <file>D:\Charles\imap4\GUI\normalization.m</file>
+      <file>D:\Charles\imap4\GUI\reset_variables.m</file>
+      <file>D:\Charles\imap4\GUI\retrieve_table_conditions.m</file>
+      <file>D:\Charles\imap4\GUI\save_LMM.m</file>
+      <file>D:\Charles\imap4\GUI\select_condition_model.m</file>
+      <file>D:\Charles\imap4\GUI\select_conditions.m</file>
+      <file>D:\Charles\imap4\GUI\select_delimitation.m</file>
+      <file>D:\Charles\imap4\GUI\select_mask_parameter.m</file>
+      <file>D:\Charles\imap4\GUI\select_option_bootstrap.m</file>
+      <file>D:\Charles\imap4\GUI\select_option_cluster.m</file>
+      <file>D:\Charles\imap4\GUI\select_option_fdr.m</file>
+      <file>D:\Charles\imap4\GUI\select_option_mcc.m</file>
+      <file>D:\Charles\imap4\GUI\select_option_randomfield.m</file>
+      <file>D:\Charles\imap4\GUI\select_parameters.m</file>
+      <file>D:\Charles\imap4\GUI\select_scale_parameter.m</file>
+      <file>D:\Charles\imap4\GUI\select_smoothing2.m</file>
+      <file>D:\Charles\imap4\GUI\txtimapout.m</file>
+      <file>D:\Charles\imap4\GUI\type_fixation.m</file>
+      <file>D:\Charles\imap4\imap_utilities\bt_switch_cr.m</file>
+      <file>D:\Charles\imap4\imap_utilities\CategoricalName.m</file>
+      <file>D:\Charles\imap4\imap_utilities\CIforFixed.m</file>
+      <file>D:\Charles\imap4\imap_utilities\CiVol.m</file>
+      <file>D:\Charles\imap4\imap_utilities\clustertest2D.m</file>
+      <file>D:\Charles\imap4\imap_utilities\covproj.m</file>
+      <file>D:\Charles\imap4\imap_utilities\fdr.m</file>
+      <file>D:\Charles\imap4\imap_utilities\HalfMax.m</file>
+      <file>D:\Charles\imap4\imap_utilities\histfitimap.m</file>
+      <file>D:\Charles\imap4\imap_utilities\indtorgb.m</file>
+      <file>D:\Charles\imap4\imap_utilities\limo_OrthogContrasts.m</file>
+      <file>D:\Charles\imap4\imap_utilities\maincontrast.m</file>
+      <file>D:\Charles\imap4\imap_utilities\mcc2d.m</file>
+      <file>D:\Charles\imap4\imap_utilities\stat_threshold.m</file>
+      <file>D:\Charles\imap4\imap_utilities\tfce2d.m</file>
+      <file>D:\Charles\imap4\imap_utilities\winsored_fixmap.m</file>
+    </fileset.depfun>
+    <fileset.resources>
+      <file>D:\Charles\imap4\GUI</file>
+      <file>D:\Charles\imap4\imap_utilities</file>
+      <file>D:\Charles\imap4\imapGLMM.m</file>
+      <file>D:\Charles\imap4\imapLMM.m</file>
+      <file>D:\Charles\imap4\imapLMMcontrast.m</file>
+      <file>D:\Charles\imap4\imapLMMdisplay.m</file>
+      <file>D:\Charles\imap4\imapLMMmcc.m</file>
+      <file>D:\Charles\imap4\imapLMMposthoc.m</file>
+      <file>D:\Charles\imap4\imapLMMresample.m</file>
+      <file>D:\Charles\imap4\LICENSE</file>
+      <file>D:\Charles\imap4\README.md</file>
+    </fileset.resources>
+    <fileset.package />
+    <build-deliverables>
+      <file location="D:\Charles\imap4\Matlab_Installation_Package" name="iMap4.mlappinstall" optional="false">D:\Charles\imap4\Matlab_Installation_Package\iMap4.mlappinstall</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>C:\Program Files\MATLAB\R2014b</root>
+      <toolboxes />
+    </matlab>
+    <platform>
+      <unix>false</unix>
+      <mac>false</mac>
+      <windows>true</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>false</linux>
+      <solaris>false</solaris>
+      <osver>6.2</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>win64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>
