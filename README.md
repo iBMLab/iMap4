@@ -9,7 +9,7 @@ Junpeng Lao<sup>1</sup>, Sébastien Miellet<sup>1,2</sup>, Cyril Pernet<sup>3</s
 - <sup>3</sup>Centre for Clinical Brain Sciences, Neuroimaging Sciences, University of Edinburgh, Edinburgh, UK.
 
 ##Installation 
-Download ./Matlab_Installation_Package and intall the toolbox as a Matlab Application.
+Download ./Matlab_Installation_Package and intall the toolbox as a Matlab Application. 
 Example codes and dataset could be found in ./Data_Sample_with_codes/
 
 Please read the guidebook for more information of how to use the toolbox.
