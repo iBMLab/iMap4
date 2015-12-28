@@ -76,6 +76,10 @@ if nargin<7
     foldername=['imapLMMoutput-' opt.type];
 end
 
+if ~exist(foldername, 'dir')
+    mkdir('foldername');
+end
+
 label=StatMap.label;
 maptemp=StatMap.map;
 if ~ismatrix(maptemp)
@@ -86,9 +90,7 @@ end
 cr=colormaprange;
 switch opt.type
     case 'model'% output model fitting and criterion map
-        %% create folder
-        mkdir(foldername)
-        % Rsquared
+        %% Rsquared
         figure('NumberTitle','off','Name','R^2 of model','Position',[1 1 scrsz(3) scrsz(4)/2]);
         maprangetmp=sort(squeeze(max(abs(maptemp(1:2,mask)))));
         mapmax=maprangetmp(round(length(maprangetmp)*cr));
@@ -170,8 +172,7 @@ switch opt.type
             cd(['./' foldername]);print('-depsc2','-r300','Model Criterion(with background)');cd('..');
         end
     case 'fixed'% output Fvalue map and mask according to MCC
-        %% create folder
-        mkdir(foldername)
+        %%
         % pmptemp=StatMap.Pmap;
         msktemp=StatMap.Pmask;
         % output Statvalue map, Statvalue map with P<0.05 and Statvalue map
@@ -243,8 +244,7 @@ switch opt.type
             end
         end
     case 'random'% output Fvalue map, beta map and mask according to MCC
-        %% create folder
-        mkdir(foldername)
+        %% 
         % pmptemp=StatMap.Pmap;
         msktemp=StatMap.Pmask;
         % output Statvalue map, Statvalue map with P<0.05 and Statvalue map
@@ -283,8 +283,7 @@ switch opt.type
             end
         end
     case {'predictor beta', 'model beta'} % output F/Tvalue map, beta map, pvalue map, and mask according to MCC
-        %% create folder
-        mkdir(foldername)
+        %% 
         betatmp=StatMap.beta;
         % pmptemp=StatMap.Pmap;
         msktemp=StatMap.Pmask;
