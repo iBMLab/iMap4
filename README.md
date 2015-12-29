@@ -1,4 +1,7 @@
+[![DOI](https://zenodo.org/badge/18909/iBMLab/iMap4.svg)](https://zenodo.org/badge/latestdoi/18909/iBMLab/iMap4)
+
 # *i*Map4
+
 
 *i*Map4: An Open Source Toolbox for the Statistical Fixation Mapping of Eye Movement data with Linear Mixed Modeling
 
