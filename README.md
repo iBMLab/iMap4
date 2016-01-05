@@ -1,3 +1,6 @@
+
+<img src="https://github.com/iBMLab/iMap4/blob/master/GUI/logo_imap.png" width="50" height="50" />
+<img src="https://github.com/iBMLab/iMap4/blob/master/GUI/IMAP.png" width="50" height="50" /> 
 # *i*Map4
 
 *i*Map4: An Open Source Toolbox for the Statistical Fixation Mapping of Eye Movement data with Linear Mixed Modeling
@@ -23,3 +26,6 @@ If you have any question, please email Junpeng.lao@unifr.ch
 
 #####Acknowledgments
 The development of this toolbox was supported by the Swiss National Science Foundation (n° 100014_138627) awarded to Dr. Roberto Caldara
+
+
+
