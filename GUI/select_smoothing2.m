@@ -7,7 +7,7 @@ is = 1;
 it = 1;
 
 screen_y_pixel = str2double(handles.xy_size{2});
-user_visual_angle = smoothing_value/(2*sqrt(log(2))); % in pixel. we have this parameter smtpl=sqrt(2)*sigma and sigma=FWHM/2*sqrt(2*log(2)) and smtpl=FWHM/(2*sqrt(log(2)))
+user_visual_angle = smoothing_value/(2*sqrt(log(2))); % in pixel. we have this parameter smtpl=sqrt(2)*sigma and sigma=FWHM/(2*sqrt(2*log(2))) and smtpl=FWHM/(2*sqrt(log(2)))
 distance_y_cm = str2double(handles.xy_size(6));
 participant_distance = str2double(handles.xy_size(7));
 smoothingpic = round(user_visual_angle/(atan(distance_y_cm /2/participant_distance)/pi*180)*(screen_y_pixel/2));
