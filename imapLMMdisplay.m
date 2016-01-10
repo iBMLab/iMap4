@@ -201,9 +201,9 @@ switch opt.type
                 mapmin1=min(toimage(:));
                 range2=[mapmin1 mapmax1];
                 if normalized==1
-                    range1=[-mapmax mapmax];
+                    range1=[0 mapmax];
                 else
-                    range1=[-mapmax1 mapmax1];
+                    range1=[0 mapmax1];
                 end
                 subplot(1,2,1);
                 imshow(toimage,range1,'colormap',colourmap);
