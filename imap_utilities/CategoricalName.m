@@ -1,4 +1,4 @@
-function [CatePredictor,contrast]=CategoricalName(LMMmap)
+function [CatePredictor,contrast,CateContrast]=CategoricalName(LMMmap)
 % get catigorical predictor from model beta combination
 %--------------------------------------------------------------------------
 % Copyright (C) iMap Team 2015
