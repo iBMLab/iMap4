@@ -393,34 +393,29 @@ for is = 1:Ns
                 seyext = Seyext(idx2);
                 seyeyt = Seyeyt(idx2);
                 intv   = Intv(idx2);
+                % exclude zeros or negative
+                exclist=intv<=0;seyext(exclist)=[];seyeyt(exclist)=[];intv(exclist)=[];
                 % descriptive
                 % fixation number, sum of fixation duraion, mean of fixation duration, total path length, mean path length
                 pathlength=diag(squareform(pdist([seyext,seyeyt])),1);
-                descriptemp(itt,1)=sum(intv>0);
-                descriptemp(itt,2)=sum(intv(intv>0));
-                descriptemp(itt,3)=mean(intv(intv>0));
+                descriptemp(itt,1)=length(intv);
+                descriptemp(itt,2)=sum(intv);
+                descriptemp(itt,3)=mean(intv);
                 descriptemp(itt,4)=sum(pathlength);
                 descriptemp(itt,5)=mean(pathlength);
                 if handles.mapType==2
                     intv=ones(size(intv));
                 end
                 
-                rawmap = zeros(ySize, xSize);
                 coordX = round(seyeyt);%switch matrix coordinate here
                 coordY = round(seyext);
                 indx1=coordX>0 & coordY>0 & coordX<ySize & coordY<xSize;
-                indxtf=sub2ind([ySize, xSize],coordX(indx1),coordY(indx1)); % index each fixation location,
-                
-                unindx = unique(indxtf);% find unique fixation
-                [cotind,whe] = histc(indxtf,unindx); % cumulate fixation with same coordinates.
-                durind=zeros(size(cotind));
-                for iw=1:length(cotind);durind(iw)=sum(intv(whe==iw));end % calculate duration, the last loop i cant get rid of
-                rawmap(unindx(durind>0))=durind(durind>0);
+                rawmap=full(sparse(coordX(indx1),coordY(indx1),intv(indx1),ySize,xSize));
                 
                 f_mat = fft2(rawmap); % 2D fourrier transform on the points matrix
                 filtered_mat = f_mat .* f_fil;
                 smoothpic = real(fftshift(ifft2(filtered_mat)));
-                Tridur(itt,1)=nansum(durind(durind>0));
+                Tridur(itt,1)=nansum(intv(indx1));
                 rawmaptmp(itt,:,:)=rawmap;
                 fixmaptmp(itt,:,:)=smoothpic;
             end
@@ -675,30 +670,24 @@ for is = 1:Ns
         seyext=seyex(trialstend(it,1):trialstend(it,2));
         seyeyt=seyey(trialstend(it,1):trialstend(it,2));
         intv=sfixd(trialstend(it,1):trialstend(it,2));
+        % exclude zeros or negative
+        exclist=intv<=0;seyext(exclist)=[];seyeyt(exclist)=[];intv(exclist)=[];
         % descriptive
         % fixation number, sum of fixation duraion, mean of fixation duration, total path length, mean path length
         pathlength=diag(squareform(pdist([seyext,seyeyt])),1);
-        descriptemp(it,1)=sum(intv>0);
-        descriptemp(it,2)=sum(intv(intv>0));
-        descriptemp(it,3)=mean(intv(intv>0));
-        descriptemp(it,4)=sum(pathlength);
-        descriptemp(it,5)=mean(pathlength);
-                
+        descriptemp(itt,1)=length(intv);
+        descriptemp(itt,2)=sum(intv);
+        descriptemp(itt,3)=mean(intv);
+        descriptemp(itt,4)=sum(pathlength);
+        descriptemp(itt,5)=mean(pathlength);
         if handles.mapType==2
             intv=ones(size(intv));
         end
-        
-        rawmap = zeros(ySize, xSize);
+                
         coordX = round(seyeyt);%switch matrix coordinate here
         coordY = round(seyext);
         indx1=coordX>0 & coordY>0 & coordX<ySize & coordY<xSize;
-        indxtf=sub2ind([ySize, xSize],coordX(indx1),coordY(indx1)); % index each fixation location,
-        
-        unindx = unique(indxtf);% find unique fixation
-        [cotind,whe] = histc(indxtf,unindx); % cumulate fixation with same coordinates.
-        durind=zeros(size(cotind));
-        for iw=1:length(cotind);durind(iw)=sum(intv(whe==iw));end % calculate duration, the last loop i cant get rid of
-        rawmap(unindx(durind>0))=durind(durind>0);
+        rawmap=full(sparse(coordX(indx1),coordY(indx1),intv(indx1),ySize,xSize));
         
         f_mat = fft2(rawmap); % 2D fourrier transform on the points matrix
         filtered_mat = f_mat .* f_fil;
@@ -708,7 +697,7 @@ for is = 1:Ns
         %original
         fix_map(it,:,:)=imresize(smoothpic, scale,'box');
         raw_map(it,:,:)=imresize(rawmap,scale,'box'); %switch case if they want to normalize
-        stDur(it)=nansum(durind);
+        stDur(it)=nansum(intv(indx1));
     end
     descripM=num2cell(descriptemp);
     sTable = num2cell(tbl(trialstend(:,1),:));
