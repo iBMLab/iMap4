@@ -814,8 +814,8 @@ if (check_estimated) == 1 %user did the estimated method
         h = waitbar(0,'Please wait scaling is in progress','Name','Scaling FixMap RawMap and Mask','color','w');
         
         for it=1:size(handles.FixMap_estimated,1)
-            FixMap_estimated_scaled(it,:,:) = imresize(squeeze(handles.FixMap_estimated(it,:,:)),scale,'box');
-            RawMap_estimated_scaled(it,:,:)  = imresize(squeeze(handles.RawMap_estimated(it,:,:)),scale,'box');
+            FixMap_estimated_scaled(it,:,:) = imresize(squeeze(handles.FixMap_estimated(it,:,:)),scale,'nearest');
+            RawMap_estimated_scaled(it,:,:)  = imresize(squeeze(handles.RawMap_estimated(it,:,:)),scale,'nearest');
             
             waitbar(it/size(handles.FixMap_estimated,1))
         end
