@@ -53,20 +53,11 @@ gaussienne = exp(- (x .^2 / smoothingpic ^2) - (y .^2 / smoothingpic ^2));
 gaussienne = (gaussienne - min(gaussienne(:))) / (max(gaussienne(:)) - min(gaussienne(:)));
 f_fil = fft2(gaussienne);
 % fixation matrix
-rawmap = zeros(ySize, xSize);
 coordX = round(Y(:,2));
 coordY = round(Y(:,1));
 intv=normrnd(0.4,.085,length(Y),1);
 indx1=coordX>0 & coordY>0 & coordX<xSize & coordY<ySize;
-indxtf=sub2ind([ySize, xSize],coordX(indx1),coordY(indx1)); % index each fixation location,
-unindx = unique(indxtf);% find unique fixation
-[cotind,whe] = histc(indxtf,unindx); % cumulate fixation with same coordinates.
-% number of fixation
-% rawmap(unindx)=cotind;
-% fixation duration
-durind=zeros(size(cotind));
-for iw=1:length(cotind);durind(iw)=sum(intv(whe==iw));end % calculate duration
-rawmap(unindx(durind>0))=durind(durind>0);
+rawmap=full(sparse(coordX(indx1),coordY(indx1),intv(indx1),ySize,xSize));
 
 f_mat = fft2(rawmap); % 2D fourrier transform on the points matrix
 filtered_mat = f_mat .* f_fil;
@@ -160,15 +151,7 @@ for ig=1:length(Group)
             pathlength=diag(squareform(pdist([coordY,coordX])),1);
             intv=normrnd(Meandur,Stddur,length(Y),1)*1000;
             indx1=coordX>0 & coordY>0 & coordX<xSize & coordY<ySize;
-            indxtf=sub2ind([ySize, xSize],coordX(indx1),coordY(indx1)); % index each fixation location,
-            unindx = unique(indxtf);% find unique fixation
-            [cotind,whe] = histc(indxtf,unindx); % cumulate fixation with same coordinates.
-            % number of fixation
-            % rawmap(unindx)=cotind;
-            % fixation duration
-            durind=zeros(size(cotind));
-            for iw=1:length(cotind);durind(iw)=sum(intv(whe==iw));end % calculate duration
-            rawmap(unindx(durind>0))=durind(durind>0);
+            rawmap=full(sparse(coordX(indx1),coordY(indx1),intv(indx1),ySize,xSize));
             
             f_mat = fft2(rawmap); % 2D fourrier transform on the points matrix
             filtered_mat = f_mat .* f_fil;

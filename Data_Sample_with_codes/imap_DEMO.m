@@ -106,22 +106,15 @@ for is=1:Ns
                     if isempty(indx1)
                         indx(ii)=1;
                     else
-                    indxtf=sub2ind([ySize, xSize],coordX(indx1),coordY(indx1)); % index each fixation location,
-                    
-                    unindx = unique(indxtf);% find unique fixation
-                    [cotind,whe] = histc(indxtf,unindx); % cumulate fixation with same coordinates.
-                    durind=zeros(size(cotind));
-                    for iw=1:length(cotind);durind(iw)=sum(intv(whe==iw));end % calculate duration
-                    rawmap(unindx(durind>0))=durind(durind>0);
-                    
-                    f_mat = fft2(rawmap); % 2D fourrier transform on the points matrix
-                    filtered_mat = f_mat .* f_fil;
-                    
-                    smoothpic = real(fftshift(ifft2(filtered_mat)));
-                    isfixmap(it,:,:)=imresize(smoothpic,scale);
-                    israwmap(it,:,:)=imresize(rawmap,scale);
-                    stDur(it)=sum(durind);
-                    stRate(it)=srate(selected2(1));
+                        rawmap=full(sparse(coordX(indx1),coordY(indx1),intv(indx1),ySize,xSize));
+                        f_mat = fft2(rawmap); % 2D fourrier transform on the points matrix
+                        filtered_mat = f_mat .* f_fil;
+                        
+                        smoothpic = real(fftshift(ifft2(filtered_mat)));
+                        isfixmap(it,:,:)=imresize(smoothpic,scale);
+                        israwmap(it,:,:)=imresize(rawmap,scale);
+                        stDur(it)=sum(durind);
+                        stRate(it)=srate(selected2(1));
                     end
                 end
                 Subject{ii,1}=subjlist{is};
@@ -177,8 +170,8 @@ toc
 %% LMMmap structure
 % impLMM will output a structure called LMMmap with all the information
 % from the linear mixed model fitting:
-% LMMmap = 
-% 
+% LMMmap =
+%
 %                    runopt: [1x1 struct]
 %              VariableInfo: [6x4 dataset]
 %                 Variables: [118x6 dataset]

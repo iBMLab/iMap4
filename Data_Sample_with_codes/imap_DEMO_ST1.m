@@ -128,14 +128,10 @@ gaussienne = exp(- (x .^2 / smoothingpic ^2) - (y .^2 / smoothingpic ^2));
 gaussienne = (gaussienne - min(gaussienne(:))) / (max(gaussienne(:)) - min(gaussienne(:)));
 f_fil = fft2(gaussienne);
 % fixation matrix
-rawmap = zeros(ySize, xSize);
 coordX = round(Y(:,2));
 coordY = round(Y(:,1));
 indx1=coordX>0 & coordY>0 & coordX<xSize & coordY<ySize;
-indxtf=sub2ind([ySize, xSize],coordX(indx1),coordY(indx1)); % index each fixation location,
-unindx = unique(indxtf);% find unique fixation
-[cotind,whe] = histc(indxtf,unindx); % cumulate fixation with same coordinates.
-rawmap(unindx)=cotind;% number of fixation
+rawmap=full(sparse(coordX(indx1),coordY(indx1),ones(size(coordY(indx1))),ySize,xSize));
 f_mat = fft2(rawmap); % 2D fourrier transform on the points matrix
 filtered_mat = f_mat .* f_fil;
 smoothpic = real(fftshift(ifft2(filtered_mat)));
@@ -151,6 +147,7 @@ FixMap=zeros(Ns*n,ySize,xSize);
 RawMap=FixMap;
 Nfixbase=2; % number of fixations for each trials is the multiple of Nfixbase
 item=0;
+DataM=[];
 for is=1:Ns
     for itrial=1:n
         item=item+1;
@@ -165,14 +162,10 @@ for is=1:Ns
         Ytmp2= [randi(xSize,10,1) randi(ySize,10,1)];% 10 random fixations 
         % fixation matrix
         Y=[Ytmp;Ytmp2];
-        rawmap = zeros(ySize, xSize);
         coordX = round(Y(:,2));
         coordY = round(Y(:,1));
         indx1=coordX>0 & coordY>0 & coordX<xSize & coordY<ySize;
-        indxtf=sub2ind([ySize, xSize],coordX(indx1),coordY(indx1)); % index each fixation location,
-        unindx = unique(indxtf);% find unique fixation
-        [cotind,whe] = histc(indxtf,unindx); % cumulate fixation with same coordinates.
-        rawmap(unindx)=cotind;% number of fixation
+        rawmap=full(sparse(coordX(indx1),coordY(indx1),ones(size(coordY(indx1))),ySize,xSize));
         f_mat = fft2(rawmap); % 2D fourrier transform on the points matrix
         filtered_mat = f_mat .* f_fil;
         smoothpic = real(fftshift(ifft2(filtered_mat)));
@@ -183,12 +176,20 @@ for is=1:Ns
         Subject(item)=is;
         Rating(item)=Xall(is,itrial);
         fixNb(item)=Nfix;
+        Yk=cotind;
+        Yk(:,2:3)=unique([coordX(indx1),coordY(indx1)],'rows');
+        Yk(:,4)=Xall(is,itrial);
+        Yk(:,5)=is;
+        DataM=[DataM;Yk];
     end
 end
 % figure;imagesc(squeeze(mean(FixMap,1)))
 Mask=squeeze(mean(FixMap,1)>.25);
 % figure;imagesc(Mask)
 PredictorM=dataset(Rating,fixNb,Subject);
+ds=mat2dataset(DataM);
+ds=set(ds,'VarNames',{'fixN','rl','cl','rating','is'});
+export(ds,'File','STrate.csv','Delimiter',',');
 %% Linear Mixed Modeling with imapLMM
 tic
 opt.singlepredi=0;
@@ -222,3 +223,114 @@ mccopt.tfce=0;
 [StatMap_c]=imapLMMmcc(StatMap,LMMmap,mccopt,FixMap);
 % output figure;
 imapLMMdisplay(StatMap_c,0)
+%% Region dependent threshold
+ResampStat=StatMap_c.resampMat;
+nboot=mccopt.nboot;
+alpha=.05;
+Pmask=zeros(size(squeeze(StatMap_c.Pmask(2,:,:))));
+Pmap=StatMap.Pmap;
+mapvalue=StatMap.map;
+Maskall=zeros(size(Pmask));
+Maskall(16:135,16:135)=kron(reshape(1:16,4,4),ones(30,30));
+bootopt=1;
+
+for imask=1:16
+    region=Maskall==imask;
+    for ic=2
+        Fboot=squeeze(ResampStat.resFvalue(:,ic,region));
+        Pboot=squeeze(ResampStat.resPvalue(:,ic,region));
+        Betabt=squeeze(ResampStat.resBeta(:,ic,region));
+        Fboot=reshape(Fboot,1000,30,30);
+        Pboot=reshape(Pboot,1000,30,30);
+        Betabt=reshape(Betabt,1000,30,30);
+        % output estimated bootstrap distribution (cluster test)
+        maxclust=zeros(nboot,3);
+        for ib=1:nboot
+            Ftmp=squeeze(Fboot(ib,:,:));
+            [bmasktmp,bnum]=bwlabel(squeeze(Pboot(ib,:,:))<alpha);
+            if bnum>0
+                maxtmp=zeros(bnum,3);
+                for icluster=1:bnum
+                    maxtmp(icluster,1)=nansum(nansum(Ftmp(bmasktmp==icluster)));
+                    maxtmp(icluster,2)=sum(sum(bmasktmp==icluster));
+                    maxtmp(icluster,3)=maxtmp(icluster,1)./maxtmp(icluster,2);
+                end
+                maxclust(ib,1)=max(maxtmp(:,1));
+                maxclust(ib,2)=max(maxtmp(:,2));
+                maxclust(ib,3)=max(maxtmp(:,3));
+            end
+        end
+        distmp=sort(maxclust,1);
+        % output cluster mass and size threshold at alpha
+        clthres=distmp(round(nboot*(1-alpha)),:);
+        % output new Pmask: 1 cluster mass, 2 cluster size, 3 both,
+        % 4 cluster dense
+        mapvalue1=reshape(squeeze(mapvalue(ic,region)),30,30);
+        Pmap1=reshape(squeeze(Pmap(ic,region)),30,30);
+        switch bootopt
+            case 1
+                Pmask(region)=clustertest2D(mapvalue1, ...
+                    Pmap1,alpha,clthres(1),[],[]);
+            case 2
+                Pmask(region)=clustertest2D(mapvalue1, ...
+                    Pmap1,alpha,[],clthres(2),[]);
+            case 3
+                Pmask(region)=clustertest2D(mapvalue1, ...
+                    Pmap1,alpha,clthres(1),clthres(2),[]);
+            case 4
+                Pmask(region)=clustertest2D(mapvalue1, ...
+                    Pmap1,alpha,[],[],clthres(3));
+        end
+    end
+end
+figure;imagesc(Pmask);axis square off
+%% plot fixed effec(anova and beta) - using permutation
+% close all
+opt=struct;% clear structure
+opt.type='model beta';
+opt.alpha=.05;
+% perform contrast
+[StatMap]=imapLMMcontrast(LMMmap,opt); 
+% imapLMMdisplay(StatMap,1)
+
+mccopt=struct;
+mccopt.methods='permutation';
+mccopt.nboot=1000;
+mccopt.bootopt=1;
+mccopt.tfce=0;
+% perform multiple comparison correction
+[StatMap_c]=imapLMMmcc(StatMap,LMMmap,mccopt,FixMap);
+% output figure;
+imapLMMdisplay(StatMap_c,0)
+%% Region dependent threshold
+ResampStat=StatMap_c.resampMat;
+nboot=mccopt.nboot;
+alpha=.05;
+Pmask=zeros(size(squeeze(StatMap_c.Pmask(2,:,:))));
+Pmap=StatMap.Pmap;
+mapvalue=StatMap.map;
+Maskall=zeros(size(Pmask));
+Maskall(16:135,16:135)=kron(reshape(1:16,4,4),ones(30,30));
+bootopt=1;
+Pmapnew2=Maskall;
+for imask=1:16
+    region=Maskall==imask;
+    for ic=2
+        Fboot=squeeze(ResampStat.resFvalue(:,ic,region));
+        Fboot=reshape(Fboot,1000,30,30);
+        % output new Pmask
+        origFmap=squeeze(StatMap.map(ic,region));
+        origFmap=reshape(origFmap,30,30);
+        orFmat=permute(repmat(origFmap,[1,1,nboot]),[3,1,2]);
+        Fboot2=repmat(max(Fboot(:,:),[],2),[1,size(Fboot,2),size(Fboot,3)]);
+        Pmapnew2(region)=(sum(Fboot2>=orFmat,1)+1)./(nboot+1);
+    end
+end
+Pmapnew2(Mask==0)=1;
+figure;
+subplot(1,3,1);
+imagesc(squeeze(StatMap_c.Pmap(ic,:,:)));axis square off
+subplot(1,3,2);
+imagesc(Pmapnew2);axis square off
+subplot(1,3,3);
+imagesc(Pmapnew2<alpha);axis square off
