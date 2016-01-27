@@ -28,6 +28,7 @@ function [GLMMmap,glmexample]=imapGLMM(FixMap,PredictorM,Mask,opt,formula,vararg
 %--------------------------------------------------------------------------
 % Copyright (C) iMap Team 2015
 %% check Matlab version and toolbox before start
+warning('off')
 v=ver;
 if size(PredictorM,1)~=size(FixMap,1)
     error('Number of items/trials mismatch between PredictorM and FixMap, please double check your input matrix.')
@@ -213,4 +214,5 @@ GLMMmap.Coefficients=CoefficientsMatrix;% save beta, SE
 
 RandomStat(:,:,compuIdx)=pRandomStat;
 GLMMmap.RandomEffects.RandomStat=RandomStat;
+warning('on')
 end
