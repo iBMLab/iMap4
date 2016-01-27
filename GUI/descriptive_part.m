@@ -24,6 +24,7 @@ elseif nargin==2
 end
 %%
 if exist('DescriptvM','var') && exist('FixMap','var')
+    close all
     % indx=find(DescriptvM.FixNum>200);
     % FixMap(indx,:,:)=[];
     % RawMap(indx,:,:)=[];
