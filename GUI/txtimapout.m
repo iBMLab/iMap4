@@ -7,7 +7,7 @@ if opt==1 % overall descriptive result
     else
         fileID = fopen(['Descriptive_STAT\Info_all.txt'],'w');
     end
-    fprintf(fileID,'%s \n','Thank you for using iMap 4. This .txt file contains the descriptive');
+    fprintf(fileID,'%s \n','Thank you for using iMap4. This .txt file contains the descriptive');
     fprintf(fileID,'%s \n','statistic of your data input.');
     fprintf(fileID,'%s \n','     ');
     fprintf(fileID,'%s \n','<Mean_Intensity_Map.png> is the mean fixation map of the whole dataset.');
@@ -20,7 +20,7 @@ elseif opt==2 % condition or joint condition
     else
         fileID = fopen(['Descriptive_STAT\',CondName,'\','Info_' CondName '.txt'],'w');
     end
-    fprintf(fileID,'%s \n','Thank you for using iMap 4. This .txt file contains the descriptive');
+    fprintf(fileID,'%s \n','Thank you for using iMap4. This .txt file contains the descriptive');
     fprintf(fileID,'%s \n','statistic of your data input.');
     fprintf(fileID,'%s \n','     ');
     fprintf(fileID,'%s \n',['<', CondName, '_Mean_Intensity_Map.png> is the mean fixation map of each level in condition <' CondName, '>.']);
@@ -36,7 +36,7 @@ fprintf(fileID,'%s \n',' - Total path length (total eye movement path length in 
 fprintf(fileID,'%s \n',' - Mean path length');
 fprintf(fileID,'%s \n','     ');
 fprintf(fileID,'%s \n','     ');
-fprintf(fileID,'%s \n','Importantly, iMap 4 fits a gamma distribution on all above measurement.');
+fprintf(fileID,'%s \n','Importantly, iMap4 fits a gamma distribution on all above measurement.');
 fprintf(fileID,'%s \n','We believe this is appropriate and more informative than a Gaussian');
 fprintf(fileID,'%s \n','assumption given that eye fixation should be considered as a Poisson');
 fprintf(fileID,'%s \n','process. Thus, its parameters could be fit with a Gamma distribution.');
