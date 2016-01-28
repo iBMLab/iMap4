@@ -1,26 +1,26 @@
-%%
+%% Load data
 clear all
 clc
 filename=dir('data*.mat');
 % create condition table
-sbj=repmat([1:30],1,4)';
-group=repmat([ones(1,15) ones(1,15)*2],1,4)';
-blinkspot=repmat(1:4,30,1);
-blinkspot=blinkspot(:);
-Tbl=dataset(sbj,group,blinkspot);
-% deg0cau=1:15;
-% deg0as=16:30;
-% deg2cau=31:45;
-% deg2as=46:60;
-% deg5cau=61:75;
-% deg5as=76:90;
-% deg8cau=91:105;
-% deg8as=106:120;
+sbj      = repmat([1:30],1,4)';
+group    = repmat([ones(1,15) ones(1,15)*2],1,4)';
+blinkspot= repmat(1:4,30,1);
+blinkspot= blinkspot(:);
+Tbl      = dataset(sbj,group,blinkspot);
+% deg0cau = 1:15;
+% deg0as  = 16:30;
+% deg2cau = 31:45;
+% deg2as  = 46:60;
+% deg5cau = 61:75;
+% deg5as  = 76:90;
+% deg8cau = 91:105;
+% deg8as  = 106:120;
 
-% parameters
-ySize=382;
-xSize=390;
-smoothingpic=10;
+% parameters for smoothing
+ySize       = 382;
+xSize       = 390;
+smoothingpic= 10;
 [x, y] = meshgrid(-floor(xSize/2)+.5:floor(xSize/2)-.5, -floor(ySize/2)+.5:floor(ySize/2)-.5);
 gaussienne = exp(- (x .^2 / smoothingpic ^2) - (y .^2 / smoothingpic ^2));
 gaussienne = (gaussienne - min(gaussienne(:))) / (max(gaussienne(:)) - min(gaussienne(:)));
@@ -47,7 +47,7 @@ for item=1:Nitem
     smoothpic = real(fftshift(ifft2(filtered_mat)));
     fixmapMat(item,:,:)=(smoothpic-mean(smoothpic(:)))./std(smoothpic(:));%smoothpic;% ./sum(durind); % 
     rawmapMat(item,:,:)=rawmap;
-    stDur(item)=sum(durind);
+    stDur(item)=sum(indx1);
 end
 Tbl.stDur=stDur;
 Tbl.blinkspot=nominal(Tbl.blinkspot);
@@ -63,7 +63,8 @@ fixmapMat2=zeros(size(Tbl,1),ySize2,xSize2);
 for it=1:size(Tbl,1)
     fixmapMat2(it,:,:)=imresize(squeeze(fixmapMat(it,:,:)),scale);
 end
-%% mean map
+
+%% Mean fixation intensity map by condition
 figure('NumberTitle','off','Name','Mean fixation bias');
 race=unique(Tbl.group);
 condi=unique(Tbl.blinkspot);
@@ -87,9 +88,6 @@ imagesc(masktmp);axis('equal','off')
 %% imapLMM
 tic
 opt.singlepredi=1;
-%opt.parallelname='grid2';
-% [LMMmap,lmexample]=imapLMM(fixmapMat2,Tbl,masktmp,opt, ...
-%    'PixelIntensity ~ group + blinkspot +  group:blinkspot + (stDur|sbj)','DummyVarCoding','effect');
 [LMMmap,lmexample]=imapLMM(fixmapMat2,Tbl,masktmp,opt, ...
    'PixelIntensity ~ group + blinkspot +  group:blinkspot + (1|sbj)','DummyVarCoding','effect');
 toc
@@ -246,7 +244,7 @@ for item=1:Nitem
         f_mat = fft2(rawmap); % 2D fourrier transform on the points matrix
         filtered_mat = f_mat .* f_fil;
         smoothpic = real(fftshift(ifft2(filtered_mat)));
-        fixmaptmp(it,:,:)=smoothpic./sum(durind); % (smoothpic-mean(smoothpic(:)))./std(smoothpic(:));%
+        fixmaptmp(it,:,:)=(smoothpic-mean(smoothpic(:)))./std(smoothpic(:));%smoothpic./sum(indx1); % 
         fixmapMatST(ii,:,:)=fixmaptmp(it,:,:);
         rawmaptmp(it,:,:)=rawmap;
         rawmapMatST(ii,:,:)=rawmaptmp(it,:,:);
@@ -254,7 +252,7 @@ for item=1:Nitem
         groupST(ii)=Tbl.group(item);
         sbjST(ii)=Tbl.sbj(item);
         blinkspotST(ii)=Tbl.blinkspot(item);
-        stDurST(ii)=sum(durind);
+        stDurST(ii)=sum(indx1);
     end
     if Nt<10
         fixmapMat(item,:,:)=mean(fixmaptmp,1);
