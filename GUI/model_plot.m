@@ -90,7 +90,7 @@ uiwait(gcf)
         end
         %output figure;
         % imapLMMdisplay(StatMap,0)
-        imapLMMdisplay(StatMap,normalized,backgroundfile(2:end-1),cmap(2:end-1),colormaprange,distplot);
+        imapLMMdisplay(StatMap,normalized,backgroundfile(2:end-1),cmap(2:end-1),colormaprange,distplot,[]);
     end
 
     function anova(~,~)
@@ -453,7 +453,7 @@ uiwait(gcf)
             end
             %output figure;
             % imapLMMdisplay(StatMap,0)
-            imapLMMdisplay(StatMaptoplot,normalized,backgroundfile(2:end-1),cmap(2:end-1),colormaprange,distplot);
+            imapLMMdisplay(StatMaptoplot,normalized,backgroundfile(2:end-1),cmap(2:end-1),colormaprange,distplot,[]);
         end
         
         

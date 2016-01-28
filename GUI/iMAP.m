@@ -227,7 +227,7 @@ else
         if isempty(StatMaptoplot.label)
             StatMaptoplot.label={'unname Contrast'};
         end
-        imapLMMdisplay(StatMaptoplot,normalized,backgroundfile(2:end-1),cmap(2:end-1),colormaprange,distplot);
+        imapLMMdisplay(StatMaptoplot,normalized,backgroundfile(2:end-1),cmap(2:end-1),colormaprange,distplot,[]);
     end
 end   
 end

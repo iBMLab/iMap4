@@ -4,7 +4,7 @@ function [ResampStat]=imapLMMresample(FixMap,LMMmap,c,h,effect,method,nboot,grou
 % from the resampling distribution.
 % This function is called by imapLMMmcc with bootstrap or permutation
 % option, but you can call it independently as well.
-% input: FixMap, mask,
+% input: FixMap, LMMmap,
 %       DX - fixed effect design matrix
 %       Zx - random effect design matrix
 %        c - contrast matrix

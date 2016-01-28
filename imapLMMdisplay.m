@@ -1,5 +1,5 @@
 function imapLMMdisplay(StatMap,normalized,backgroundfile,cmap,colormaprange,distplot,foldername)
-% Usage: imapLMMdisplay(StatMap,normalized,backgroundfile,colourmap,colormaprange,distplot)
+% Usage: imapLMMdisplay(StatMap,normalized,backgroundfile,colourmap,colormaprange,distplot,foldername)
 % display result after contrast test. Input result from imapLMMcontrast
 % input structure format {opt} {Pmap} {Pmask} {F/Tmap} {betamap(optional)}
 % {labels of the maps} {MCC related field}

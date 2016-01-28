@@ -2,7 +2,7 @@ function [StatMap_c]=imapLMMmcc(StatMap,LMMmap,mccopt,varargin)
 % {MCC related field}
 % mccopt.methods  - fdr/bonferroni/randomfield/cluster/
 %                   bootstrap/permutation
-% mccopt.bootopt  - 1 cluster mass, 2 cluster size, 3 both, 4 dense
+% mccopt.bootopt  - 1 cluster mass, 2 cluster size, 3 both cluster mass and size, 4 cluster dense 
 % mccopt.bootgroup- grouping variable for bootstrap and permutation (to 
 %                   keep group variance constant). Input must be a cell 
 %                   specifying the grouping variables in the PredictorM
