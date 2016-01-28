@@ -127,7 +127,7 @@ switch method
         error('Please input the method as mean or sum')
 end
 
-lmeposthoc = LinearMixedModel.fit(tbl,string(formula),varargin{:});
+lmeposthoc = LinearMixedModel.fit(tbl,char(formula),varargin{:});
 
 numcomp=length(contrast);
 posthocmat=NaN(numcomp,numcomp,3);
