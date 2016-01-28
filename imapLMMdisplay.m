@@ -77,7 +77,7 @@ if nargin<7
 end
 
 if ~exist(foldername, 'dir')
-    mkdir('foldername');
+    mkdir(foldername);
 end
 
 label=StatMap.label;
