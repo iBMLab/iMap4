@@ -1,5 +1,5 @@
 function [ResampStat]=imapLMMresample(FixMap,LMMmap,c,h,effect,method,nboot,grouping,rmRE)
-% imapLMMmontecarlo performs a nonparametric statistical test by calculating
+% imapLMMresample performs a nonparametric statistical test by calculating
 % Monte-Carlo estimates of the significance probabilities and/or critical values
 % from the resampling distribution.
 % This function is called by imapLMMmcc with bootstrap or permutation

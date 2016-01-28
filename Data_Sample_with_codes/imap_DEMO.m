@@ -42,7 +42,7 @@ xScreen=37;
 ySize=1024;
 xSize=1280;
 % rescale
-scale=1/4;
+scale=1/5;
 [ySize2,xSize2]=size(imresize(ones(ySize,xSize),scale));
 % create Gaussian for smoothing
 smoothingpic=20;
@@ -168,7 +168,7 @@ opt.singlepredi=1;
     'DummyVarCoding','effect','FitMethod','REML');
 toc
 %% LMMmap structure
-% impLMM will output a structure called LMMmap with all the information
+% imapLMM will output a structure called LMMmap with all the information
 % from the linear mixed model fitting:
 % LMMmap =
 %
