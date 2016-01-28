@@ -31,7 +31,7 @@ else
     formula=formula2;
 end
 varargin=LMMmap.FitOptions;
-lmetmp = LinearMixedModel.fit(tbl,string(formula),varargin{:});
+lmetmp = LinearMixedModel.fit(tbl,char(formula),varargin{:});
 
 DesignMatrix=designMatrix(lmetmp);
 
