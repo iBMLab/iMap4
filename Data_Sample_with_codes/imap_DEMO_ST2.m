@@ -43,7 +43,7 @@ subplot(1,3,2)
 Nfix=10; % total number of fixation
 Y = random(obj,Nfix);
 
-plot(Y(:,1),Y(:,2),'.')
+plot(Y(:,1),Y(:,2),'o')
 axis([0 xSize 0 ySize],'square')
 %
 % smooth map

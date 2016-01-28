@@ -4,7 +4,7 @@
 % presented to 20 subjects for 100 trials, each trial participant gives a
 % subjective rating (from -3 to 3 in the current case). We simulate a
 % linear relationship between rating and fixation number on each grid with
-% different power. iMap4 will then estimate the relationship for eachb
+% different power. iMap4 will then estimate the relationship for each
 % grid.
 % Junpeng Lao, 2015 March, University of Fribourg
 %--------------------------------------------------------------------------
@@ -46,9 +46,9 @@ for irr=1:length(rho)
         cst=constant*sign(constant);
         U(:,2)=U(:,2)+cst;
         
-        plot(X,U(:,2),'.k');
-        plot(X,X.*slope(iss)+cst,'r')
-        title(['Y_' num2str(iplot) '=' num2str(slope(iss)) '*X+c_' num2str(iplot) '; (rho_' num2str(iplot) '=' num2str(rho(irr)) ')']);
+        plot(X,U(:,2),'o');
+        plot(X,X.*slope(iss)+cst,'r','LineWidth',2.5)
+        title(['Y' num2str(iplot) '=' num2str(slope(iss)) '*X+c' num2str(iplot) '; (rho' num2str(iplot) '=' num2str(rho(irr)) ')']);
         axis([-2.2 2.2 0 5.5])
     end
 end
@@ -85,7 +85,7 @@ for is=1:Ns
             U(:,2)=U(:,2)+cst;
             Yall(is,itype,:)=U(:,2);
             if itype==1
-                plot(Xall(is,:),squeeze(Yall(is,1,:)),'.')
+                plot(Xall(is,:),squeeze(Yall(is,1,:)),'o')
                 hold on
             end
         end
@@ -118,7 +118,7 @@ rng(1); % For reproducibility
 Nfix=60; % total number of fixation
 Y = random(obj,Nfix);
 
-plot(Y(:,1),Y(:,2),'.')
+plot(Y(:,1),Y(:,2),'o')
 set(gca,'YDir','reverse');
 axis([0 xSize 0 ySize],'square')
 % smooth map
