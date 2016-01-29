@@ -15,7 +15,7 @@ Junpeng Lao<sup>1</sup>, Sébastien Miellet<sup>1,2</sup>, Cyril Pernet<sup>3</s
 Download ./Matlab_Installation_Package and intall the toolbox as a Matlab Application. 
 Example codes and dataset could be found in ./Data_Sample_with_codes/
 
-Please read the guidebook for more information of how to use the toolbox.
+Please read the [wiki](https://github.com/iBMLab/iMap4/wiki) for more information of how to use the toolbox.
 
 ##Keep in touch!
 Updates and new release will be announced on our [lab website] (http://perso.unifr.ch/roberto.caldara/index.php?page=3).
