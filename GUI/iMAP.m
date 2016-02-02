@@ -253,11 +253,12 @@ function uitoggletool1_ClickedCallback(hObject, eventdata, handles)
 % hObject    handle to uitoggletool1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-if ispc
-    winopen('manual_GUI.pdf');
-elseif ismac
-    system(['open manual_GUI.pdf']);
-else
-    errordlg('Please open the Guidebook manually in ./matlab/Apps/iMAP/GUI')
-end
+% if ispc
+%     winopen('manual_GUI.pdf');
+% elseif ismac
+%     system(['open manual_GUI.pdf']);
+% else
+%     errordlg('Please open the Guidebook manually in ./matlab/Apps/iMAP/GUI')
+% end
+web('https://github.com/iBMLab/iMap4/wiki','-browser')
 

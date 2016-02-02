@@ -480,11 +480,12 @@ uiwait(gcf)
 end
 
 function help_button(~,~)
-if ispc
-    winopen('manual_GUI.pdf');
-elseif ismac
-    system(['open manual_GUI.pdf']);
-else
-    errordlg('Please open the Guidebook manually in ./matlab/Apps/iMAP/GUI')
-end
+% if ispc
+%     winopen('manual_GUI.pdf');
+% elseif ismac
+%     system(['open manual_GUI.pdf']);
+% else
+%     errordlg('Please open the Guidebook manually in ./matlab/Apps/iMAP/GUI')
+% end
+web('https://github.com/iBMLab/iMap4/wiki','-browser')
 end
