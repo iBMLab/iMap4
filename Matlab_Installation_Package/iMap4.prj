@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <deployment-project plugin="plugin.apptool" plugin-version="1.0">
-  <configuration target="target.mlapps" target-name="Package App" name="iMap4" location="D:\Charles\imap4\Matlab_Installation_Package" file="D:\Charles\imap4\Matlab_Installation_Package\iMap4.prj" build-checksum="3708042916">
+  <configuration target="target.mlapps" target-name="Package App" name="iMap4" location="D:\Charles\imap4\Matlab_Installation_Package" file="D:\Charles\imap4\Matlab_Installation_Package\iMap4.prj" build-checksum="1635711710">
     <param.appname>iMap4</param.appname>
     <param.authnamewatermark>Junpeng Lao &amp; Nayla Sokhn</param.authnamewatermark>
     <param.email>junpeng.lao@unifr.ch</param.email>
@@ -47,11 +47,9 @@ iMap4 is a freely available MATLAB open source toolbox for the statistical fixat
     <param.platforms>
       <item>win64</item>
     </param.platforms>
-    <param.output>${PROJECT_ROOT}\App Name.mlappinstall</param.output>
+    <param.output>${PROJECT_ROOT}\iMap4.mlappinstall</param.output>
     <param.guid>46b19551-c1e9-4ea8-88fe-88f82d0f496f</param.guid>
-    <unset>
-      <param.output />
-    </unset>
+    <unset />
     <fileset.main>
       <file>D:\Charles\imap4\GUI\iMAP.m</file>
     </fileset.main>
@@ -131,7 +129,7 @@ iMap4 is a freely available MATLAB open source toolbox for the statistical fixat
     </fileset.resources>
     <fileset.package />
     <build-deliverables>
-      <file name="App Name.mlappinstall" location="D:\Charles\imap4\Matlab_Installation_Package" optional="false">D:\Charles\imap4\Matlab_Installation_Package\App Name.mlappinstall</file>
+      <file name="iMap4.mlappinstall" location="D:\Charles\imap4\Matlab_Installation_Package" optional="false">D:\Charles\imap4\Matlab_Installation_Package\iMap4.mlappinstall</file>
     </build-deliverables>
     <workflow />
     <matlab>
