@@ -16,7 +16,7 @@ Example codes and dataset could be found in ./Data_Sample_with_codes/
 
 Please read the [wiki](https://github.com/iBMLab/iMap4/wiki) for more information of how to use the toolbox.
 
-##Examples
+##Published papers using *i*Map4
 Our first paper using *i*Map4 is recently published in Scientific Reports:
 
 Bovet, J., Lao, J., & Caldara, R., & Raymond, M. (2016). Mapping females' bodily features of attractiveness. _Scientific Reports, 6,_ 18551; [doi: 10.1038/srep18551](http://www.nature.com/articles/srep18551)  
