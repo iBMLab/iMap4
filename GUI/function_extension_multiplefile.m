@@ -30,7 +30,7 @@ name_file(1:length(name_file))= cellstr(filename{i});
 readdata = [readdata;[readdata1,{name_file}]];
 waitbar(i/length(filename));
 end
-if ~ishandle(h)
+if ishandle(h)
 delete(h);
 end
 
@@ -51,7 +51,7 @@ name_file(1:length(name_file))= cellstr(filename{i});
 readdata = [readdata;[readdata1,{name_file}]];
 waitbar(i/length(filename));
 end
-if ~ishandle(h)
+if ishandle(h)
 delete(h);
 end
     
@@ -72,7 +72,7 @@ name_file(1:length(name_file))= cellstr(filename{i});
 readdata = [readdata;[readdata1,{name_file}]];
 waitbar(i/length(filename));
 end
-if ~ishandle(h)
+if ishandle(h)
 delete(h);
 end
     
@@ -96,7 +96,7 @@ readdata = [readdata;[readdata1,{name_file}]];
 
 waitbar(i/length(filename));
 end
-if ~ishandle(h)
+if ishandle(h)
 delete(h);
 end
     
@@ -111,7 +111,7 @@ AllC = cat(1,e{:});
 try
 data(:,i) = AllC;    
 catch
-if ~ishandle(h)
+if ishandle(h)
 delete(h);
 end
     
