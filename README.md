@@ -2,6 +2,8 @@
 
 # *i*Map4  <img src="https://github.com/iBMLab/iMap4/blob/master/GUI/IMAP.png" width="50" height="50" />   <img src="https://github.com/iBMLab/iMap4/blob/master/GUI/logo_imap.png" width="50" height="50" />
 
+[![Join the chat at https://gitter.im/iBMLab/iMap4](https://badges.gitter.im/iBMLab/iMap4.svg)](https://gitter.im/iBMLab/iMap4?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 
 *i*Map4: An Open Source Toolbox for the Statistical Fixation Mapping of Eye Movement data with Linear Mixed Modeling
 
