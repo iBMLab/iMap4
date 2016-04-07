@@ -128,7 +128,7 @@ switch opt.type
         end
         cd(['./' foldername]);print('-depsc2','-r300','Model Criterion');cd('..');
         if ~isempty(im3D)
-            im3D2=imresize(im3D,[size(maptemp,2),size(maptemp,3)],'box');
+            im3D2=imresize(im3D,[size(maptemp,2),size(maptemp,3)],'nearest');
             % Rsquared
             figure('NumberTitle','off','Name','R^2 of model(with background)','Position',[1 1 scrsz(3) scrsz(4)/2]);
             maprangetmp=sort(squeeze(max(abs(maptemp(1:2,mask)))));
@@ -183,7 +183,7 @@ switch opt.type
         % mapmax=max(maptemp(:));
         % mapmin=min(maptemp(:));
         if ~isempty(im3D)
-            im3D2=imresize(im3D,[size(maptemp,2),size(maptemp,3)],'box');
+            im3D2=imresize(im3D,[size(maptemp,2),size(maptemp,3)],'nearest');
         end
         for ip=1:length(label)
             toimage=squeeze(maptemp(ip,:,:));
@@ -294,7 +294,7 @@ switch opt.type
         % mapmin=min(maptemp(:));
         mapmaxb=max(abs(betatmp(:)));
         if ~isempty(im3D)
-            im3D2=imresize(im3D,[size(maptemp,2),size(maptemp,3)],'box');
+            im3D2=imresize(im3D,[size(maptemp,2),size(maptemp,3)],'nearest');
         end
         for ip=1:length(label)
             toimage=squeeze(maptemp(ip,:,:));
