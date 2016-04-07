@@ -1,8 +1,7 @@
-
 function [scale_parameter, ySize2, xSize2,idx] = select_scale_parameter(xSize,ySize)
 idx = 0;
 scale_parameter = round(25000/max(xSize,ySize))/100;
-[ySize2,xSize2]=size(imresize(ones(ySize,xSize),scale_parameter)); % to verify!
+[ySize2,xSize2]=size(imresize(ones(ySize,xSize),scale_parameter,'nearest')); % to verify!
 scale_parameter = num2str(scale_parameter);
 
 screensize = get(0,'ScreenSize');
@@ -85,7 +84,7 @@ uiwait(gcf)
         
         index_selected = get(hObject,'string');
         scale_parameter = round((str2double(index_selected)/xSize)*100)/100;
-        [ySize2,xSize2]=size(imresize(ones(ySize,xSize),scale_parameter));
+        [ySize2,xSize2]=size(imresize(ones(ySize,xSize),scale_parameter,'nearest'));
         set(S.edit_1,'string',scale_parameter)
         %set(S.edit_2,'string',xSize2)
         set(S.edit_3,'string',ySize2)
@@ -109,7 +108,7 @@ uiwait(gcf)
         
         index_selected = get(hObject,'string');
         
-        [ySize2,xSize2]=size(imresize(ones(ySize,xSize),str2double(index_selected)));
+        [ySize2,xSize2]=size(imresize(ones(ySize,xSize),str2double(index_selected),'nearest'));
         set(S.edit_2,'string',xSize2)
         set(S.edit_3,'string',ySize2)
         
@@ -130,9 +129,4 @@ uiwait(gcf)
         scale_parameter = get(S.edit_1,'String');
        delete(S.fh)
     end
-
-
-
-
-
 end
