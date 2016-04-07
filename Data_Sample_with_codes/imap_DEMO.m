@@ -43,7 +43,7 @@ ySize=1024;
 xSize=1280;
 % rescale
 scale=1/5;
-[ySize2,xSize2]=size(imresize(ones(ySize,xSize),scale));
+[ySize2,xSize2]=size(imresize(ones(ySize,xSize),scale,'nearest'));
 % create Gaussian for smoothing
 smoothingpic=20;
 [x, y] = meshgrid(-floor(xSize/2)+.5:floor(xSize/2)-.5, -floor(ySize/2)+.5:floor(ySize/2)-.5);
@@ -111,8 +111,8 @@ for is=1:Ns
                         filtered_mat = f_mat .* f_fil;
                         
                         smoothpic = real(fftshift(ifft2(filtered_mat)));
-                        isfixmap(it,:,:)=imresize(smoothpic,scale);
-                        israwmap(it,:,:)=imresize(rawmap,scale);
+                        isfixmap(it,:,:)=imresize(smoothpic,scale,'nearest');
+                        israwmap(it,:,:)=imresize(rawmap,scale,'nearest');
                         stDur(it)=sum(durind);
                         stRate(it)=srate(selected2(1));
                     end
