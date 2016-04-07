@@ -695,8 +695,8 @@ for is = 1:Ns
         smoothpic = real(fftshift(ifft2(filtered_mat)));
         
         %original
-        fix_map(it,:,:)=imresize(smoothpic, scale,'box');
-        raw_map(it,:,:)=imresize(rawmap,scale,'box'); %switch case if they want to normalize
+        fix_map(it,:,:)=imresize(smoothpic, scale,'nearest');
+        raw_map(it,:,:)=imresize(rawmap,scale,'nearest'); %switch case if they want to normalize
         stDur(it)=nansum(intv(indx1));
     end
     descripM=num2cell(descriptemp);
