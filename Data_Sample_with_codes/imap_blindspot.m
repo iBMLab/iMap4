@@ -58,10 +58,10 @@ Tbl.group=nominal(Tbl.group);
 
 %% rescale
 scale=150/mean([xSize,ySize]);
-[ySize2,xSize2]=size(imresize(ones(ySize,xSize),scale));
+[ySize2,xSize2]=size(imresize(ones(ySize,xSize),scale,'nearest'));
 fixmapMat2=zeros(size(Tbl,1),ySize2,xSize2);
 for it=1:size(Tbl,1)
-    fixmapMat2(it,:,:)=imresize(squeeze(fixmapMat(it,:,:)),scale);
+    fixmapMat2(it,:,:)=imresize(squeeze(fixmapMat(it,:,:)),scale,'nearest');
 end
 
 %% Mean fixation intensity map by condition
@@ -271,10 +271,10 @@ TblST.groupST=nominal(TblST.groupST);
 
 %% rescale
 scale=150/mean([xSize,ySize]);
-[ySize2,xSize2]=size(imresize(ones(ySize,xSize),scale));
+[ySize2,xSize2]=size(imresize(ones(ySize,xSize),scale,'nearest'));
 fixmapMat2ST=zeros(size(TblST,1),ySize2,xSize2);
 for it=1:size(TblST,1)
-    fixmapMat2ST(it,:,:)=imresize(squeeze(fixmapMatST(it,:,:)),scale);
+    fixmapMat2ST(it,:,:)=imresize(squeeze(fixmapMatST(it,:,:)),scale,'nearest');
 end
 %% mean map
 figure('NumberTitle','off','Name','Mean fixation bias');
