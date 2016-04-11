@@ -21,7 +21,7 @@ Please read the [wiki](https://github.com/iBMLab/iMap4/wiki) for more informatio
 ##Published papers using *i*Map4
 Our first paper using *i*Map4 is recently published in Scientific Reports:
 
-Bovet, J., Lao, J., & Caldara, R., & Raymond, M. (2016). Mapping females' bodily features of attractiveness. _Scientific Reports, 6,_ 18551; [doi: 10.1038/srep18551](http://www.nature.com/articles/srep18551)  
+> Bovet, J., Lao, J., Bartholomée, O., Caldara, R., & Raymond, M. (2016). Mapping female bodily features of attractiveness. Scientific Reports, 6, *18551*.[doi: 10.1038/srep18551](http://www.nature.com/articles/srep18551)
 
 We provide a subset of the eye movement data as a demo of *i*Map4, see [wiki](https://github.com/iBMLab/iMap4/wiki/Background-of-Example-1) 
 
