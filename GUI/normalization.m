@@ -13,7 +13,7 @@ switch choice
             %Single Trial Method
             durind_single_trial = double(handles.duration_single_trial);
             FixMap_duration_single_trial = bsxfun(@rdivide,handles.FixMap_single_trial_scaled,durind_single_trial);% divided by the number of trials %(smoothpic-mean(smoothpic(:)))./std(smoothpic(:));%
-            FixMap = FixMap_duration_single_trial;
+            FixMap = FixMap_duration_single_trial*100;
             
             
             if isunix ==0
@@ -30,7 +30,7 @@ switch choice
             else
                 FixMap_duration_estimated = bsxfun(@rdivide,handles.FixMap_estimated,durind_estimated);% divided by the number of trials %(smoothpic-mean(smoothpic(:)))./std(smoothpic(:));%
             end
-            FixMap = FixMap_duration_estimated;
+            FixMap = FixMap_duration_estimated*100;
             
             
             if isunix ==0
@@ -67,7 +67,7 @@ switch choice
                 drawnow;
                 durind = double(handles.duration_single_trial);
                 FixMap_duration_single_trial = bsxfun(@rdivide,handles.FixMap_single_trial_scaled,durind);% divided by the number of trials %(smoothpic-mean(smoothpic(:)))./std(smoothpic(:));%
-                FixMap = FixMap_duration_single_trial;
+                FixMap = FixMap_duration_single_trial*100;
                 %set(handles.figure1, 'pointer', 'arrow')
                 
                 
@@ -103,7 +103,7 @@ switch choice
                     FixMap_duration_estimated = bsxfun(@rdivide,handles.FixMap_estimated,durind);% divided by the number of trials %(smoothpic-mean(smoothpic(:)))./std(smoothpic(:));%
                     
                 end
-                FixMap = FixMap_duration_estimated;
+                FixMap = FixMap_duration_estimated*100;
                 
                 
                 if isunix==0
