@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <deployment-project plugin="plugin.apptool" plugin-version="1.0">
-  <configuration target="target.mlapps" target-name="Package App" name="iMap4" location="D:\Charles\imap4\Matlab_Installation_Package" file="D:\Charles\imap4\Matlab_Installation_Package\iMap4.prj" build-checksum="1116247746">
+  <configuration build-checksum="3199861447" file="D:\Charles\imap4\Matlab_Installation_Package\iMap4.prj" location="D:\Charles\imap4\Matlab_Installation_Package" name="iMap4" target="target.mlapps" target-name="Package App">
     <param.appname>iMap4</param.appname>
     <param.authnamewatermark>Junpeng Lao &amp; Nayla Sokhn</param.authnamewatermark>
     <param.email>junpeng.lao@unifr.ch</param.email>
@@ -25,7 +24,7 @@ Here, we tackled this issue by using the statistical framework implemented in di
 
 iMap4 is a freely available MATLAB open source toolbox for the statistical fixation mapping of eye movement data, with a user-friendly interface providing straightforward, easy to interpret statistical graphical outputs and matching the standards in robust statistical neuroimaging methods. iMap4 represents a major step in the processing of eye movement fixation data, paving the way to a routine use of robust data-driven analyses in this important field of vision sciences.</param.description>
     <param.screenshot>${PROJECT_ROOT}\iMap4_resources\iBMLab.png</param.screenshot>
-    <param.version>4.07</param.version>
+    <param.version>4.08</param.version>
     <param.products.name>
       <item>Curve Fitting Toolbox</item>
       <item>Image Processing Toolbox</item>
@@ -128,11 +127,11 @@ iMap4 is a freely available MATLAB open source toolbox for the statistical fixat
     </fileset.resources>
     <fileset.package />
     <build-deliverables>
-      <file name="iMap4.mlappinstall" location="D:\Charles\imap4\Matlab_Installation_Package" optional="false">D:\Charles\imap4\Matlab_Installation_Package\iMap4.mlappinstall</file>
+      <file location="D:\Charles\imap4\Matlab_Installation_Package" name="iMap4.mlappinstall" optional="false">D:\Charles\imap4\Matlab_Installation_Package\iMap4.mlappinstall</file>
     </build-deliverables>
     <workflow />
     <matlab>
-      <root>C:\Program Files\MATLAB\R2013b</root>
+      <root>C:\Program Files\MATLAB\R2014b</root>
       <toolboxes />
     </matlab>
     <platform>
@@ -152,4 +151,3 @@ iMap4 is a freely available MATLAB open source toolbox for the statistical fixat
     </platform>
   </configuration>
 </deployment-project>
-
