@@ -658,14 +658,14 @@ for is = 1:Ns
         [~,trialstend,t3]= unique(tbl(:,1),'stable');
     end
     trialstend(:,2)=[trialstend(2:end,1)-1;length(t3)];
-    stDur=zeros(length(trialstend),1);
-    descriptemp=zeros(length(trialstend),5);
+    stDur=zeros(size(trialstend,1),1);
+    descriptemp=zeros(size(trialstend,1),5);
     
     % note: normalized for each trial
-    fix_map=zeros(length(trialstend),ySize_scaled, xSize_scaled);
+    fix_map=zeros(size(trialstend,1),ySize_scaled, xSize_scaled);
     raw_map=fix_map;
     
-    for it=1:length(trialstend)
+    for it=1:size(trialstend,1)
         % fixation matrix
         seyext=seyex(trialstend(it,1):trialstend(it,2));
         seyeyt=seyey(trialstend(it,1):trialstend(it,2));
