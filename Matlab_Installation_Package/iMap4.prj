@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <deployment-project plugin="plugin.apptool" plugin-version="1.0">
-  <configuration target="target.mlapps" target-name="Package App" name="iMap4" location="D:\Charles\imap4\Matlab_Installation_Package" file="D:\Charles\imap4\Matlab_Installation_Package\iMap4.prj" build-checksum="4087029942">
+  <configuration target="target.mlapps" target-name="Package App" name="iMap4" location="D:\Charles\imap4\Matlab_Installation_Package" file="D:\Charles\imap4\Matlab_Installation_Package\iMap4.prj" build-checksum="2072782746">
     <param.appname>iMap4</param.appname>
     <param.authnamewatermark>Junpeng Lao &amp; Nayla Sokhn</param.authnamewatermark>
     <param.email>junpeng.lao@unifr.ch</param.email>
@@ -27,33 +27,180 @@ iMap4 is a freely available MATLAB open source toolbox for the statistical fixat
     <param.screenshot>${PROJECT_ROOT}\iMap4_resources\iBMLab.png</param.screenshot>
     <param.version>4.08</param.version>
     <param.products.name>
-      <item>MATLAB</item>
-      <item>Curve Fitting Toolbox</item>
       <item>Image Processing Toolbox</item>
+      <item>Simulink</item>
+      <item>Neural Network Toolbox</item>
+      <item>Signal Processing Toolbox</item>
       <item>Statistics Toolbox</item>
+      <item>Curve Fitting Toolbox</item>
+      <item>MATLAB</item>
     </param.products.name>
     <param.products.id>
-      <item>'1'</item>
-      <item>'60'</item>
-      <item>'17'</item>
-      <item>'19'</item>
+      <item>17</item>
+      <item>2</item>
+      <item>12</item>
+      <item>8</item>
+      <item>19</item>
+      <item>60</item>
+      <item>1</item>
     </param.products.id>
     <param.products.version>
-      <item>8.4</item>
-      <item>3.5</item>
-      <item>9.1</item>
-      <item>9.1</item>
+      <item>8.3</item>
+      <item>8.2</item>
+      <item>8.1</item>
+      <item>6.20</item>
+      <item>8.3</item>
+      <item>3.4</item>
+      <item>8.2</item>
     </param.products.version>
-    <param.platforms />
+    <param.platforms>
+      <item>win64</item>
+    </param.platforms>
     <param.output>${PROJECT_ROOT}\iMap4.mlappinstall</param.output>
     <param.guid>ddc1ce28-2fbd-402b-a90d-1881c6df01ef</param.guid>
-    <unset>
-      <param.platforms />
-    </unset>
+    <unset />
     <fileset.main>
       <file>D:\Charles\imap4\GUI\iMAP.m</file>
     </fileset.main>
     <fileset.depfun>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_DEMO\back.jpg</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_DEMO\data_subset.txt</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_DEMO\front.jpg</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_DEMO\label.txt</file>
+    </fileset.depfun>
+    <fileset.resources>
+      <file>D:\Charles\imap4\Data_Sample_with_codes</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data1.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data10.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data100.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data101.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data102.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data103.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data104.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data105.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data106.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data107.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data108.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data109.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data11.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data110.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data111.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data112.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data113.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data114.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data115.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data116.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data117.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data118.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data119.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data12.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data120.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data13.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data14.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data15.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data16.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data17.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data18.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data19.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data2.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data20.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data21.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data22.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data23.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data24.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data25.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data26.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data27.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data28.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data29.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data3.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data30.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data31.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data32.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data33.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data34.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data35.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data36.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data37.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data38.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data39.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data4.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data40.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data41.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data42.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data43.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data44.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data45.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data46.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data47.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data48.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data49.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data5.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data50.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data51.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data52.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data53.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data54.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data55.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data56.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data57.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data58.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data59.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data6.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data60.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data61.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data62.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data63.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data64.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data65.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data66.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data67.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data68.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data69.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data7.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data70.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data71.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data72.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data73.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data74.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data75.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data76.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data77.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data78.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data79.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data8.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data80.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data81.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data82.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data83.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data84.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data85.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data86.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data87.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data88.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data89.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data9.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data90.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data91.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data92.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data93.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data94.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data95.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data96.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data97.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data98.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_blindspot\data99.mat</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_DEMO</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_DEMO\back.jpg</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_DEMO\data_subset.txt</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_DEMO\front.jpg</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\Data_sample_DEMO\label.txt</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\imap_blindspot.m</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\imap_DEMO.m</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\imap_DEMO_ST1.m</file>
+      <file>D:\Charles\imap4\Data_Sample_with_codes\imap_DEMO_ST2.m</file>
+      <file>D:\Charles\imap4\GUI</file>
       <file>D:\Charles\imap4\GUI\allcombs.m</file>
       <file>D:\Charles\imap4\GUI\char2cell.m</file>
       <file>D:\Charles\imap4\GUI\check_columns_file.m</file>
@@ -67,6 +214,7 @@ iMap4 is a freely available MATLAB open source toolbox for the statistical fixat
       <file>D:\Charles\imap4\GUI\function_find_fixation.m</file>
       <file>D:\Charles\imap4\GUI\function_select_predictors_stat.m</file>
       <file>D:\Charles\imap4\GUI\iMAP.fig</file>
+      <file>D:\Charles\imap4\GUI\iMAP.m</file>
       <file>D:\Charles\imap4\GUI\IMAP.png</file>
       <file>D:\Charles\imap4\GUI\imap_gui.fig</file>
       <file>D:\Charles\imap4\GUI\imap_gui.m</file>
@@ -97,6 +245,7 @@ iMap4 is a freely available MATLAB open source toolbox for the statistical fixat
       <file>D:\Charles\imap4\GUI\select_smoothing2.m</file>
       <file>D:\Charles\imap4\GUI\txtimapout.m</file>
       <file>D:\Charles\imap4\GUI\type_fixation.m</file>
+      <file>D:\Charles\imap4\imap_utilities</file>
       <file>D:\Charles\imap4\imap_utilities\bt_switch_cr.m</file>
       <file>D:\Charles\imap4\imap_utilities\CategoricalName.m</file>
       <file>D:\Charles\imap4\imap_utilities\CIforFixed.m</file>
@@ -113,11 +262,6 @@ iMap4 is a freely available MATLAB open source toolbox for the statistical fixat
       <file>D:\Charles\imap4\imap_utilities\stat_threshold.m</file>
       <file>D:\Charles\imap4\imap_utilities\tfce2d.m</file>
       <file>D:\Charles\imap4\imap_utilities\winsored_fixmap.m</file>
-    </fileset.depfun>
-    <fileset.resources>
-      <file>D:\Charles\imap4\Data_Sample_with_codes</file>
-      <file>D:\Charles\imap4\GUI</file>
-      <file>D:\Charles\imap4\imap_utilities</file>
       <file>D:\Charles\imap4\imapGLMM.m</file>
       <file>D:\Charles\imap4\imapLMM.m</file>
       <file>D:\Charles\imap4\imapLMMcontrast.m</file>
