@@ -1,7 +1,7 @@
 function StatMap_c=multiple_comparison_tab(LMMmap,FixMap,StatMap,pathname)
 
 if strcmp(StatMap.opt.type,'model')==1
-    errordlg('There is no multiple comparison correction on model fitting')
+    errordlg('Currently there is no multiple comparison correction on model fitting results.')
     StatMap_c=[];
     return
     uiwait(gcf)
@@ -20,8 +20,7 @@ switch mccopt.methods
     case 'cluster'
         mccopt = select_option_cluster(mccopt);
     case 'permutation'
-        %mccopt.permute   = str2double(options{2}); %permutation test type. 1 for pixel wise p-value, 2 for cluster wise p-value
-        errordlg('permutation still under construnction');
+        mccopt = select_option_permutation(mccopt);
 end
 
 %mccopt.methods   = options{1};             %fdr/bonferroni/randomfield/cluster/bootstrap/permutation
