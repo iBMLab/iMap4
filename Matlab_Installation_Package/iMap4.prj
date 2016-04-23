@@ -1,5 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <deployment-project plugin="plugin.apptool" plugin-version="1.0">
-  <configuration build-checksum="3199861447" file="D:\Charles\imap4\Matlab_Installation_Package\iMap4.prj" location="D:\Charles\imap4\Matlab_Installation_Package" name="iMap4" target="target.mlapps" target-name="Package App">
+  <configuration target="target.mlapps" target-name="Package App" name="iMap4" location="D:\Charles\imap4\Matlab_Installation_Package" file="D:\Charles\imap4\Matlab_Installation_Package\iMap4.prj" build-checksum="4087029942">
     <param.appname>iMap4</param.appname>
     <param.authnamewatermark>Junpeng Lao &amp; Nayla Sokhn</param.authnamewatermark>
     <param.email>junpeng.lao@unifr.ch</param.email>
@@ -26,26 +27,26 @@ iMap4 is a freely available MATLAB open source toolbox for the statistical fixat
     <param.screenshot>${PROJECT_ROOT}\iMap4_resources\iBMLab.png</param.screenshot>
     <param.version>4.08</param.version>
     <param.products.name>
+      <item>MATLAB</item>
       <item>Curve Fitting Toolbox</item>
       <item>Image Processing Toolbox</item>
       <item>Statistics Toolbox</item>
-      <item>MATLAB</item>
     </param.products.name>
     <param.products.id>
-      <item>60</item>
-      <item>17</item>
-      <item>19</item>
-      <item>1</item>
+      <item>'1'</item>
+      <item>'60'</item>
+      <item>'17'</item>
+      <item>'19'</item>
     </param.products.id>
     <param.products.version>
-      <item>3.4</item>
-      <item>8.3</item>
-      <item>8.3</item>
-      <item>8.2</item>
+      <item>8.4</item>
+      <item>3.5</item>
+      <item>9.1</item>
+      <item>9.1</item>
     </param.products.version>
     <param.platforms />
     <param.output>${PROJECT_ROOT}\iMap4.mlappinstall</param.output>
-    <param.guid>46b19551-c1e9-4ea8-88fe-88f82d0f496f</param.guid>
+    <param.guid>ddc1ce28-2fbd-402b-a90d-1881c6df01ef</param.guid>
     <unset>
       <param.platforms />
     </unset>
@@ -89,6 +90,7 @@ iMap4 is a freely available MATLAB open source toolbox for the statistical fixat
       <file>D:\Charles\imap4\GUI\select_option_cluster.m</file>
       <file>D:\Charles\imap4\GUI\select_option_fdr.m</file>
       <file>D:\Charles\imap4\GUI\select_option_mcc.m</file>
+      <file>D:\Charles\imap4\GUI\select_option_permutation.m</file>
       <file>D:\Charles\imap4\GUI\select_option_randomfield.m</file>
       <file>D:\Charles\imap4\GUI\select_parameters.m</file>
       <file>D:\Charles\imap4\GUI\select_scale_parameter.m</file>
@@ -113,6 +115,7 @@ iMap4 is a freely available MATLAB open source toolbox for the statistical fixat
       <file>D:\Charles\imap4\imap_utilities\winsored_fixmap.m</file>
     </fileset.depfun>
     <fileset.resources>
+      <file>D:\Charles\imap4\Data_Sample_with_codes</file>
       <file>D:\Charles\imap4\GUI</file>
       <file>D:\Charles\imap4\imap_utilities</file>
       <file>D:\Charles\imap4\imapGLMM.m</file>
@@ -127,11 +130,11 @@ iMap4 is a freely available MATLAB open source toolbox for the statistical fixat
     </fileset.resources>
     <fileset.package />
     <build-deliverables>
-      <file location="D:\Charles\imap4\Matlab_Installation_Package" name="iMap4.mlappinstall" optional="false">D:\Charles\imap4\Matlab_Installation_Package\iMap4.mlappinstall</file>
+      <file name="iMap4.mlappinstall" location="D:\Charles\imap4\Matlab_Installation_Package" optional="false">D:\Charles\imap4\Matlab_Installation_Package\iMap4.mlappinstall</file>
     </build-deliverables>
     <workflow />
     <matlab>
-      <root>C:\Program Files\MATLAB\R2014b</root>
+      <root>C:\Program Files\MATLAB\R2013b</root>
       <toolboxes />
     </matlab>
     <platform>
@@ -151,3 +154,4 @@ iMap4 is a freely available MATLAB open source toolbox for the statistical fixat
     </platform>
   </configuration>
 </deployment-project>
+
