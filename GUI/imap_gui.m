@@ -260,15 +260,30 @@ if counter == 1
     guidata(hObject, handles);
     
     %give the user the oppurtunity to select specific or exclude fixations.
-    [data, counter2,mapType] = function_find_fixation(handles);
+ 
+    
+    %%
+prompt={'Do you have more than one fixation per trial? Insert 1 if you have only 1 fixation and 0 if you have more'};
+name = 'Number of fixations per trial';
+defaultans = {'0'};
+
+value = inputdlg(prompt,name,[1 50],defaultans);
+if isempty(value)==1
+    value = 0;
+else
+value = str2double(value{:});
+end
+    %%
+    [data, counter2,mapType,check_number_fixations] = function_find_fixation(handles,value);
     handles.data = data;
+    
     % user can select type of fixation map (1-fixation duration 2-fixation number)
     % mapType = type_fixation();
     handles.mapType = mapType;
     guidata(hObject,handles);
     if counter2 ==1 % counter to make sure that the user select one of the 3 choices
-        set(handles.smoothing_1, 'enable','on');
-        set(handles.smoothing_2, 'enable','on');
+        
+        
         %create filename to save the results!
         filename=datestr(now);
         filename=strrep(filename,':','_'); %Replace colon with underscore
@@ -279,6 +294,15 @@ if counter == 1
         handles.filename = filename;
         guidata(hObject,handles);
         
+        
+        if check_number_fixations == 1
+            
+            set(handles.smoothing_1, 'enable','on');
+            set(handles.smoothing_2, 'enable','on');
+        elseif check_number_fixations ==0
+            
+            set(handles.smoothing_1, 'enable','on');
+        end
         % if isunix ==0
         %     save(strcat(handles.filename,'\handles'),'handles','-v7.3');
         %     else
@@ -286,6 +310,8 @@ if counter == 1
         %
         % end
     end
+    
+    
 end
 
 
@@ -393,34 +419,29 @@ for is = 1:Ns
                 seyext = Seyext(idx2);
                 seyeyt = Seyeyt(idx2);
                 intv   = Intv(idx2);
+                % exclude zeros or negative
+                exclist=intv<=0;seyext(exclist)=[];seyeyt(exclist)=[];intv(exclist)=[];
                 % descriptive
                 % fixation number, sum of fixation duraion, mean of fixation duration, total path length, mean path length
                 pathlength=diag(squareform(pdist([seyext,seyeyt])),1);
-                descriptemp(itt,1)=sum(intv>0);
-                descriptemp(itt,2)=sum(intv(intv>0));
-                descriptemp(itt,3)=mean(intv(intv>0));
+                descriptemp(itt,1)=length(intv);
+                descriptemp(itt,2)=sum(intv);
+                descriptemp(itt,3)=mean(intv);
                 descriptemp(itt,4)=sum(pathlength);
                 descriptemp(itt,5)=mean(pathlength);
                 if handles.mapType==2
                     intv=ones(size(intv));
                 end
                 
-                rawmap = zeros(ySize, xSize);
                 coordX = round(seyeyt);%switch matrix coordinate here
                 coordY = round(seyext);
                 indx1=coordX>0 & coordY>0 & coordX<ySize & coordY<xSize;
-                indxtf=sub2ind([ySize, xSize],coordX(indx1),coordY(indx1)); % index each fixation location,
-                
-                unindx = unique(indxtf);% find unique fixation
-                [cotind,whe] = histc(indxtf,unindx); % cumulate fixation with same coordinates.
-                durind=zeros(size(cotind));
-                for iw=1:length(cotind);durind(iw)=sum(intv(whe==iw));end % calculate duration, the last loop i cant get rid of
-                rawmap(unindx(durind>0))=durind(durind>0);
+                rawmap=full(sparse(coordX(indx1),coordY(indx1),intv(indx1),ySize,xSize));
                 
                 f_mat = fft2(rawmap); % 2D fourrier transform on the points matrix
                 filtered_mat = f_mat .* f_fil;
                 smoothpic = real(fftshift(ifft2(filtered_mat)));
-                Tridur(itt,1)=nansum(durind(durind>0));
+                Tridur(itt,1)=nansum(intv(indx1));
                 rawmaptmp(itt,:,:)=rawmap;
                 fixmaptmp(itt,:,:)=smoothpic;
             end
@@ -675,30 +696,24 @@ for is = 1:Ns
         seyext=seyex(trialstend(it,1):trialstend(it,2));
         seyeyt=seyey(trialstend(it,1):trialstend(it,2));
         intv=sfixd(trialstend(it,1):trialstend(it,2));
+        % exclude zeros or negative
+        exclist=intv<=0;seyext(exclist)=[];seyeyt(exclist)=[];intv(exclist)=[];
         % descriptive
         % fixation number, sum of fixation duraion, mean of fixation duration, total path length, mean path length
         pathlength=diag(squareform(pdist([seyext,seyeyt])),1);
-        descriptemp(it,1)=sum(intv>0);
-        descriptemp(it,2)=sum(intv(intv>0));
-        descriptemp(it,3)=mean(intv(intv>0));
-        descriptemp(it,4)=sum(pathlength);
-        descriptemp(it,5)=mean(pathlength);
-                
+        descriptemp(itt,1)=length(intv);
+        descriptemp(itt,2)=sum(intv);
+        descriptemp(itt,3)=mean(intv);
+        descriptemp(itt,4)=sum(pathlength);
+        descriptemp(itt,5)=mean(pathlength);
         if handles.mapType==2
             intv=ones(size(intv));
         end
-        
-        rawmap = zeros(ySize, xSize);
+                
         coordX = round(seyeyt);%switch matrix coordinate here
         coordY = round(seyext);
         indx1=coordX>0 & coordY>0 & coordX<ySize & coordY<xSize;
-        indxtf=sub2ind([ySize, xSize],coordX(indx1),coordY(indx1)); % index each fixation location,
-        
-        unindx = unique(indxtf);% find unique fixation
-        [cotind,whe] = histc(indxtf,unindx); % cumulate fixation with same coordinates.
-        durind=zeros(size(cotind));
-        for iw=1:length(cotind);durind(iw)=sum(intv(whe==iw));end % calculate duration, the last loop i cant get rid of
-        rawmap(unindx(durind>0))=durind(durind>0);
+        rawmap=full(sparse(coordX(indx1),coordY(indx1),intv(indx1),ySize,xSize));
         
         f_mat = fft2(rawmap); % 2D fourrier transform on the points matrix
         filtered_mat = f_mat .* f_fil;
@@ -708,7 +723,7 @@ for is = 1:Ns
         %original
         fix_map(it,:,:)=imresize(smoothpic, scale,'box');
         raw_map(it,:,:)=imresize(rawmap,scale,'box'); %switch case if they want to normalize
-        stDur(it)=nansum(durind);
+        stDur(it)=nansum(intv(indx1));
     end
     descripM=num2cell(descriptemp);
     sTable = num2cell(tbl(trialstend(:,1),:));
@@ -825,8 +840,8 @@ if (check_estimated) == 1 %user did the estimated method
         h = waitbar(0,'Please wait scaling is in progress','Name','Scaling FixMap RawMap and Mask','color','w');
         
         for it=1:size(handles.FixMap_estimated,1)
-            FixMap_estimated_scaled(it,:,:) = imresize(squeeze(handles.FixMap_estimated(it,:,:)),scale,'box');
-            RawMap_estimated_scaled(it,:,:)  = imresize(squeeze(handles.RawMap_estimated(it,:,:)),scale,'box');
+            FixMap_estimated_scaled(it,:,:) = imresize(squeeze(handles.FixMap_estimated(it,:,:)),scale,'nearest');
+            RawMap_estimated_scaled(it,:,:)  = imresize(squeeze(handles.RawMap_estimated(it,:,:)),scale,'nearest');
             
             waitbar(it/size(handles.FixMap_estimated,1))
         end
@@ -1080,11 +1095,12 @@ function help_button_ClickedCallback(hObject, eventdata, handles)
 % hObject    handle to help_button (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-if ispc
-    winopen('manual_GUI.pdf');
-elseif ismac
-    system(['open manual_GUI.pdf']);
-else
-    errordlg('Please open the Guidebook manually in ./matlab/Apps/iMAP/GUI')
-end
+% if ispc
+%     winopen('manual_GUI.pdf');
+% elseif ismac
+%     system(['open manual_GUI.pdf']);
+% else
+%     errordlg('Please open the Guidebook manually in ./matlab/Apps/iMAP/GUI')
+% end
+web('https://github.com/iBMLab/iMap4/wiki','-browser')
 
