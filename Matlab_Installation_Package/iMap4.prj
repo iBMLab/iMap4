@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <deployment-project plugin="plugin.apptool" plugin-version="1.0">
-  <configuration target="target.mlapps" target-name="Package App" name="iMap4" location="D:\Charles\imap4\Matlab_Installation_Package" file="D:\Charles\imap4\Matlab_Installation_Package\iMap4.prj" build-checksum="2072782746">
+  <configuration target="target.mlapps" target-name="Package App" name="iMap4" location="D:\Charles\imap4\Matlab_Installation_Package" file="D:\Charles\imap4\Matlab_Installation_Package\iMap4.prj" build-checksum="2334374119">
     <param.appname>iMap4</param.appname>
     <param.authnamewatermark>Junpeng Lao &amp; Nayla Sokhn</param.authnamewatermark>
     <param.email>junpeng.lao@unifr.ch</param.email>
