@@ -260,20 +260,17 @@ if counter == 1
     guidata(hObject, handles);
     
     %give the user the oppurtunity to select specific or exclude fixations.
- 
+    prompt={'Do you have more than one fixation per trial? Insert 1 if you have only 1 fixation and 0 if you have more'};
+    name = 'Number of fixations per trial';
+    defaultans = {'0'};
     
-    %%
-prompt={'Do you have more than one fixation per trial? Insert 1 if you have only 1 fixation and 0 if you have more'};
-name = 'Number of fixations per trial';
-defaultans = {'0'};
+    value = inputdlg(prompt,name,[1 50],defaultans);
+    if isempty(value)==1
+        value = 0;
+    else
+        value = str2double(value{:});
+    end
 
-value = inputdlg(prompt,name,[1 50],defaultans);
-if isempty(value)==1
-    value = 0;
-else
-value = str2double(value{:});
-end
-    %%
     [data, counter2,mapType,check_number_fixations] = function_find_fixation(handles,value);
     handles.data = data;
     
