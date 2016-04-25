@@ -260,15 +260,30 @@ if counter == 1
     guidata(hObject, handles);
     
     %give the user the oppurtunity to select specific or exclude fixations.
-    [data, counter2,mapType] = function_find_fixation(handles);
+ 
+    
+    %%
+prompt={'Do you have more than one fixation per trial? Insert 1 if you have only 1 fixation and 0 if you have more'};
+name = 'Number of fixations per trial';
+defaultans = {'0'};
+
+value = inputdlg(prompt,name,[1 50],defaultans);
+if isempty(value)==1
+    value = 0;
+else
+value = str2double(value{:});
+end
+    %%
+    [data, counter2,mapType,check_number_fixations] = function_find_fixation(handles,value);
     handles.data = data;
+    
     % user can select type of fixation map (1-fixation duration 2-fixation number)
     % mapType = type_fixation();
     handles.mapType = mapType;
     guidata(hObject,handles);
     if counter2 ==1 % counter to make sure that the user select one of the 3 choices
-        set(handles.smoothing_1, 'enable','on');
-        set(handles.smoothing_2, 'enable','on');
+        
+        
         %create filename to save the results!
         filename=datestr(now);
         filename=strrep(filename,':','_'); %Replace colon with underscore
@@ -279,6 +294,15 @@ if counter == 1
         handles.filename = filename;
         guidata(hObject,handles);
         
+        
+        if check_number_fixations == 1
+            
+            set(handles.smoothing_1, 'enable','on');
+            set(handles.smoothing_2, 'enable','on');
+        elseif check_number_fixations ==0
+            
+            set(handles.smoothing_1, 'enable','on');
+        end
         % if isunix ==0
         %     save(strcat(handles.filename,'\handles'),'handles','-v7.3');
         %     else
@@ -286,6 +310,8 @@ if counter == 1
         %
         % end
     end
+    
+    
 end
 
 
@@ -697,6 +723,10 @@ for is = 1:Ns
         %original
         fix_map(it,:,:)=imresize(smoothpic, scale,'nearest');
         raw_map(it,:,:)=imresize(rawmap,scale,'nearest'); %switch case if they want to normalize
+=======
+        fix_map(it,:,:)=imresize(smoothpic, scale,'box');
+        raw_map(it,:,:)=imresize(rawmap,scale,'box'); %switch case if they want to normalize
+>>>>>>> fb0ea6492ad85a634f4f0d71a8734b4af06a1c5f
         stDur(it)=nansum(intv(indx1));
     end
     descripM=num2cell(descriptemp);
