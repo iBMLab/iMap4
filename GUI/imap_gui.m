@@ -970,7 +970,7 @@ if (check_trial == 1) && (check_estimated == 1)
         [answer, Mask,fixthres] = select_mask_parameter(FixMap,Mask,handles);
     end
     if isempty(answer)==0
-        
+        handles.fixthres = fixthres;
         if (strcmp(answer_user,'Estimated Method'));
             handles.Mask_estimated = Mask;
             guidata(hObject,handles)
@@ -1010,6 +1010,7 @@ else if (check_trial)==1
         end
         if isempty(answer)==0
             handles.Mask_single_trial_scaled = Mask;
+			handles.fixthres = fixthres;
             guidata(hObject,handles)
         end
     else
