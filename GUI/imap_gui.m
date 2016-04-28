@@ -698,11 +698,11 @@ for is = 1:Ns
         % descriptive
         % fixation number, sum of fixation duraion, mean of fixation duration, total path length, mean path length
         pathlength=diag(squareform(pdist([seyext,seyeyt])),1);
-        descriptemp(itt,1)=length(intv);
-        descriptemp(itt,2)=sum(intv);
-        descriptemp(itt,3)=mean(intv);
-        descriptemp(itt,4)=sum(pathlength);
-        descriptemp(itt,5)=mean(pathlength);
+        descriptemp(it,1)=length(intv);
+        descriptemp(it,2)=sum(intv);
+        descriptemp(it,3)=mean(intv);
+        descriptemp(it,4)=sum(pathlength);
+        descriptemp(it,5)=mean(pathlength);
         if handles.mapType==2
             intv=ones(size(intv));
         end
