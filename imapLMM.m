@@ -85,7 +85,7 @@ disp(['The total computation time is around ' num2str(estimatime) ...
     ' minutes without parallel computation.'])
 
 % save information
-LMMmap.VariableInfo     =lmexample.VariableInfo;
+LMMmap.VariableInfo     = lmexample.VariableInfo;
 LMMmap.Variables        = tbl;
 LMMmap.FitMethod        = lmexample.FitMethod;
 LMMmap.Formula          = lmexample.Formula;
@@ -100,7 +100,7 @@ LMMmap.Anova.DF1        = statexample.DF1;
 LMMmap.Anova.DF2        = statexample.DF2;
 
 AnovaFStat              = NaN(size(statexample.Term,1),              ySize2, xSize2);
-Covb                    = NaN(size(lmexample.CoefficientCovariance), ySize2, xSize2);
+Covb                    = NaN([size(lmexample.CoefficientCovariance), ySize2, xSize2]);
 MSEmatrix               = NaN(ySize2,xSize2);
 SSEmatrix               = MSEmatrix;
 SSTmatrix               = MSEmatrix;

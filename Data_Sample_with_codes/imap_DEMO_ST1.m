@@ -182,8 +182,8 @@ for is = 1:Ns
         Rating (item)       = Xall(is,itrial);
         fixNb  (item)       = Nfix;
         
-        Yk                  = cotind;
-        Yk(:,2:3)           = unique([coordX(indx1), coordY(indx1)],'rows');
+        Yk                  = rawmap(rawmap~=0);        
+        [Yk(:,2),Yk(:,3)]   = find(rawmap~=0);
         Yk(:,4)             = Xall(is,itrial);
         Yk(:,5)             = is;
         DataM               = [DataM; Yk];
