@@ -10,6 +10,7 @@ else
     TickX = varargin{1};
     TickY = varargin{2};
 end
+
 himgsc      = imagesc(mat);
 axis square;
 % display result
