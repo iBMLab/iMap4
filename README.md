@@ -5,12 +5,8 @@
 [![Join the chat at https://gitter.im/iBMLab/iMap4](https://badges.gitter.im/iBMLab/iMap4.svg)](https://gitter.im/iBMLab/iMap4?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 
-*i*Map4: An Open Source Toolbox for the Statistical Fixation Mapping of Eye Movement data with Linear Mixed Modeling
-
-Junpeng Lao<sup>1</sup>, Sébastien Miellet<sup>1,2</sup>, Cyril Pernet<sup>3</sup>, Nayla Sokhn<sup>1</sup>, and Roberto Caldara<sup>1</sup>  
-<sup>1</sup>Department of Psychology, University of Fribourg, Fribourg, Switzerland.  
-<sup>2</sup>Department of Psychology, Bournemouth University, UK.  
-<sup>3</sup>Centre for Clinical Brain Sciences, Neuroimaging Sciences, University of Edinburgh, Edinburgh, UK.  
+## Citing *i*Map4
+Lao, J., Miellet, S., Pernet, C., Sokhn, N., & Caldara, R. (in press). *i*Map4: An Open Source Toolbox for the Statistical Fixation Mapping of Eye Movement data with Linear Mixed Modeling. *Behavior Research Methods.*
 
 ##Installation 
 Download ./Matlab_Installation_Package and intall the toolbox as a Matlab Application. 
