@@ -58,8 +58,8 @@ for ic1 = 1:Nc
             sd2  = nancov(map2, 1);
             % C    = (sd1+sd2)/2;
         end
-        C        = sd;
-        % C        = sd*weight;
+        % C        = sd;
+        C        = sd*weight;
         
         % dist     = sqrt((mu1-mu2)*pinv(C)*(mu1-mu2)');
         dist     = pdist2(mu1,mu2,'mahalanobis',C);
@@ -73,8 +73,15 @@ for ic1 = 1:Nc
         RDM (ic1,ic2) = dist;
     end
 end
+% display output
 figure;
+subplot(1,2,1)
+imagesc(stRDM);
+title('stRDM')
+axis square off;
+subplot(1,2,2)
 imsqrmat(RDM, unicd);
+title('RDM')
 end
 
 %---------------------------------------------

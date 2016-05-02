@@ -6,7 +6,7 @@
 p = userpath;
 addpath(genpath([ p(1:end-1) '/Apps/iMAP']));
 clear all
-cd('./Data_sample')
+cd('./Data_sample_DEMO/')
 datafile = 'data_subset.txt';
 % data structure
 % column 1 :  subject
@@ -115,7 +115,7 @@ for is = 1:Ns
                         smoothpic        = real(fftshift(ifft2(filtered_mat)));
                         isfixmap(it,:,:) = imresize(smoothpic, scale, 'nearest');
                         israwmap(it,:,:) = imresize(rawmap,    scale, 'nearest');
-                        stDur (it)       = sum(durind);
+                        stDur (it)       = sum(intv(indx1));
                         stRate(it)       = srate(selected2(1));
                     end
                 end
