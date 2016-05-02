@@ -63,6 +63,7 @@ for ic1 = 1:Nc
         
         % dist     = sqrt((mu1-mu2)*pinv(C)*(mu1-mu2)');
         dist     = pdist2(mu1,mu2,'mahalanobis',C);
+        % dist     = pdist2(mu1,mu2,'seuclidean',explained(list));
         
         % dist = pdist2(mu1,mu2,'corr');
         % scale by variance explain, closely related to correlation
