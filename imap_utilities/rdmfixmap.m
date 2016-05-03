@@ -58,23 +58,24 @@ for ic1 = 1:Nc
             sd2  = nancov(map2, 1);
             % C    = (sd1+sd2)/2;
         end
-        % C        = sd;
-        C        = sd*weight;
+        C        = sd;
+        % C        = sd*weight;
         
         % dist     = sqrt((mu1-mu2)*pinv(C)*(mu1-mu2)');
-        dist     = pdist2(mu1,mu2,'mahalanobis',C);
+        % dist     = pdist2(mu1,mu2,'mahalanobis',C);
         % dist     = pdist2(mu1,mu2,'seuclidean',explained(list));
         
         % dist = pdist2(mu1,mu2,'corr');
-        % scale by variance explain, closely related to correlation
-        % diffmu   = mu1-mu2;
-        % dist     = sqrt(sum((diffmu'.*(diag(C).^-1).*diffmu').*explained(list)));
+        % Multivariance distance scaled by variance explain, closely related to correlation
+        diffmu   = mu1-mu2;
+        dist     = sqrt(sum((diffmu'.*(diag(C).^-1).*diffmu').*explained(list)));
         
         RDM (ic1,ic2) = dist;
     end
 end
+% RDM = RDM./max(RDM(:));
 % display output
-figure;
+figure('Name','Representational Dissimilarity Matrix');
 subplot(1,2,1)
 imagesc(stRDM);
 title('stRDM')

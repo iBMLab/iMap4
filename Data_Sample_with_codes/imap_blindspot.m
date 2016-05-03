@@ -92,6 +92,10 @@ subplot(1,2,2)
 masktmp=squeeze(mean(fixmapMat2,1))>.01;
 imagesc(masktmp);
 axis('equal','off');
+
+CondiVec     = Tbl.group .* Tbl.blinkspot;
+SbjVec       = Tbl.sbj;
+[RDM, stRDM] = rdmfixmap(fixmapMat2, masktmp, CondiVec, SbjVec);
 %% imapLMM
 % tic
 % opt.singlepredi=1;

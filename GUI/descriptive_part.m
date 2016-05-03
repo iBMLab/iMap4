@@ -19,8 +19,12 @@ if nargin==0
         end
     end
 elseif nargin==2
-    DescriptvM=varargin{1};
-    FixMap=varargin{2};
+    DescriptvM = varargin{1};
+    FixMap     = varargin{2};
+elseif nargin==3
+    DescriptvM = varargin{1};
+    FixMap     = varargin{2};
+    opt        = varargin{3};
 end
 %%
 if exist('DescriptvM','var') && exist('FixMap','var')
@@ -220,7 +224,7 @@ if exist('DescriptvM','var') && exist('FixMap','var')
             [CName2,selection_conditions] = function_select_predictors_stat(ConditionM);
         end
         if isempty(CName2)==0
-            CNameall=strjoin(CName2','_');
+            CNameall=strjoin(CName2','-');
             if isunix
                 mkdir('Descriptive_STAT/',CNameall);
                 addpath('Descriptive_STAT/',CNameall);
@@ -241,7 +245,7 @@ if exist('DescriptvM','var') && exist('FixMap','var')
                 end
             end
             for ii=1:length(label)
-                strlabel{ii,:}=strjoin(label(ii,:),'_');
+                strlabel{ii,:}=strjoin(label(ii,:),'-');
             end
             % [CatePredictor,btmp]=unique(strlabel,'rows');
             
@@ -349,7 +353,9 @@ if exist('DescriptvM','var') && exist('FixMap','var')
         end
     end
     %% Modelling Analysisclear all
-    modelling_part()
+    if ~exist('opt')
+        modelling_part()
+    end
 else
     errordlg('Please select the correct Files: DescriptivM and FixMap')
 end

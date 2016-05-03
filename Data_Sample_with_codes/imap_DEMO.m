@@ -164,6 +164,9 @@ end
 % figure;imagesc(Mask)
 % title('mask')
 % axis off,axis equal
+CondiVec     = PredictorM.position .* PredictorM.spotlight;
+SbjVec       = PredictorM.Subject;
+[RDM, stRDM] = rdmfixmap(FixMap, Mask, CondiVec, SbjVec);
 %% Linear Mixed Modeling with imapLMM
 tic
 opt.singlepredi    = 1;

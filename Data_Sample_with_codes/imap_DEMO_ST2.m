@@ -191,7 +191,10 @@ save(strcat('./DescriptvM_single_trial'),    'DescriptvM', '-v7.3');
 save(strcat('./RawMap_single_trial_scaled'), 'RawMap',     '-v7.3');
 save(strcat('./Mask_single_trial_scaled'),   'Mask',       '-v7.3');
 %% mean map
-descriptive_part(DescriptvM, FixMap)
+descriptive_part(DescriptvM, FixMap, 0)
+CondiVec     = PredictorM.Grp .* PredictorM.ACC;
+SbjVec       = PredictorM.Sbj;
+[RDM, stRDM] = rdmfixmap(FixMap, Mask, CondiVec, SbjVec);
 %% LMM
 tic
 opt.singlepredi    = 1;
