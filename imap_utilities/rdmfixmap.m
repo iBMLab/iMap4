@@ -42,7 +42,7 @@ stRDM     = squareform(y);
 mu        = mean(mapreduce,1);
 sd        = nancov (mapreduce,1);
 RDM       = NaN(Nc,Nc);
-
+% L         = length(CondiVec);
 
 for ic1 = 1:Nc
     map1         = mapreduce( cv2==unicd(ic1) , :);
@@ -57,6 +57,8 @@ for ic1 = 1:Nc
             mu2  = mean(map2, 1);
             sd2  = nancov(map2, 1);
             % C    = (sd1+sd2)/2;
+            
+            % dist = MIim (map1, map2, L);
         end
         C        = sd;
         % C        = sd*weight;
@@ -65,7 +67,7 @@ for ic1 = 1:Nc
         % dist     = pdist2(mu1,mu2,'mahalanobis',C);
         % dist     = pdist2(mu1,mu2,'seuclidean',explained(list));
         
-        % dist = pdist2(mu1,mu2,'corr');
+        % dist     = pdist2(mu1,mu2,'corr');
         % Multivariance distance scaled by variance explain, closely related to correlation
         diffmu   = mu1-mu2;
         dist     = sqrt(sum((diffmu'.*(diag(C).^-1).*diffmu').*explained(list)));
@@ -108,4 +110,34 @@ Xnorm(Xmax==0) = 0;
 flag =  any(Xnorm <= eps(max(Xnorm)));
 Xnorm = Xnorm .* Xmax;
 X = bsxfun(@rdivide,X,Xnorm);
+end
+
+%---------------------------------------------
+% Mutual Information
+function I = MIim (A,B,L)
+na    = hist(A(:),L);
+na    = na/sum(na);
+nb    = hist(B(:),L);
+nb    = nb/sum(nb);
+papb  = na'*nb;
+
+ma=min(A(:));
+MA=max(A(:));
+mb=min(B(:));
+MB=max(B(:));
+
+% Scale and round to fit in {0,...,L-1}
+A=round((A-ma)*(L-1)/(MA-ma+eps));
+B=round((B-mb)*(L-1)/(MB-mb+eps));
+n2=zeros(L);
+x=0:L-1;
+for i=0:L-1
+    n2(i+1,:) = histc(B(A==i),x,1);
+end
+pab   = n2/sum(n2(:));
+
+I     = find(papb(:)>1e-12 & pab(:)>1e-12); % function support
+y     = pab(I).*log2(pab(I)./papb(I));
+
+I     = sum(y);
 end
