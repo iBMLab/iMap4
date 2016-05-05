@@ -19,7 +19,7 @@ Our first paper using *i*Map4 is recently published in Scientific Reports:
 We provide a subset of the eye movement data as a demo of *i*Map4, see [wiki](https://junpenglao.gitbooks.io/imap4_guidebook/content/readme_eg1.html) 
 
 ## Citing *i*Map4
-Lao, J., Miellet, S., Pernet, C., Sokhn, N., & Caldara, R. (in press). *i*Map4: An Open Source Toolbox for the Statistical Fixation Mapping of Eye Movement data with Linear Mixed Modeling. *Behavior Research Methods.*
+Lao, J., Miellet, S., Pernet, C., Sokhn, N., & Caldara, R. (2016). *i*Map4: An Open Source Toolbox for the Statistical Fixation Mapping of Eye Movement data with Linear Mixed Modeling. *Behavior Research Methods.* [doi: 10.3758/s13428-016-0737-x](http://link.springer.com/article/10.3758/s13428-016-0737-x)
 
 ##Keep in touch!
 Updates and new release will be announced on our [lab website] (http://perso.unifr.ch/roberto.caldara/index.php?page=3).
