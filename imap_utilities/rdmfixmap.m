@@ -64,11 +64,15 @@ for ic1 = 1:Nc
         % C        = sd*weight;
         
         % dist     = sqrt((mu1-mu2)*pinv(C)*(mu1-mu2)');
-        % dist     = pdist2(mu1,mu2,'mahalanobis',C);
         % dist     = pdist2(mu1,mu2,'seuclidean',explained(list));
-        
         % dist     = pdist2(mu1,mu2,'corr');
+        
+	% Multivariance distance (Mahalanobis)
+	% M1 (uncomment the below one)
+        % dist     = pdist2(mu1,mu2,'mahalanobis',C);
+
         % Multivariance distance scaled by variance explain, closely related to correlation
+        % M2 (uncomment the below two)
         diffmu   = mu1-mu2;
         dist     = sqrt(sum((diffmu'.*(diag(C).^-1).*diffmu').*explained(list)));
         
