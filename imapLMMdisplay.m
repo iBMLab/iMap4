@@ -315,10 +315,10 @@ switch opt.type
                 mapmin1beta=min(toimagebeta(:));
                 range2beta=[mapmin1beta mapmax1beta];
                 if normalized==1
-                    range1=[-mapmax mapmax];
+                    range1=[0 mapmax];
                     range1beta=[-mapmaxb mapmaxb];
                 else
-                    range1=[-mapmax1 mapmax1];
+                    range1=[0 mapmax1];
                     range1beta=[-max(abs(toimagebeta(:))) max(abs(toimagebeta(:)))];
                 end
                 
