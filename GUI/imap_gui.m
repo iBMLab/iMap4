@@ -187,6 +187,16 @@ set(handles.table,'columnname',answer)
 handles.colnames = answer;
 handles.data = new_data;
 guidata(hObject, handles);
+
+%% saving the column in the summary_information
+if isunix ==0
+    summary_information.column_name = handles.colnames ;
+    save(strcat(handles.filename,'\summary_information'),'summary_information')
+else
+    summary_information.column_name = handles.colnames ;
+    save(strcat(handles.filename,'/summary_information'),'summary_information')
+end
+%%
 set(handles.select_parameters, 'enable','on')
 
 % --- Executes on button press in select_parameters.
@@ -226,6 +236,18 @@ while isempty(idx_answer)==0
 end
 handles.xy_size = answer;
 guidata(hObject, handles);
+
+%% saving parameters in the summary_information
+if isunix ==0
+    summary_information.column_name = handles.colnames ;
+    summary_information.parameters  = handles.xy_size ;
+    save(strcat(handles.filename,'\summary_information'),'summary_information')
+else
+    summary_information.column_name = handles.colnames ;
+    summary_information.parameters  = handles.xy_size ;
+    save(strcat(handles.filename,'/summary_information'),'summary_information')
+end
+%%
 set(handles.select_predictors, 'enable','on')
 
 % --- Executes on button press in select_predictors.
@@ -308,6 +330,21 @@ if counter == 1
         % end
     end
     
+    
+    %% Saving the predictors in the summary information
+    if isunix ==0
+        summary_information.column_name = handles.colnames ;
+        summary_information.parameters  = handles.xy_size ;
+        summary_information.predictors  = [{handles.predictors_categorical_default};{handles.predictors_continuous_default};...
+            {handles.predictors_categorical};{handles.predictors_continuous}];
+        save(strcat(handles.filename,'\summary_information'),'summary_information')
+    else
+        summary_information.column_name = handles.colnames ;
+        summary_information.parameters  = handles.xy_size ;
+        summary_information.predictors  = [{handles.predictors_categorical_default};{handles.predictors_continuous_default};...
+            {handles.predictors_categorical};{handles.predictors_continuous}];
+        save(strcat(handles.filename,'/summary_information'),'summary_information')
+    end
     
 end
 
