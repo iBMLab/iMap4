@@ -237,16 +237,6 @@ end
 handles.xy_size = answer;
 guidata(hObject, handles);
 
-%% saving parameters in the summary_information
-if isunix ==0
-    summary_information.column_name = handles.colnames ;
-    summary_information.parameters  = handles.xy_size ;
-    save(strcat(handles.filename,'\summary_information'),'summary_information')
-else
-    summary_information.column_name = handles.colnames ;
-    summary_information.parameters  = handles.xy_size ;
-    save(strcat(handles.filename,'/summary_information'),'summary_information')
-end
 %%
 set(handles.select_predictors, 'enable','on')
 
