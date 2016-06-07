@@ -334,7 +334,8 @@ continuous_conditions_default  = handles.predictors_continuous_default; %find th
 % Trial = length(unique(str2double(handles.data(:,categorical_conditions_default.idx_categorical_default(2)))));
 %create Gaussian for smoothing
 [smoothingpic] = select_smoothing2(handles,categorical_conditions_default,continuous_conditions,categorical_conditions,continuous_conditions_default);
-
+handles.smoothingpic = smoothingpic;
+guidata(hObject, handles);
 xSize = str2double(handles.xy_size{3}); %image x in pixel
 ySize = str2double(handles.xy_size{4}); %image y in pixel
 [x, y] = meshgrid(-floor(xSize/2)+.5:floor(xSize/2)-.5, -floor(ySize/2)+.5:floor(ySize/2)-.5);
@@ -524,6 +525,13 @@ if ishandle(h) % if the user did not close the wait bar menu
         save(strcat(handles.filename,'\RawMap_estimated'),'RawMap','-v7.3');
         save(strcat(handles.filename,'\Mask_estimated'),'Mask','-v7.3');
         %save(strcat(handles.filename,'\handles'),'handles','-v7.3');
+        summary_information.column_name = handles.colnames ;
+        summary_information.parameters  = handles.xy_size ;
+        summary_information.predictors  = [{handles.predictors_categorical_default};{handles.predictors_continuous_default};...
+            {handles.predictors_categorical};{handles.predictors_continuous}];
+        summary_information.smoothing   = handles.smoothingpic;
+        summary_information.mask        =  handles.fixthres;
+        save(strcat(handles.filename,'\summary_information'),'summary_information')
     else
         save(strcat(handles.filename,'/FixMap_estimated'),'FixMap','-v7.3');
         save(strcat(handles.filename,'/PredictorM_estimated'),'PredictorM','-v7.3');
@@ -531,6 +539,13 @@ if ishandle(h) % if the user did not close the wait bar menu
         save(strcat(handles.filename,'/RawMap_estimated'),'RawMap','-v7.3');
         save(strcat(handles.filename,'/Mask_estimated'),'Mask','-v7.3');
         %save(strcat(handles.filename,'/handles'),'handles','-v7.3');
+        summary_information.column_name = handles.colnames ;
+        summary_information.parameters  = handles.xy_size ;
+        summary_information.predictors  = [{handles.predictors_categorical_default};{handles.predictors_continuous_default};...
+            {handles.predictors_categorical};{handles.predictors_continuous}];
+        summary_information.smoothing   = handles.smoothingpic;
+        summary_information.mask        =  handles.fixthres;
+        save(strcat(handles.filename,'/summary_information'),'summary_information')
     end
     if ishandle(h)
         delete(h)
@@ -623,7 +638,8 @@ RawMap = [];
 %     answer = smoothing_figure(handles,smoothingpic,categorical_conditions_default,continuous_conditions,categorical_conditions,continuous_conditions_default);
 % end
 [smoothingpic] = select_smoothing2(handles,categorical_conditions_default,continuous_conditions,categorical_conditions,continuous_conditions_default);
-
+handles.smoothingpic = smoothingpic;
+guidata(hObject, handles);
 [x, y] = meshgrid(-floor(xSize/2)+.5:floor(xSize/2)-.5, -floor(ySize/2)+.5:floor(ySize/2)-.5);
 gaussienne = exp(- (x .^2 / smoothingpic ^2) - (y .^2 / smoothingpic ^2));
 gaussienne = (gaussienne - min(gaussienne(:))) / (max(gaussienne(:)) - min(gaussienne(:)));
@@ -791,6 +807,13 @@ if ishandle(h) % if the user did not close the wait bar menu
         save(strcat(handles.filename,'\RawMap_single_trial_scaled'),'RawMap','-v7.3');
         save(strcat(handles.filename,'\Mask_single_trial_scaled'),'Mask','-v7.3');
         %save(strcat(handles.filename,'\handles'),'handles','-v7.3');
+        summary_information.column_name = handles.colnames ;
+        summary_information.parameters  = handles.xy_size ;
+        summary_information.predictors  = [{handles.predictors_categorical_default};{handles.predictors_continuous_default};...
+            {handles.predictors_categorical};{handles.predictors_continuous}];
+        summary_information.smoothing   = handles.smoothingpic;
+        summary_information.mask        =  handles.fixthres;
+        save(strcat(handles.filename,'\summary_information'),'summary_information')
     else
         save(strcat(handles.filename,'/FixMap_single_trial_scaled'),'FixMap','-v7.3');
         save(strcat(handles.filename,'/PredictorM_single_trial'),'PredictorM','-v7.3');
@@ -798,7 +821,13 @@ if ishandle(h) % if the user did not close the wait bar menu
         save(strcat(handles.filename,'/RawMap_single_trial_scaled'),'RawMap','-v7.3');
         save(strcat(handles.filename,'/Mask_single_trial_scaled'),'Mask','-v7.3');
         %save(strcat(handles.filename,'/handles'),'handles','-v7.3');
-        
+        summary_information.column_name = handles.colnames ;
+        summary_information.parameters  = handles.xy_size ;
+        summary_information.predictors  = [{handles.predictors_categorical_default};{handles.predictors_continuous_default};...
+            {handles.predictors_categorical};{handles.predictors_continuous}];
+        summary_information.smoothing   = handles.smoothingpic;
+        summary_information.mask        =  handles.fixthres;
+        save(strcat(handles.filename,'/summary_information'),'summary_information')
     end
     set(handles.figure1, 'pointer', 'arrow')
     if ishandle(h)
