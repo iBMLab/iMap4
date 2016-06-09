@@ -35,7 +35,7 @@ warning('off')
 effect   = lower(effect);
 Zx       = LMMmap.RandomEffects.DX;
 tbl      = LMMmap.Variables;
-
+fitml    = strcmp(upper(LMMmap.Fitmethod),'ML');
 % exclude empty trials/conditions
 outtrial               = full(sum(Zx, 2))==0;
 tbl     (outtrial,:)   = [];
@@ -244,7 +244,11 @@ switch effect2
                     bY2     = bY - M(:, cz==1) * obeta(cz==1, :);
 
                     bbeta   = M\bY2;
-                    bMSE    = sum((M*bbeta-bY2).^2)./DFmodel;
+                    if fitml
+                        bMSE    = mean((M*bbeta-bY2).^2);
+                    else
+                        bMSE    = sum((M*bbeta-bY2).^2)./DFmodel;
+                    end
                     bMSEinv = bMSE.^-1;
                     % covprj = inv(M'*M);
                     % instead of calculating the covariance matrix and
@@ -288,7 +292,11 @@ switch effect2
                             
                             % orignial statistic for the fixed effect (revisit)
                             bbeta   = bDX\bY2;
-                            bMSE    = sum((bDX*bbeta-bY2).^2)./DFmodel;
+                            if fitml
+                                bMSE    = mean((bDX*bbeta-bY2).^2);
+                            else
+                                bMSE    = sum((bDX*bbeta-bY2).^2)./DFmodel;
+                            end
                             bMSEinv = bMSE.^-1;
                             % covprj=inv(bDX'*bDX);
                             % instead of calculating the covariance matrix and
@@ -330,7 +338,11 @@ switch effect2
                             
                             % orignial statistic for the fixed effect (revisit)
                             bbeta   = bDX\bY2;
-                            bMSE    = sum((bDX*bbeta-bY2).^2)./DFmodel;
+                            if fitml
+                                bMSE    = mean((bDX*bbeta-bY2).^2);
+                            else
+                                bMSE    = sum((bDX*bbeta-bY2).^2)./DFmodel;
+                            end
                             bMSEinv = bMSE.^-1;
                             % covprj=inv(bDX'*bDX);
                             % instead of calculating the covariance matrix and
@@ -429,7 +441,11 @@ switch effect2
                         df2     = size(DX,1)-size(DX,2);
                         
                         bbeta   = bDX\bY;
-                        bMSE    = sum((bDX*bbeta-bY).^2)./DFmodel;
+                        if fitml
+                            bMSE    = mean((bDX*bbeta-bY).^2);
+                        else
+                            bMSE    = sum((bDX*bbeta-bY).^2)./DFmodel;
+                        end
                         bMSEinv = bMSE.^-1;
                         % covprj=inv(bDX'*bDX);
                         % instead of calculating the covariance matrix and
@@ -489,7 +505,11 @@ switch effect2
                         df2     = size(DX,1)-size(DX,2);
                         
                         bbeta   = bDX\bY;
-                        bMSE    = sum((bDX*bbeta-bY).^2)./DFmodel;
+                        if fitml
+                            bMSE    = mean((bDX*bbeta-bY).^2);
+                        else
+                            bMSE    = sum((bDX*bbeta-bY).^2)./DFmodel;
+                        end
                         bMSEinv = bMSE.^-1;
                         % covprj=inv(bDX'*bDX);
                         % instead of calculating the covariance matrix and
