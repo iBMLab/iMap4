@@ -1,4 +1,7 @@
 function varargout = iMAP(varargin)
+scriptName = mfilename('fullpath');
+[currentpath, ~, ~]= fileparts(scriptName);
+addpath(currentpath);
 % IMAP MATLAB code for iMAP.fig
 %      IMAP, by itself, creates a new IMAP or raises the existing
 %      singleton*.

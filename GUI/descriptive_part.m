@@ -1,5 +1,8 @@
 function descriptive_part(varargin)
-%%
+scriptName = mfilename('fullpath');
+[currentpath, ~, ~]= fileparts(scriptName);
+addpath(currentpath);
+%
 if nargin==0
     [filename, pathname] = uigetfile('*.mat',' Select DescriptvM, FixMap to proceed','MultiSelect','on');
     if iscell(filename)==0 %user selects only multiple file
@@ -28,7 +31,7 @@ elseif nargin==3
 end
 %%
 if exist('DescriptvM','var') && exist('FixMap','var')
-    close all
+    % close all
     % indx=find(DescriptvM.FixNum>200);
     % FixMap(indx,:,:)=[];
     % RawMap(indx,:,:)=[];
@@ -50,7 +53,7 @@ if exist('DescriptvM','var') && exist('FixMap','var')
     xpos = ceil((screensize(3)-screensize(3))/2); % center the figure on the screen horizontally
     ypos = ceil((screensize(4)-screensize(4))/2); % center the figure on the screen vertically
     
-    h(1) = figure('NumberTitle','off','Name','Eye movement measurement distribution',...
+    h1 = figure('NumberTitle','off','Name','Eye movement measurement distribution',...
         'position',[xpos,ypos,screensize(3)/2,screensize(4)]);
     % given that fixation number could be consider as a possion process, the
     % parameters could be fit with a Gamma distribution. Fixation
@@ -81,10 +84,9 @@ if exist('DescriptvM','var') && exist('FixMap','var')
     else
         print(strcat('Descriptive_STAT\Eye_Mvt_Measure_Dist'),'-dpng')
     end
-    close all
     
     % Mean of Fixation Map
-    h(1) = figure('NumberTitle','off','Name','Mean Fixation Intensity',...
+    h2 = figure('NumberTitle','off','Name','Mean Fixation Intensity',...
         'position',[xpos,ypos,screensize(3),screensize(4)]);
     title('Mean Fixation')
     FixationMean=squeeze(nanmean(FixMap(:,:,:)));
@@ -95,7 +97,7 @@ if exist('DescriptvM','var') && exist('FixMap','var')
     else
         print(strcat('Descriptive_STAT\Mean_Intensity_Map'),'-dpng')
     end
-    close all
+    close(h1,h2)
     
     % text output
     txtimapout(MeasureM,[],[],1)
@@ -111,7 +113,7 @@ if exist('DescriptvM','var') && exist('FixMap','var')
             mkdir(strcat('Descriptive_STAT\',CName{ic}));
             addpath(strcat('Descriptive_STAT\',CName{ic}));
         end
-        h(1) = figure('NumberTitle','off','Name',['Condition ' CName{ic}],...
+        h1 = figure('NumberTitle','off','Name',['Condition ' CName{ic}],...
             'position',[xpos,ypos,screensize(3)/2,screensize(4)]);
         subplot(3,2,1)
         Conditiontmp=eval(['ConditionM.' CName{ic}]);
@@ -138,7 +140,7 @@ if exist('DescriptvM','var') && exist('FixMap','var')
         else
             print(strcat('Descriptive_STAT\',CName{ic},'\',CName{ic},'_Boxplot'),'-dpng')
         end
-        close all
+        close(h1)
         
         txtimapout(MeasureM,Conditiontmp,CName{ic},2)
     end
@@ -215,7 +217,7 @@ if exist('DescriptvM','var') && exist('FixMap','var')
             end
         end
         %close figure
-        close all;
+        close(h);
     end
     CName2 = 0; % initialize CName2
     while isempty(CName2)==0
@@ -310,7 +312,7 @@ if exist('DescriptvM','var') && exist('FixMap','var')
                 end
             end
             % %% savefigures
-            close all;
+            close(h);
             % hfigs = get(0, 'children') ;
             % hfigs = sort(hfigs);%Get list of figures
             % %hfigs(hfigs ==handles.figure1)=[];
@@ -344,7 +346,7 @@ if exist('DescriptvM','var') && exist('FixMap','var')
             else
                 print(strcat('Descriptive_STAT\',CNameall,'\',CNameall,'_Boxplot'),'-dpng');
             end
-            close all
+            close(h)
             
             h1= msgbox('All Figures are closed and saved in the folder Descriptive_STAT');
             uiwait(h1)
