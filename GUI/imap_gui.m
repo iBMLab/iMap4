@@ -188,6 +188,15 @@ handles.colnames = answer;
 handles.data = new_data;
 guidata(hObject, handles);
 
+%create filename to save the results!
+filename=datestr(now);
+filename=strrep(filename,':','_'); %Replace colon with underscore
+filename=strrep(filename,'-','_');%Replace minus sign with underscore
+filename=strrep(filename,' ','_');%Replace space with underscore
+mkdir(filename)
+addpath(filename)
+handles.filename = filename;
+guidata(hObject,handles);
 %% saving the column in the summary_information
 if isunix ==0
     summary_information.column_name = handles.colnames ;
@@ -291,19 +300,7 @@ if counter == 1
     handles.mapType = mapType;
     guidata(hObject,handles);
     if counter2 ==1 % counter to make sure that the user select one of the 3 choices
-        
-        
-        %create filename to save the results!
-        filename=datestr(now);
-        filename=strrep(filename,':','_'); %Replace colon with underscore
-        filename=strrep(filename,'-','_');%Replace minus sign with underscore
-        filename=strrep(filename,' ','_');%Replace space with underscore
-        mkdir(filename)
-        addpath(filename)
-        handles.filename = filename;
-        guidata(hObject,handles);
-        
-        
+
         if check_number_fixations == 1
             
             set(handles.smoothing_1, 'enable','on');
