@@ -196,6 +196,7 @@ if exist('DescriptvM','var') && exist('FixMap','var')
             else
                 print(strcat('Descriptive_STAT\',CName{ic},'\',CName{ic},'_Mean_Intensity_Map',num2str(k)),'-dpng')
             end
+            close(gcf)
         else
             for isub=1:lengthcondi
                 subplot(rlength,clength,isub)
@@ -215,9 +216,9 @@ if exist('DescriptvM','var') && exist('FixMap','var')
             else
                 print(strcat('Descriptive_STAT\',CName{ic},'\',CName{ic},'_Mean_Intensity_Map'),'-dpng')
             end
+            %close figure
+            close(gcf);
         end
-        %close figure
-        close(h);
     end
     CName2 = 0; % initialize CName2
     while isempty(CName2)==0
@@ -296,6 +297,7 @@ if exist('DescriptvM','var') && exist('FixMap','var')
                 else
                     print(strcat('Descriptive_STAT\',CNameall,'\',CNameall,'_Mean_Intensity_Map',num2str(k)),'-dpng')
                 end
+                close(gcf)
             else
                 for isub=1:lengthcondi
                     subplot(rlength,clength,isub)
@@ -310,9 +312,9 @@ if exist('DescriptvM','var') && exist('FixMap','var')
                 else
                     print(strcat('Descriptive_STAT\',CNameall,'\',CNameall,'_Mean_Intensity_Map'),'-dpng')
                 end
+                close(gcf);
             end
             % %% savefigures
-            close(h);
             % hfigs = get(0, 'children') ;
             % hfigs = sort(hfigs);%Get list of figures
             % %hfigs(hfigs ==handles.figure1)=[];
@@ -346,7 +348,7 @@ if exist('DescriptvM','var') && exist('FixMap','var')
             else
                 print(strcat('Descriptive_STAT\',CNameall,'\',CNameall,'_Boxplot'),'-dpng');
             end
-            close(h)
+            close(gcf)
             
             h1= msgbox('All Figures are closed and saved in the folder Descriptive_STAT');
             uiwait(h1)
