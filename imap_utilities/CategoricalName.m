@@ -12,11 +12,17 @@ elseif isa(tbl, 'table')
 end
 categypredi     = LMMmap.VariableInfo.InModel ...
                 & LMMmap.VariableInfo.IsCategorical;
-categyprediname = VarNames(categypredi); 
-label           = cell(length(tbl),sum(categypredi));
+categyprediname = VarNames(categypredi);
+repredi         = LMMmap.Formula.GroupingVariableNames;
+excld = zeros(length(categyprediname),length(repredi));
+for irep = 1:length(repredi)
+    excld(:,irep) = strcmp(categyprediname,repredi{irep});
+end
+categyprediname = categyprediname(sum(excld,2)==0);
+label           = cell(length(tbl),length(categyprediname));
 strlabel        = cell(length(tbl),1);
 
-for icc = 1:sum(categypredi)
+for icc = 1:length(categyprediname)
     label(:,icc)     = cellstr(eval(['tbl.' categyprediname{icc}]));
 end
 for ii = 1:length(label)
