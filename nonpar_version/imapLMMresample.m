@@ -27,7 +27,7 @@ warning('off')
 effect   = lower(effect);
 Zx       = LMMmap.RandomEffects.DX;
 tbl      = LMMmap.Variables;
-fitml    = strcmp(upper(LMMmap.Fitmethod),'ML');
+fitml    = strcmp(upper(LMMmap.FitMethod),'ML');
 % exclude empty trials/conditions
 outtrial               = full(sum(Zx, 2))==0;
 tbl     (outtrial,:)   = [];
