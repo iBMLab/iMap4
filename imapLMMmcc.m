@@ -22,61 +22,61 @@ warning('off','all');
 if nargin > 3
     FixMap=varargin{1};
 end
-statopt=StatMap.opt;
-alpha=statopt.alpha;
-Pmap=StatMap.Pmap;
-mapvalue=StatMap.map;
-StatMap.Pmask0=StatMap.Pmask;
+statopt        = StatMap.opt;
+alpha          = statopt.alpha;
+Pmap           = StatMap.Pmap;
+mapvalue       = StatMap.map;
+StatMap.Pmask0 = StatMap.Pmask;
 % clear old fields
-StatMap.Pmask=[];
-StatMap.report=[];
-mask=isnan(LMMmap.MSE)==0;
-tbl=LMMmap.Variables;
-nonnan=find(mask);
+StatMap.Pmask  = [];
+StatMap.report = [];
+mask   = isnan(LMMmap.MSE)==0;
+tbl    = LMMmap.Variables;
+nonnan = find(mask);
 
 %% multiple comparison correction
 if strcmp(statopt.type,'model')~=1
-    Pmask=zeros(size(Pmap));
-    mccopt.methods=lower(mccopt.methods);
+    Pmask          = zeros(size(Pmap));
+    mccopt.methods = lower(mccopt.methods);
     switch mccopt.methods
         case 'fdr'
             %%
-            pid=zeros(1,size(Pmask,1));
+            pid = zeros(1,size(Pmask,1));
             if isfield(mccopt,'parametic')==1
                 for imask=1:size(Pmask,1)
-                    tmpMsk=squeeze(Pmap(imask,:,:));
-                    pid(imask)=fdr(tmpMsk(isnan(tmpMsk)==0), alpha,'parametic');
-                    Pmask(imask,:,:)=tmpMsk<pid(imask);
+                    tmpMsk           = squeeze(Pmap(imask,:,:));
+                    pid(imask)       = fdr(tmpMsk(isnan(tmpMsk)==0), alpha,'parametic');
+                    Pmask(imask,:,:) = tmpMsk<pid(imask);
                 end
             else
                 for imask=1:size(Pmask,1)
-                    tmpMsk=squeeze(Pmap(imask,:,:));
-                    pid(imask)=fdr(tmpMsk(isnan(tmpMsk)==0), alpha);
-                    Pmask(imask,:,:)=tmpMsk<pid(imask);
+                    tmpMsk           = squeeze(Pmap(imask,:,:));
+                    pid(imask)       = fdr(tmpMsk(isnan(tmpMsk)==0), alpha);
+                    Pmask(imask,:,:) = tmpMsk<pid(imask);
                 end
             end
             % tfec
             if isfield(mccopt,'tfce')==1
                 if mccopt.tfce==1
-                    mapvaluetmp=StatMap.map;
-                    mapvalue2=tfce2d(permute(mapvaluetmp,[2,3,1]));
-                    mapvalue=permute(mapvalue2,[3,1,2]);
-                    StatMap.map=mapvalue;
+                    mapvaluetmp      = StatMap.map;
+                    mapvalue2        = tfce2d(permute(mapvaluetmp,[2,3,1]));
+                    mapvalue         = permute(mapvalue2,[3,1,2]);
+                    StatMap.map      = mapvalue;
                 end
             end
-            mccopt.fdrThreshold=pid;
+            mccopt.fdrThreshold = pid;
         case 'bonferroni'
             %%
-            alpha2=alpha/length(nonnan);
-            Pmask=Pmap<alpha2;
-            mccopt.BonferroniThreshold=alpha2;
+            alpha2                     = alpha/length(nonnan);
+            Pmask                      = Pmap<alpha2;
+            mccopt.BonferroniThreshold = alpha2;
             % tfec
             if isfield(mccopt,'tfce')==1
                 if mccopt.tfce==1
-                    mapvaluetmp=StatMap.map;
-                    mapvalue2=tfce2d(permute(mapvaluetmp,[2,3,1]));
-                    mapvalue=permute(mapvalue2,[3,1,2]);
-                    StatMap.map=mapvalue;
+                    mapvaluetmp = StatMap.map;
+                    mapvalue2   = tfce2d(permute(mapvaluetmp,[2,3,1]));
+                    mapvalue    = permute(mapvalue2,[3,1,2]);
+                    StatMap.map = mapvalue;
                 end
             end
         case 'randomfield'
@@ -84,82 +84,82 @@ if strcmp(statopt.type,'model')~=1
             % for details see Chauvin, A., Worsley, K. J., Schyns, P. G., Arguin, M. &
             % Gosselin, F. (2004).  A sensitive statistical test for smooth
             % classification images.
-            pixsearchspace=mask;
+            pixsearchspace = mask;
             % calculation of the significant values for single matrix
-            sigma = mccopt.sigma;
-            FWHM=HalfMax(sigma);% computes the full width half maximum
-            [volumes,N]=CiVol(pixsearchspace,2); % (Worsley et al. 1996, HBM) computes the intrinsic volumes
-            tP=zeros(1,size(Pmask,1));
+            sigma          = mccopt.sigma;
+            FWHM           = sigma * sqrt(8*log(2));% computes the full width half maximum
+            [volumes,N]    = CiVol(pixsearchspace,2); % (Worsley et al. 1996, HBM) computes the intrinsic volumes
+            tP             = zeros(1,size(Pmask,1));
             for imask=1:size(Pmask,1)
-                Fvalue=squeeze(mapvalue(imask,:,:));
-                if strcmp(statopt.type,'random');Fvalue=Fvalue.^2;end
-                tP(imask)=stat_threshold(volumes, N,FWHM,StatMap.df(imask,:),alpha);
-                Pmask(imask,:,:)=Fvalue>tP(imask);
+                Fvalue     = squeeze(mapvalue(imask,:,:));
+                if strcmp(statopt.type,'random');Fvalue = Fvalue.^2;end
+                tP(imask)        = stat_threshold(volumes, N,FWHM,StatMap.df(imask,:),alpha);
+                Pmask(imask,:,:) = Fvalue>tP(imask);
             end
-            mccopt.randomfieldThreshold=tP;
+            mccopt.randomfieldThreshold = tP;
             % tfec
             if isfield(mccopt,'tfce')==1
                 if mccopt.tfce==1
-                    mapvaluetmp=StatMap.map;
-                    mapvalue2=tfce2d(permute(mapvaluetmp,[2,3,1]));
-                    mapvalue=permute(mapvalue2,[3,1,2]);
-                    StatMap.map=mapvalue;
+                    mapvaluetmp = StatMap.map;
+                    mapvalue2   = tfce2d(permute(mapvaluetmp,[2,3,1]));
+                    mapvalue    = permute(mapvalue2,[3,1,2]);
+                    StatMap.map = mapvalue;
                 end
             end
         case 'cluster'% cluster size and stat value sum within cluster could be estimated via resampling (bootstrap or jackknife)
             %%
             if isfield(mccopt,'tfce')==1
                 if mccopt.tfce==1
-                    mapvaluetmp=StatMap.map;
-                    mapvalue2=tfce2d(permute(mapvaluetmp,[2,3,1]));
-                    mapvalue=permute(mapvalue2,[3,1,2]);
-                    StatMap.map=mapvalue;
+                    mapvaluetmp = StatMap.map;
+                    mapvalue2   = tfce2d(permute(mapvaluetmp,[2,3,1]));
+                    mapvalue    = permute(mapvalue2,[3,1,2]);
+                    StatMap.map = mapvalue;
                 end
             end
             if isfield(mccopt,'clustSize') && isfield(mccopt,'clustVal') % using both cluster size and stat sum value as criterion
-                clustersize=mccopt.clustSize;
-                clustervalue=mccopt.clustVal;
+                clustersize  = mccopt.clustSize;
+                clustervalue = mccopt.clustVal;
                 if length(clustersize)~=size(Pmap,1) || length(clustervalue)~=size(Pmap,1)
                     warning('cluster threshold missmatch, using the first element of the threshold vector')
-                    clustersize2=clustersize(1)*ones(1,size(Pmap,1));
-                    clustervalue2=clustervalue(1)*ones(1,size(Pmap,1));
+                    clustersize2  = clustersize(1)*ones(1,size(Pmap,1));
+                    clustervalue2 = clustervalue(1)*ones(1,size(Pmap,1));
                 else
-                    clustersize2=clustersize;
-                    clustervalue2=clustervalue;
+                    clustersize2  = clustersize;
+                    clustervalue2 = clustervalue;
                 end
                 for imask=1:size(Pmask,1)
-                    Fvalue=squeeze(mapvalue(imask,:,:));
-                    pvalue=squeeze(Pmap(imask,:,:));
-                    if strcmp(statopt.type,'random');Fvalue=Fvalue.^2;end
-                    Pmask(imask,:,:)=clustertest2D(Fvalue,pvalue,alpha,clustervalue2(imask),clustersize2(imask),[]);
+                    Fvalue = squeeze(mapvalue(imask,:,:));
+                    pvalue = squeeze(Pmap(imask,:,:));
+                    if strcmp(statopt.type,'random');Fvalue = Fvalue.^2;end
+                    Pmask(imask,:,:) = clustertest2D(Fvalue,pvalue,alpha,clustervalue2(imask),clustersize2(imask),[]);
                 end
             elseif isfield(mccopt,'clustSize') && ~isfield(mccopt,'clustVal') % using only cluster size
-                clustersize=mccopt.clustSize;
+                clustersize = mccopt.clustSize;
                 if length(clustersize)~=size(Pmap,1)
                     warning('cluster threshold missmatch, using the first element of the threshold vector')
-                    clustersize2=clustersize(1)*ones(1,size(Pmap,1));
+                    clustersize2 = clustersize(1)*ones(1,size(Pmap,1));
                 else
-                    clustersize2=clustersize;
+                    clustersize2 = clustersize;
                 end
                 for imask=1:size(Pmask,1)
-                    Fvalue=squeeze(mapvalue(imask,:,:));
-                    pvalue=squeeze(Pmap(imask,:,:));
-                    if strcmp(statopt.type,'random');Fvalue=Fvalue.^2;end
-                    Pmask(imask,:,:)=clustertest2D(Fvalue,pvalue,alpha,[],clustersize2(imask),[]);
+                    Fvalue = squeeze(mapvalue(imask,:,:));
+                    pvalue = squeeze(Pmap(imask,:,:));
+                    if strcmp(statopt.type,'random');Fvalue = Fvalue.^2;end
+                    Pmask(imask,:,:) = clustertest2D(Fvalue,pvalue,alpha,[],clustersize2(imask),[]);
                 end
             elseif ~isfield(mccopt,'clustSize') && isfield(mccopt,'clustVal') % using only cluster stat sum value
-                clustervalue=mccopt.clustVal;
+                clustervalue = mccopt.clustVal;
                 if length(clustervalue)~=size(Pmap,1)
                     warning('cluster threshold missmatch, using the first element of the threshold vector')
-                    clustervalue2=clustervalue(1)*ones(1,size(Pmap,1));
+                    clustervalue2 = clustervalue(1)*ones(1,size(Pmap,1));
                 else
-                    clustervalue2=clustervalue;
+                    clustervalue2 = clustervalue;
                 end
                 for imask=1:size(Pmask,1)
-                    Fvalue=squeeze(mapvalue(imask,:,:));
-                    pvalue=squeeze(Pmap(imask,:,:));
+                    Fvalue = squeeze(mapvalue(imask,:,:));
+                    pvalue = squeeze(Pmap(imask,:,:));
                     if strcmp(statopt.type,'random');Fvalue=Fvalue.^2;end
-                    Pmask(imask,:,:)=clustertest2D(Fvalue,pvalue,alpha,clustervalue2(imask),[],[]);
+                    Pmask(imask,:,:) = clustertest2D(Fvalue,pvalue,alpha,clustervalue2(imask),[],[]);
                 end
             end
         case 'bootstrap'
