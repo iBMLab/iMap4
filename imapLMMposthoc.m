@@ -181,38 +181,11 @@ if flag==1
     
     mat=double(Posthoc.Tval);
     subplot(1,3,2)
-    imagesc(mat);
-    axis square;
-    % display result
-    textStrings = num2str(mat(:),'%0.2f');  %# Create strings from the matrix values
-    textStrings = strtrim(cellstr(textStrings));  %# Remove any space padding
-    [x,y] = meshgrid(1:size(mat,1));   %# Create x and y coordinates for the strings
-    hStrings = text(x(~isnan(mat(:))),y(~isnan(mat(:))),textStrings(~isnan(mat(:))),...      %# Plot the strings
-        'HorizontalAlignment','center');
-    midValue = mean(get(gca,'CLim'));  %# Get the middle value of the color range
-    textColors = repmat(mat(~isnan(mat(:))) < midValue,1,3);  %# Choose white or black for the
-    %#   text color of the strings so
-    %#   they can be easily seen over
-    %#   the background color
-    set(hStrings,{'Color'},num2cell(textColors,2));  %# Change the text colors
-    
-    set(gca,'XTick',1:size(mat,1),...                         %# Change the axes tick marks
-        'XTickLabel',Posthoc.beta.Properties.VarNames,...  %#   and tick labels
-        'YTick',1:size(mat,1),...
-        'YTickLabel',Posthoc.beta.Properties.ObsNames,...
-        'TickLength',[0 0],...
-        'xdir','reverse','ydir','normal');
+    imsqrmat(mat, Posthoc.beta.Properties.VarNames,Posthoc.beta.Properties.ObsNames);
     title('Tvalue')
     
     mat2=double(Posthoc.pval);
     subplot(1,3,3)
-    imagesc(mat2<(.05/sum(~isnan(mat2(:)))));
-    axis square;    
-    set(gca,'XTick',1:size(mat2,1),...                         %# Change the axes tick marks
-        'XTickLabel',Posthoc.beta.Properties.VarNames,...  %#   and tick labels
-        'YTick',1:size(mat2,1),...
-        'YTickLabel',Posthoc.beta.Properties.ObsNames,...
-        'TickLength',[0 0],...
-        'xdir','reverse','ydir','normal');
+    imsqrmat(mat2<(.05/sum(~isnan(mat2(:)))), Posthoc.beta.Properties.VarNames,Posthoc.beta.Properties.ObsNames);
     title('pValue < .05 (Bonferroni Corrected)')
 end

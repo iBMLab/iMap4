@@ -1,4 +1,5 @@
 %--------------------------------------------------------------------------
+% code snippet to demonstrate winsorization on the smoothed fixation map.
 % Copyright (C) iMap Team 2015
 %% remove NaN
 remv             = find(isnan(FixMap(:,1,1)));
