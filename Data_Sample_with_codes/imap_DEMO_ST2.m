@@ -52,7 +52,7 @@ smoothingpic   = 5;
 [x, y]         = meshgrid(-floor(ySize/2)+.5:floor(ySize/2)-.5, -floor(xSize/2)+.5:floor(xSize/2)-.5);
 gaussienne     = exp(- (x .^2 / smoothingpic ^2) - (y .^2 / smoothingpic ^2));
 gaussienne     = (gaussienne - min(gaussienne(:))) / (max(gaussienne(:)) - min(gaussienne(:)));
-f_fil          = fft2(gaussienne);
+% f_fil          = fft2(gaussienne);
 % fixation matrix
 coordX         = round(Y(:,2));
 coordY         = round(Y(:,1));
@@ -60,9 +60,10 @@ intv           = normrnd(0.4,.085,length(Y),1);
 indx1          = coordX>0 & coordY>0 & coordX<xSize & coordY<ySize;
 rawmap         = full(sparse(coordX(indx1),coordY(indx1),intv(indx1),ySize,xSize));
 
-f_mat          = fft2(rawmap); % 2D fourrier transform on the points matrix
-filtered_mat   = f_mat .* f_fil;
-smoothpic      = real(fftshift(ifft2(filtered_mat)));
+% f_mat          = fft2(rawmap); % 2D fourrier transform on the points matrix
+% filtered_mat   = f_mat .* f_fil;
+% smoothpic      = real(fftshift(ifft2(filtered_mat)));
+smoothpic      = conv2(rawmap, gaussienne,'same');
 
 subplot(1,3,3)
 imagesc(smoothpic);colorbar
@@ -147,7 +148,6 @@ for ig = 1:length(Group)
             currFrame = getframe;
             writeVideo(vidObj,currFrame);
             
-            rawmap     = zeros(ySize, xSize);
             coordX     = xSize-round(Y(:,2));
             coordY     = round(Y(:,1));
             pathlength = diag(squareform(pdist([coordY,coordX])),1);
@@ -155,9 +155,10 @@ for ig = 1:length(Group)
             indx1      = coordX>0 & coordY>0 & coordX<xSize & coordY<ySize;
             rawmap     = full(sparse(coordX(indx1),coordY(indx1),intv(indx1),ySize,xSize));
             
-            f_mat              = fft2(rawmap); % 2D fourrier transform on the points matrix
-            filtered_mat       = f_mat .* f_fil;
-            smoothpic          = real(fftshift(ifft2(filtered_mat)));
+%             f_mat              = fft2(rawmap); % 2D fourrier transform on the points matrix
+%             filtered_mat       = f_mat .* f_fil;
+%             smoothpic          = real(fftshift(ifft2(filtered_mat)));
+            smoothpic          = conv2(rawmap, gaussienne,'same');
             mm                 = mean(smoothpic(:));
             stdm               = std(smoothpic(:));
             FixMap(itt,:,:)    = (smoothpic-mm)./stdm;
@@ -211,7 +212,7 @@ opt1.type = 'model';
 [StatMap] = imapLMMcontrast(LMMmap,opt1);
 % output figure;
 imapLMMdisplay(StatMap,0)
-%% plot fixed effec(anova result using the cell mean DS and its related contrast)
+%% plot fixed effect (anova result using the cell mean DS and its related contrast)
 % close all
 opt        = struct;% clear structure
 opt.type   = 'predictor beta';
@@ -249,7 +250,7 @@ opt1.type = 'model';
 [StatMap] = imapLMMcontrast(LMMmap2,opt1);
 % output figure;
 imapLMMdisplay(StatMap,0)
-%% plot fixed effec(anova result using the cell mean DS and its related contrast)
+%% plot fixed effect (anova result using the cell mean DS and its related contrast)
 close all
 opt       = struct;% clear structure
 opt.type  = 'fixed';

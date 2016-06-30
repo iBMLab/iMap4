@@ -131,15 +131,16 @@ smoothingpic = 5;
 [x, y]       = meshgrid(-floor(ySize/2)+.5:floor(ySize/2)-.5, -floor(xSize/2)+.5:floor(xSize/2)-.5);
 gaussienne   = exp(- (x .^2 / smoothingpic ^2) - (y .^2 / smoothingpic ^2));
 gaussienne   = (gaussienne - min(gaussienne(:))) / (max(gaussienne(:)) - min(gaussienne(:)));
-f_fil        = fft2(gaussienne);
+% f_fil        = fft2(gaussienne);
 % fixation matrix
 coordX       = round(Y(:,2));
 coordY       = round(Y(:,1));
 indx1        = coordX>0 & coordY>0 & coordX<xSize & coordY<ySize;
 rawmap       = full(sparse(coordX(indx1),coordY(indx1),ones(size(coordY(indx1))),ySize,xSize));
-f_mat        = fft2(rawmap); % 2D fourrier transform on the points matrix
-filtered_mat = f_mat .* f_fil;
-smoothpic    = real(fftshift(ifft2(filtered_mat)));
+% f_mat        = fft2(rawmap); % 2D fourrier transform on the points matrix
+% filtered_mat = f_mat .* f_fil;
+% smoothpic    = real(fftshift(ifft2(filtered_mat)));
+smoothpic    = conv2(rawmap, gaussienne,'same');
 subplot(1,3,3)
 imagesc(smoothpic);colorbar
 axis('square','off')
@@ -171,9 +172,10 @@ for is = 1:Ns
         coordY       = round(Y(:,1));
         indx1        = coordX>0 & coordY>0 & coordX<xSize & coordY<ySize;
         rawmap       = full(sparse(coordX(indx1),coordY(indx1),ones(size(coordY(indx1))),ySize,xSize));
-        f_mat        = fft2(rawmap); % 2D fourrier transform on the points matrix
-        filtered_mat = f_mat .* f_fil;
-        smoothpic    = real(fftshift(ifft2(filtered_mat)));
+%         f_mat        = fft2(rawmap); % 2D fourrier transform on the points matrix
+%         filtered_mat = f_mat .* f_fil;
+%         smoothpic    = real(fftshift(ifft2(filtered_mat)));
+        smoothpic    = conv2(rawmap, gaussienne,'same');
         
         % save fixation matrix
         RawMap (item, :, :) = rawmap;
@@ -212,7 +214,7 @@ opt1.type = 'model';
 [StatMap] = imapLMMcontrast(LMMmap,opt1);
 % output figure;
 imapLMMdisplay(StatMap,0);
-%% plot fixed effec(anova and beta)
+%% plot fixed effect (anova and beta)
 % close all
 opt       = struct;% clear structure
 opt.type  = 'model beta';
@@ -292,7 +294,7 @@ for imask = 1:16
     end
 end
 figure;imagesc(Pmask);axis square off
-%% plot fixed effec(anova and beta) - using permutation
+%% plot fixed effect (anova and beta) - using permutation
 % close all
 opt       = struct;% clear structure
 opt.type  = 'model beta';

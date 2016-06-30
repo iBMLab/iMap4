@@ -51,7 +51,7 @@ smoothingpic     = 20;
 gaussienne       = exp(- (x .^2 / smoothingpic ^2) - (y .^2 / smoothingpic ^2));
 gaussienne       = (gaussienne - min(gaussienne(:))) ...
                  / (max(gaussienne(:)) - min(gaussienne(:)));
-f_fil            = fft2(gaussienne);
+% f_fil            = fft2(gaussienne);
 
 subjlist         = unique(subject);
 Ns               = length(subjlist);% number of subject
@@ -109,10 +109,11 @@ for is = 1:Ns
                         indx(ii) = 1;
                     else
                         rawmap       = full(sparse(coordX(indx1), coordY(indx1), intv(indx1), ySize, xSize));
-                        f_mat        = fft2(rawmap); % 2D fourrier transform on the points matrix
-                        filtered_mat = f_mat .* f_fil;
-                        
-                        smoothpic        = real(fftshift(ifft2(filtered_mat)));
+%                         f_mat        = fft2(rawmap); % 2D fourrier transform on the points matrix
+%                         filtered_mat = f_mat .* f_fil;
+%                         
+%                         smoothpic        = real(fftshift(ifft2(filtered_mat)));
+                        smoothpic        = conv2(rawmap, gaussienne,'same');
                         isfixmap(it,:,:) = imresize(smoothpic, scale, 'nearest');
                         israwmap(it,:,:) = imresize(rawmap,    scale, 'nearest');
                         stDur (it)       = sum(intv(indx1));

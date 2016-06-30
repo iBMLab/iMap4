@@ -17,7 +17,7 @@ ySize = str2double(handles.xy_size{4});
 [x, y] = meshgrid(-floor(xSize/2)+.5:floor(xSize/2)-.5, -floor(ySize/2)+.5:floor(ySize/2)-.5);
 gaussienne = exp(- (x .^2 / smoothingpic ^2) - (y .^2 / smoothingpic ^2));
 gaussienne = (gaussienne - min(gaussienne(:))) / (max(gaussienne(:)) - min(gaussienne(:)));
-f_fil = fft2(gaussienne);
+% f_fil = fft2(gaussienne);
 
 %find the unique subjects
 subject = handles.data(:,categorical_conditions_default.idx_categorical_default(1));
@@ -73,9 +73,10 @@ durind=zeros(size(cotind));
 for iw=1:length(cotind);durind(iw)=sum(intv(whe==iw));end % calculate duration, the last loop i cant get rid of
 rawmap(unindx(durind>0))=durind(durind>0);
 
-f_mat = fft2(rawmap); % 2D fourrier transform on the points matrix
-filtered_mat = f_mat .* f_fil;
-smoothpic = real(fftshift(ifft2(filtered_mat)));
+% f_mat = fft2(rawmap); % 2D fourrier transform on the points matrix
+% filtered_mat = f_mat .* f_fil;
+% smoothpic = real(fftshift(ifft2(filtered_mat)));
+smoothpic = conv2(rawmap, gaussienne,'same');
 
 %
 S.fh = figure('menubar','none','resize','off','NumberTitle','off','Name','Smoothing','position',[100 100 900 500]);
@@ -149,11 +150,12 @@ uiwait(gcf)
         smoothingpic = str2double(get(S.edit,'string'));
         gaussienne = exp(- (x .^2 / smoothingpic ^2) - (y .^2 / smoothingpic ^2));
         gaussienne = (gaussienne - min(gaussienne(:))) / (max(gaussienne(:)) - min(gaussienne(:)));
-        f_fil = fft2(gaussienne);
-        
-        f_mat = fft2(rawmap); % 2D fourrier transform on the points matrix
-        filtered_mat = f_mat .* f_fil;
-        smoothpic = real(fftshift(ifft2(filtered_mat)));
+%         f_fil = fft2(gaussienne);
+%         
+%         f_mat = fft2(rawmap); % 2D fourrier transform on the points matrix
+%         filtered_mat = f_mat .* f_fil;
+%         smoothpic = real(fftshift(ifft2(filtered_mat)));
+        smoothpic = conv2(rawmap, gaussienne,'same');
         smoothing_value=smoothingpic/(screen_y_pixel/2)*(atan(distance_y_cm /2/participant_distance)/pi*180)*2;
         
         %

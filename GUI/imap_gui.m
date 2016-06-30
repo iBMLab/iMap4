@@ -365,7 +365,7 @@ ySize = str2double(handles.xy_size{4}); %image y in pixel
 [x, y] = meshgrid(-floor(xSize/2)+.5:floor(xSize/2)-.5, -floor(ySize/2)+.5:floor(ySize/2)-.5);
 gaussienne = exp(- (x .^2 / smoothingpic ^2) - (y .^2 / smoothingpic ^2));
 gaussienne = (gaussienne - min(gaussienne(:))) / (max(gaussienne(:)) - min(gaussienne(:)));
-f_fil = fft2(gaussienne);
+% f_fil = fft2(gaussienne);
 
 %threshold for mask
 fixdurtmp = str2double(handles.data(:,continuous_conditions_default.idx_continuous_default(3)));
@@ -460,9 +460,10 @@ for is = 1:Ns
                 indx1=coordX>0 & coordY>0 & coordX<ySize & coordY<xSize;
                 rawmap=full(sparse(coordX(indx1),coordY(indx1),intv(indx1),ySize,xSize));
                 
-                f_mat = fft2(rawmap); % 2D fourrier transform on the points matrix
-                filtered_mat = f_mat .* f_fil;
-                smoothpic = real(fftshift(ifft2(filtered_mat)));
+%                 f_mat = fft2(rawmap); % 2D fourrier transform on the points matrix
+%                 filtered_mat = f_mat .* f_fil;
+%                 smoothpic = real(fftshift(ifft2(filtered_mat)));
+                smoothpic = conv2(rawmap, gaussienne,'same');
                 Tridur(itt,1)=nansum(intv(indx1));
                 rawmaptmp(itt,:,:)=rawmap;
                 fixmaptmp(itt,:,:)=smoothpic;
@@ -667,7 +668,7 @@ guidata(hObject, handles);
 [x, y] = meshgrid(-floor(xSize/2)+.5:floor(xSize/2)-.5, -floor(ySize/2)+.5:floor(ySize/2)-.5);
 gaussienne = exp(- (x .^2 / smoothingpic ^2) - (y .^2 / smoothingpic ^2));
 gaussienne = (gaussienne - min(gaussienne(:))) / (max(gaussienne(:)) - min(gaussienne(:)));
-f_fil = fft2(gaussienne);
+% f_fil = fft2(gaussienne);
 
 %threshold for mask
 fixdurtmp = str2double(handles.data(:,continuous_conditions_default.idx_continuous_default(3)));
@@ -752,11 +753,11 @@ for is = 1:Ns
         indx1=coordX>0 & coordY>0 & coordX<ySize & coordY<xSize;
         rawmap=full(sparse(coordX(indx1),coordY(indx1),intv(indx1),ySize,xSize));
         
-        f_mat = fft2(rawmap); % 2D fourrier transform on the points matrix
-        filtered_mat = f_mat .* f_fil;
-        
-        smoothpic = real(fftshift(ifft2(filtered_mat)));
-        
+%         f_mat = fft2(rawmap); % 2D fourrier transform on the points matrix
+%         filtered_mat = f_mat .* f_fil;
+%         
+%         smoothpic = real(fftshift(ifft2(filtered_mat)));
+        smoothpic = conv2(rawmap, gaussienne,'same');
         %original
         fix_map(it,:,:)=imresize(smoothpic, scale,'nearest');
         raw_map(it,:,:)=imresize(rawmap,scale,'nearest'); %switch case if they want to normalize
