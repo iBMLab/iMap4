@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <deployment-project plugin="plugin.apptool" plugin-version="1.0">
-  <configuration target="target.mlapps" target-name="Package App" name="iMap4" location="D:\Charles\imap4\Matlab_Installation_Package" file="D:\Charles\imap4\Matlab_Installation_Package\iMap4.prj" build-checksum="358665954">
+  <configuration target="target.mlapps" target-name="Package App" name="iMap4" location="D:\Charles\imap4\Matlab_Installation_Package" file="D:\Charles\imap4\Matlab_Installation_Package\iMap4.prj" build-checksum="2519541505">
     <param.appname>iMap4</param.appname>
     <param.authnamewatermark>Junpeng Lao &amp; Nayla Sokhn</param.authnamewatermark>
     <param.email>junpeng.lao@unifr.ch</param.email>
@@ -20,25 +20,22 @@ Lao, J., Miellet, S., Pernet, C., Sokhn, N., &amp; Caldara, R. (2016). iMap4: An
     <param.screenshot>${PROJECT_ROOT}\iMap4_resources\iBMLab.png</param.screenshot>
     <param.version>4.1</param.version>
     <param.products.name>
-      <item>Statistics Toolbox</item>
       <item>Image Processing Toolbox</item>
-      <item>Signal Processing Toolbox</item>
+      <item>Statistics Toolbox</item>
       <item>MATLAB</item>
-      <item>Simulink</item>
+      <item>Signal Processing Toolbox</item>
     </param.products.name>
     <param.products.id>
-      <item>19</item>
       <item>17</item>
-      <item>8</item>
+      <item>19</item>
       <item>1</item>
-      <item>2</item>
+      <item>8</item>
     </param.products.id>
     <param.products.version>
       <item>8.3</item>
       <item>8.3</item>
+      <item>8.2</item>
       <item>6.20</item>
-      <item>8.2</item>
-      <item>8.2</item>
     </param.products.version>
     <param.platforms>
       <item>win64</item>
@@ -222,9 +219,11 @@ Lao, J., Miellet, S., Pernet, C., Sokhn, N., &amp; Caldara, R. (2016). iMap4: An
       <file>D:\Charles\imap4\imap_utilities\CIforFixed.m</file>
       <file>D:\Charles\imap4\imap_utilities\CiVol.m</file>
       <file>D:\Charles\imap4\imap_utilities\clustertest2D.m</file>
+      <file>D:\Charles\imap4\imap_utilities\Code Snippet\imfilter_vs_fft2.m</file>
+      <file>D:\Charles\imap4\imap_utilities\Code Snippet\LME_and_permutation.m</file>
+      <file>D:\Charles\imap4\imap_utilities\Code Snippet\winsored_fixmap.m</file>
       <file>D:\Charles\imap4\imap_utilities\covproj.m</file>
       <file>D:\Charles\imap4\imap_utilities\fdr.m</file>
-      <file>D:\Charles\imap4\imap_utilities\HalfMax.m</file>
       <file>D:\Charles\imap4\imap_utilities\histfitimap.m</file>
       <file>D:\Charles\imap4\imap_utilities\imsqrmat.m</file>
       <file>D:\Charles\imap4\imap_utilities\indtorgb.m</file>
@@ -234,7 +233,6 @@ Lao, J., Miellet, S., Pernet, C., Sokhn, N., &amp; Caldara, R. (2016). iMap4: An
       <file>D:\Charles\imap4\imap_utilities\rdmfixmap.m</file>
       <file>D:\Charles\imap4\imap_utilities\stat_threshold.m</file>
       <file>D:\Charles\imap4\imap_utilities\tfce2d.m</file>
-      <file>D:\Charles\imap4\imap_utilities\winsored_fixmap.m</file>
     </fileset.depfun>
     <fileset.resources>
       <file>D:\Charles\imap4\Data_Sample_with_codes</file>
@@ -245,6 +243,7 @@ Lao, J., Miellet, S., Pernet, C., Sokhn, N., &amp; Caldara, R. (2016). iMap4: An
       <file>D:\Charles\imap4\GUI</file>
       <file>D:\Charles\imap4\iMap4_BRM.pdf</file>
       <file>D:\Charles\imap4\imap_utilities</file>
+      <file>D:\Charles\imap4\imap_utilities\Code Snippet</file>
       <file>D:\Charles\imap4\imapGLMM.m</file>
       <file>D:\Charles\imap4\imapLMM.m</file>
       <file>D:\Charles\imap4\imapLMMcontrast.m</file>
