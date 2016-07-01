@@ -67,8 +67,8 @@ for ic1 = 1:Nc
         % dist     = pdist2(mu1,mu2,'seuclidean',explained(list));
         % dist     = pdist2(mu1,mu2,'corr');
         
-	% Multivariance distance (Mahalanobis)
-	% M1 (uncomment the below one)
+        % Multivariance distance (Mahalanobis)
+        % M1 (uncomment the below one)
         % dist     = pdist2(mu1,mu2,'mahalanobis',C);
 
         % Multivariance distance scaled by variance explain, closely related to correlation
@@ -81,7 +81,8 @@ for ic1 = 1:Nc
 end
 % RDM = RDM./max(RDM(:));
 % display output
-figure('Name','Representational Dissimilarity Matrix');
+figure('Numbertitle','off','Name',...
+    'Representational Dissimilarity Matrix (value shows multivariate distance)');
 subplot(1,2,1)
 imagesc(stRDM);
 title('stRDM')
