@@ -60,11 +60,14 @@ if isempty(Mask) == 1
     Mask      = ones(ySize2,xSize2);
 end
 compuIdx      = find(Mask(:) == 1);
+if isempty(compuIdx)
+    error('Empty Mask! Please double check your input.')
+end
 numCompute    = length(compuIdx);
 % run one model as example to create matrix for saving
 tic;
 % indextmp           = compuIdx(randi(numCompute));
-valall             = squeeze(mean(FixMap,1));
+valall             = squeeze(nanmean(FixMap,1));
 indextmp           = valall(compuIdx) == max(valall(compuIdx));
 tbl                = PredictorM;% construct lme table
 tbl.PixelIntensity = FixMap(:,indextmp);
