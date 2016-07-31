@@ -8,7 +8,7 @@ Ns       = 10; % number of subject
 Condi1   = 2;  % levels of condition 1
 Condi2   = 3;  % levels of condition 2
 Nt       = 10; % number of trials
-beta0    = [1 2 3,3 2 1]';% [g1_c1 g1_c2 g1_c3, g2_c1 g2_c2 g2_c3]
+beta0    = [1 2 3,2 2 1]';% [g1_c1 g1_c2 g1_c3, g2_c1 g2_c2 g2_c3]
 sbjMean  = 0;  
 sbjVar   = 1.5;
 noisevar = 5;
@@ -91,7 +91,7 @@ end
 FtableLME = dataset(Fl',df1l',df2l',pl','Varnames',{'Fstat','DF1','DF2','pValue'},'ObsNames',{'Condi1','Condi2','Interation'})
 FtableHLM = dataset(Fh',df1h',df2h',ph','Varnames',{'Fstat','DF1','DF2','pValue'},'ObsNames',{'Condi1','Condi2','Interation'})
 
-%% Matrix partitioning
+%% Matrix partitioning for interaction
 DX1=lmm1.designMatrix; % Sigma-restricted Designmatrix
 DX2=lmm2.designMatrix; % cell mean Designmatrix
 mdlopt=2;
@@ -168,6 +168,12 @@ M2    = [X Z];
 % New contrast for testing K = 0 in Y* = XK + ZG + E*, specified in
 % terms of the combined model Y* = [X Z]D = E*
 Con   = padarray(eye(size(c2',1)), [0 (size(X,2) + size(Z,2)) - size(c2',1)], 0, 'post');
+
+% Notice, the above is the same compare to the function written by Winkler
+% [X,Z,eCm,eCx] = palm_partition(DX,c2,'ridgway');
+% M2    = [X Z];
+% Con   = eCm';
+
 pXX   = pinv(M2' * M2);            % (M'M)*
 CXXC  = pinv(Con * pXX * Con');    % (C (M'M)* C')*
 pM    = pinv(M2);                  %  M*
@@ -200,7 +206,11 @@ for iperm=1:Nperm
     covlmm = bMSE*((M'*M)^-1);
     Fperm1(iperm) = ((cnew*bbeta)'*((cnew*covlmm*cnew')^-1)*(cnew*bbeta))./df1;
 end
-toc
+time1 = toc;
+p1=mean(Fperm1>=Fparti1);
+disp(['Computational time for ' num2str(Nperm) ' permutation is ' num2str(time1)])
+disp(['Permutation F test 1 for the interaction: F(',num2str(df1),',',num2str(df2) ') = ', num2str(Fparti1), '; p = ', num2str(p1)])
+
 tic
 rng(srand);
 for iperm=1:Nperm
@@ -215,12 +225,10 @@ for iperm=1:Nperm
         Fperm2(iperm) = ((bhat'*(X'*X)*bhat)/rank(Con))/((Resids'*Resids)/(size(M2,1)-rank(X)-rank(Z)));
     end
 end
-toc
-p1=mean(Fperm1>=Fparti1);
+time2 = toc;
 p2=mean(Fperm2>=Fparti2);
-
-disp(['Permutation F test for the interaction 1: F(',num2str(df1),',',num2str(df2) ') = ', num2str(Fparti1), '; p = ', num2str(p1)])
-disp(['Permutation F test for the interaction 2: F(',num2str(df1),',',num2str(df2) ') = ', num2str(Fparti2), '; p = ', num2str(p2)])
+disp(['Computational time for ' num2str(Nperm) ' permutation is ' num2str(time2)])
+disp(['Permutation F test 2 for the interaction: F(',num2str(df1),',',num2str(df2) ') = ', num2str(Fparti2), '; p = ', num2str(p2)])
 
 subplot(2,3,4);imagesc(DX);colorbar
 subplot(2,3,5);imagesc(M);colorbar
