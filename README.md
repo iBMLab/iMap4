@@ -3,7 +3,7 @@
 # *i*Map4  <img src="https://github.com/iBMLab/iMap4/blob/master/GUI/IMAP.png" width="50" height="50" />   <img src="https://github.com/iBMLab/iMap4/blob/master/GUI/logo_imap.png" width="50" height="50" />
 
 [![Join the chat at https://gitter.im/iBMLab/iMap4](https://badges.gitter.im/iBMLab/iMap4.svg)](https://gitter.im/iBMLab/iMap4?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
+[![GitHub release](https://img.shields.io/badge/release-v1.0-blue.svg)](https://github.com/iBMLab/iMap4/releases/download/v1.0/iMap4.mlappinstall)
 
 ##Installation 
 Download ./Matlab_Installation_Package and intall the toolbox as a Matlab Application. 
