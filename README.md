@@ -6,7 +6,7 @@
 [![GitHub release](https://img.shields.io/badge/release-v1.0-blue.svg)](https://github.com/iBMLab/iMap4/releases/download/v1.0/iMap4.mlappinstall)
 
 ##Installation 
-Download ./Matlab_Installation_Package and intall the toolbox as a Matlab Application. 
+Download [iMap4.mlappinstall](https://github.com/iBMLab/iMap4/releases/download/v1.0/iMap4.mlappinstall) and intall the toolbox as a Matlab Application. 
 Example codes and dataset could be found in ./Data_Sample_with_codes/
 
 Please read the [wiki](https://junpenglao.gitbooks.io/imap4_guidebook/content/) for more information of how to use the toolbox.
