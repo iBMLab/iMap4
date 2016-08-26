@@ -84,7 +84,7 @@ end
 scrsz=get(0,'ScreenSize');% get screen size for output display
 figure('Numbertitle','off','Name',...
     'Representational Dissimilarity Matrix (value shows multivariate distance)',...
-    ,'Position',[1 1 scrsz(3) scrsz(4)]);
+    'Position',[1 1 scrsz(3) scrsz(4)]);
 subplot(1,2,1)
 imagesc(stRDM);
 title('stRDM')
