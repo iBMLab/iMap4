@@ -80,9 +80,9 @@ if exist('DescriptvM','var') && exist('FixMap','var')
     histfit(MeasureM.meanPathLength,nbins,'gamma');
     title('Path Length(MEAN)')
     if isunix
-        print(strcat('Descriptive_STAT/Eye_Mvt_Measure_Dist'),'-dpng')
+        print(h1,strcat('Descriptive_STAT/Eye_Mvt_Measure_Dist'),'-dpng')
     else
-        print(strcat('Descriptive_STAT\Eye_Mvt_Measure_Dist'),'-dpng')
+        print(h1,strcat('Descriptive_STAT\Eye_Mvt_Measure_Dist'),'-dpng')
     end
     
     % Mean of Fixation Map
@@ -93,9 +93,9 @@ if exist('DescriptvM','var') && exist('FixMap','var')
     imagesc(FixationMean);
     axis off,axis equal
     if isunix
-        print(strcat('Descriptive_STAT/Mean_Intensity_Map'),'-dpng')
+        print(h2,strcat('Descriptive_STAT/Mean_Intensity_Map'),'-dpng')
     else
-        print(strcat('Descriptive_STAT\Mean_Intensity_Map'),'-dpng')
+        print(h2,strcat('Descriptive_STAT\Mean_Intensity_Map'),'-dpng')
     end
     close(h1,h2)
     
@@ -136,9 +136,9 @@ if exist('DescriptvM','var') && exist('FixMap','var')
         boxplot(MeasureM.meanPathLength,Conditiontmp)
         title('Path Length(MEAN)')
         if isunix
-            print(strcat('Descriptive_STAT/',CName{ic},'/',CName{ic},'_Boxplot'),'-dpng')
+            print(h1,strcat('Descriptive_STAT/',CName{ic},'/',CName{ic},'_Boxplot'),'-dpng')
         else
-            print(strcat('Descriptive_STAT\',CName{ic},'\',CName{ic},'_Boxplot'),'-dpng')
+            print(h1,strcat('Descriptive_STAT\',CName{ic},'\',CName{ic},'_Boxplot'),'-dpng')
         end
         close(h1)
         
@@ -181,9 +181,9 @@ if exist('DescriptvM','var') && exist('FixMap','var')
                 
                 if pp==1
                     if isunix
-                        print(strcat('Descriptive_STAT/',CName{ic},'/',CName{ic},'_Mean_Intensity_Map',num2str(k-1)),'-dpng')
+                        print(h(k-1),strcat('Descriptive_STAT/',CName{ic},'/',CName{ic},'_Mean_Intensity_Map',num2str(k-1)),'-dpng')
                     else
-                        print(strcat('Descriptive_STAT\',CName{ic},'\',CName{ic},'_Mean_Intensity_Map',num2str(k-1)),'-dpng')
+                        print(h(k-1),strcat('Descriptive_STAT\',CName{ic},'\',CName{ic},'_Mean_Intensity_Map',num2str(k-1)),'-dpng')
                     end
                     h(k)=figure('NumberTitle','off','Name',['Mean_FixaionIntensity_Map - ' CName{ic} ' continue'],...
                         'position',[xpos,ypos,screensize(3),screensize(4)]);
@@ -192,9 +192,9 @@ if exist('DescriptvM','var') && exist('FixMap','var')
                 end
             end
             if isunix
-                print(strcat('Descriptive_STAT/',CName{ic},'/',CName{ic},'_Mean_Intensity_Map',num2str(k)),'-dpng')
+                print(h(k),strcat('Descriptive_STAT/',CName{ic},'/',CName{ic},'_Mean_Intensity_Map',num2str(k)),'-dpng')
             else
-                print(strcat('Descriptive_STAT\',CName{ic},'\',CName{ic},'_Mean_Intensity_Map',num2str(k)),'-dpng')
+                print(h(k),strcat('Descriptive_STAT\',CName{ic},'\',CName{ic},'_Mean_Intensity_Map',num2str(k)),'-dpng')
             end
             close(gcf)
         else
@@ -212,9 +212,9 @@ if exist('DescriptvM','var') && exist('FixMap','var')
             end
             % save figures
             if isunix
-                print(strcat('Descriptive_STAT/',CName{ic},'/',CName{ic},'_Mean_Intensity_Map'),'-dpng')
+                print(h(1),strcat('Descriptive_STAT/',CName{ic},'/',CName{ic},'_Mean_Intensity_Map'),'-dpng')
             else
-                print(strcat('Descriptive_STAT\',CName{ic},'\',CName{ic},'_Mean_Intensity_Map'),'-dpng')
+                print(h(1),strcat('Descriptive_STAT\',CName{ic},'\',CName{ic},'_Mean_Intensity_Map'),'-dpng')
             end
             %close figure
             close(gcf);
@@ -282,9 +282,9 @@ if exist('DescriptvM','var') && exist('FixMap','var')
                     
                     if pp==1
                         if isunix
-                            print(strcat('Descriptive_STAT/',CNameall,'/',CNameall,'_Mean_Intensity_Map',num2str(k-1)),'-dpng')
+                            print(h(k-1),strcat('Descriptive_STAT/',CNameall,'/',CNameall,'_Mean_Intensity_Map',num2str(k-1)),'-dpng')
                         else
-                            print(strcat('Descriptive_STAT\',CNameall,'\',CNameall,'_Mean_Intensity_Map',num2str(k-1)),'-dpng')
+                            print(h(k-1),strcat('Descriptive_STAT\',CNameall,'\',CNameall,'_Mean_Intensity_Map',num2str(k-1)),'-dpng')
                         end
                         h(k)=figure('NumberTitle','off','Name',['Mean Fixation Intensity - JointCondion continue'],...
                             'position',[xpos,ypos,screensize(3),screensize(4)]);
@@ -293,9 +293,9 @@ if exist('DescriptvM','var') && exist('FixMap','var')
                     end
                 end
                 if isunix
-                    print(strcat('Descriptive_STAT/',CNameall,'/',CNameall,'_Mean_Intensity_Map',num2str(k)),'-dpng')
+                    print(h(k),strcat('Descriptive_STAT/',CNameall,'/',CNameall,'_Mean_Intensity_Map',num2str(k)),'-dpng')
                 else
-                    print(strcat('Descriptive_STAT\',CNameall,'\',CNameall,'_Mean_Intensity_Map',num2str(k)),'-dpng')
+                    print(h(k),strcat('Descriptive_STAT\',CNameall,'\',CNameall,'_Mean_Intensity_Map',num2str(k)),'-dpng')
                 end
                 close(gcf)
             else
@@ -308,9 +308,9 @@ if exist('DescriptvM','var') && exist('FixMap','var')
                     axis off,axis equal
                 end
                 if isunix
-                    print(strcat('Descriptive_STAT/',CNameall,'/',CNameall,'_Mean_Intensity_Map'),'-dpng')
+                    print(h(1),strcat('Descriptive_STAT/',CNameall,'/',CNameall,'_Mean_Intensity_Map'),'-dpng')
                 else
-                    print(strcat('Descriptive_STAT\',CNameall,'\',CNameall,'_Mean_Intensity_Map'),'-dpng')
+                    print(h(1),strcat('Descriptive_STAT\',CNameall,'\',CNameall,'_Mean_Intensity_Map'),'-dpng')
                 end
                 close(gcf);
             end
@@ -320,7 +320,7 @@ if exist('DescriptvM','var') && exist('FixMap','var')
             % %hfigs(hfigs ==handles.figure1)=[];
             % close(hfigs(1:end-1)) % keep the figure of the linear model open
             
-            %% box plot for  joint condition
+            %% box plot for joint condition
             h(1) = figure('NumberTitle','off','Name','Eye movement measurement Boxplot',...
                 'position',[xpos,ypos,screensize(3)/2,screensize(4)]);
             
@@ -344,9 +344,9 @@ if exist('DescriptvM','var') && exist('FixMap','var')
             boxplot(MeasureM.meanPathLength,conditiontmp);
             title('Path Length(MEAN)')
             if isunix
-                print(strcat('Descriptive_STAT/',CNameall,'/',CNameall,'_Boxplot'),'-dpng');
+                print(h(1),strcat('Descriptive_STAT/',CNameall,'/',CNameall,'_Boxplot'),'-dpng');
             else
-                print(strcat('Descriptive_STAT\',CNameall,'\',CNameall,'_Boxplot'),'-dpng');
+                print(h(1),strcat('Descriptive_STAT\',CNameall,'\',CNameall,'_Boxplot'),'-dpng');
             end
             close(gcf)
             
