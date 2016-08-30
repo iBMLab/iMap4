@@ -1060,7 +1060,7 @@ else if (check_trial)==1
         Mask =  handles.Mask_single_trial_scaled;
         FixMap = handles.FixMap_single_trial_scaled;
         while answer == 1
-            [answer, Mask,~] = select_mask_parameter(FixMap,Mask,handles);
+            [answer, Mask, fixthres] = select_mask_parameter(FixMap,Mask,handles);
         end
         if isempty(answer)==0
             handles.Mask_single_trial_scaled = Mask;
@@ -1072,7 +1072,7 @@ else if (check_trial)==1
         Mask =  handles.Mask_estimated;
         FixMap = handles.FixMap_estimated;
         while answer == 1
-            [answer, Mask,fixthres] = select_mask_parameter(FixMap,Mask,handles);
+            [answer, Mask, fixthres] = select_mask_parameter(FixMap,Mask,handles);
         end
         if isempty(answer)==0
             handles.Mask_estimated = Mask;

@@ -1,20 +1,20 @@
 function [smoothingpic] = select_smoothing2(handles,categorical_conditions_default,continuous_conditions,categorical_conditions,continuous_conditions_default)
 %%
 % initial visual degree for smoothing - 1 degree of visual angle
-smoothing_value=1;
+smoothing_value = 1;
 % initial subject and trial for display
 is = 1;
 it = 1;
 
-screen_y_pixel = str2double(handles.xy_size{2});
-user_visual_angle = smoothing_value/(2*sqrt(log(2))); % in pixel. we have this parameter smtpl=sqrt(2)*sigma and sigma=FWHM/(2*sqrt(2*log(2))) and smtpl=FWHM/(2*sqrt(log(2)))
-distance_y_cm = str2double(handles.xy_size(6));
+screen_y_pixel       = str2double(handles.xy_size{2});
+user_visual_angle    = smoothing_value/(2*sqrt(log(2))); % in pixel. we have this parameter smtpl=sqrt(2)*sigma and sigma=FWHM/(2*sqrt(2*log(2))) and smtpl=FWHM/(2*sqrt(log(2)))
+distance_y_cm        = str2double(handles.xy_size(6));
 participant_distance = str2double(handles.xy_size(7));
-smoothingpic = round(user_visual_angle/(atan(distance_y_cm /2/participant_distance)/pi*180)*(screen_y_pixel/2));
+smoothingpic         = round(user_visual_angle/(atan(distance_y_cm /2/participant_distance)/pi*180)*(screen_y_pixel/2));
 
-xSize = str2double(handles.xy_size{3});
-ySize = str2double(handles.xy_size{4});
-[x, y] = meshgrid(-floor(xSize/2)+.5:floor(xSize/2)-.5, -floor(ySize/2)+.5:floor(ySize/2)-.5);
+xSize      = str2double(handles.xy_size{3});
+ySize      = str2double(handles.xy_size{4});
+[x, y]     = meshgrid(-floor(xSize/2)+.5:floor(xSize/2)-.5, -floor(ySize/2)+.5:floor(ySize/2)-.5);
 gaussienne = exp(- (x .^2 / smoothingpic ^2) - (y .^2 / smoothingpic ^2));
 gaussienne = (gaussienne - min(gaussienne(:))) / (max(gaussienne(:)) - min(gaussienne(:)));
 % f_fil = fft2(gaussienne);
@@ -51,31 +51,20 @@ if iscellstr(tbl(:,1))==1
 else
     [~,trialstend,t3]= unique(tbl(:,1),'stable');
 end
-trialstend(:,2)=[trialstend(2:end,1)-1;length(t3)];
+trialstend(:,2) = [trialstend(2:end,1)-1;length(t3)];
 
 % fixation matrix
-seyext=seyex(trialstend(it,1):trialstend(it,2));
-seyeyt=seyey(trialstend(it,1):trialstend(it,2));
-intv=sfixd(trialstend(it,1):trialstend(it,2));
+seyext = seyex(trialstend(it,1):trialstend(it,2));
+seyeyt = seyey(trialstend(it,1):trialstend(it,2));
+intv   = sfixd(trialstend(it,1):trialstend(it,2));
 if handles.mapType==2
     intv=ones(size(intv));
 end
 
-rawmap = zeros(ySize, xSize);
-coordX = round(seyeyt);%switch matrix coordinate here
-coordY = round(seyext);
-indx1=coordX>0 & coordY>0 & coordX<ySize & coordY<xSize;
-indxtf=sub2ind([ySize, xSize],coordX(indx1),coordY(indx1)); % index each fixation location,
-
-unindx = unique(indxtf);% find unique fixation
-[cotind,whe] = histc(indxtf,unindx); % cumulate fixation with same coordinates.
-durind=zeros(size(cotind));
-for iw=1:length(cotind);durind(iw)=sum(intv(whe==iw));end % calculate duration, the last loop i cant get rid of
-rawmap(unindx(durind>0))=durind(durind>0);
-
-% f_mat = fft2(rawmap); % 2D fourrier transform on the points matrix
-% filtered_mat = f_mat .* f_fil;
-% smoothpic = real(fftshift(ifft2(filtered_mat)));
+coordX    = round(seyeyt);%switch matrix coordinate here
+coordY    = round(seyext);
+indx1     = coordX>0 & coordY>0 & coordX<ySize & coordY<xSize;
+rawmap    = full(sparse(coordX(indx1), coordY(indx1), intv(indx1), ySize, xSize));
 smoothpic = conv2(rawmap, gaussienne,'same');
 
 %
@@ -176,7 +165,12 @@ uiwait(gcf)
     function validate2(hObject,eventdata)
         
         uiresume(gcf)
-        is=randi(35);
+        is=randi(length(subjlist));
+        if iscell(subjlist)==1
+            idx = strcmpi(subject,subjlist{is});
+        else
+            idx = subject==subjlist(is);
+        end
         data_separated = handles.data(idx,:);
         
         trial = data_separated(:,categorical_conditions_default.idx_categorical_default(2));
@@ -211,21 +205,12 @@ uiwait(gcf)
             intv=ones(size(intv));
         end
         
-        rawmap = zeros(ySize, xSize);
-        coordX = round(seyeyt);%switch matrix coordinate here
-        coordY = round(seyext);
-        indx1=coordX>0 & coordY>0 & coordX<ySize & coordY<xSize;
-        indxtf=sub2ind([ySize, xSize],coordX(indx1),coordY(indx1)); % index each fixation location,
-        
-        unindx = unique(indxtf);% find unique fixation
-        [cotind,whe] = histc(indxtf,unindx); % cumulate fixation with same coordinates.
-        durind=zeros(size(cotind));
-        for iw=1:length(cotind);durind(iw)=sum(intv(whe==iw));end % calculate duration, the last loop i cant get rid of
-        rawmap(unindx(durind>0))=durind(durind>0);
-        
-        f_mat = fft2(rawmap); % 2D fourrier transform on the points matrix
-        filtered_mat = f_mat .* f_fil;
-        smoothpic = real(fftshift(ifft2(filtered_mat)));
+        coordX    = round(seyeyt);%switch matrix coordinate here
+        coordY    = round(seyext);
+        indx1     = coordX>0 & coordY>0 & coordX<ySize & coordY<xSize;
+        rawmap    = full(sparse(coordX(indx1), coordY(indx1), intv(indx1), ySize, xSize));
+        smoothpic = conv2(rawmap, gaussienne,'same');
+
         
         %
         subplot(5,6,[7 8 9 13 14 15 19 20 21])

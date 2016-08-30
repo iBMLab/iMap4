@@ -38,11 +38,12 @@ fprintf(fileID,'%s \n','     ');
 fprintf(fileID,'%s \n','     ');
 fprintf(fileID,'%s \n','Importantly, iMap4 fits a gamma distribution on all above measurement.');
 fprintf(fileID,'%s \n','We believe this is appropriate and more informative than a Gaussian');
-fprintf(fileID,'%s \n','assumption given that eye fixation should be considered as a Poisson');
+fprintf(fileID,'%s \n','assumption given that eye fixation event could be considered as a Poisson');
 fprintf(fileID,'%s \n','process. Thus, its parameters could be fit with a Gamma distribution.');
 fprintf(fileID,'%s \n','Fixation duration and path length could both be considered some how as');
 fprintf(fileID,'%s \n','the waiting time of the Poisson process, thus should also be appropriate');
-fprintf(fileID,'%s \n','to fit with a gamma distribution.');
+fprintf(fileID,'%s \n','to fit with a gamma distribution. However, if you have too few data points');
+fprintf(fileID,'%s \n','the distribution fitting might fail, which iMap4 will returns NaNs.');
 
 FixNum=MeasureM.FixNum;
 sumFixDur=MeasureM.sumFixDur;
@@ -69,6 +70,7 @@ if opt==2 % condition or joint condition
             pd1 = fitdist(FixNum(idxtmp),'gamma');
             alpha1=pd1.a;beta1=pd1.b;paramci1=pd1.paramci;
         catch
+            pd1 = NaN;
             alpha1=NaN;beta1=NaN;paramci1=[NaN,NaN];
         end
         
@@ -76,6 +78,7 @@ if opt==2 % condition or joint condition
             pd2 = fitdist(sumFixDur(idxtmp),'gamma');
             alpha2=pd2.a;beta2=pd2.b;paramci2=pd2.paramci;
         catch
+            pd2 = NaN;
             alpha2=NaN;beta2=NaN;paramci2=[NaN,NaN];
         end
         
@@ -83,6 +86,7 @@ if opt==2 % condition or joint condition
             pd3 = fitdist(meanFixDur(idxtmp),'gamma');
             alpha3=pd3.a;beta3=pd3.b;paramci3=pd3.paramci;
         catch
+            pd3 = NaN;
             alpha3=NaN;beta3=NaN;paramci3=[NaN,NaN];
         end
         
@@ -90,6 +94,7 @@ if opt==2 % condition or joint condition
             pd4 = fitdist(totalPathLength(idxtmp),'gamma');
             alpha4=pd4.a;beta4=pd4.b;paramci4=pd4.paramci;
         catch
+            pd4 = NaN;
             alpha4=NaN;beta4=NaN;paramci4=[NaN,NaN];
         end
         
@@ -97,6 +102,7 @@ if opt==2 % condition or joint condition
             pd5 = fitdist(meanPathLength(idxtmp),'gamma');
             alpha5=pd5.a;beta5=pd5.b;paramci5=pd5.paramci;
         catch
+            pd5 = NaN;
             alpha5=NaN;beta5=NaN;paramci5=[NaN,NaN];
         end
         
@@ -162,6 +168,7 @@ else
         pd1 = fitdist(FixNum,'gamma');
         alpha1=pd1.a;beta1=pd1.b;paramci1=pd1.paramci;
     catch
+        pd1 = NaN;
         alpha1=NaN;beta1=NaN;paramci1=[NaN,NaN];
     end
     
@@ -169,6 +176,7 @@ else
         pd2 = fitdist(sumFixDur,'gamma');
         alpha2=pd2.a;beta2=pd2.b;paramci2=pd2.paramci;
     catch
+        pd2 = NaN;
         alpha2=NaN;beta2=NaN;paramci2=[NaN,NaN];
     end
     
@@ -176,6 +184,7 @@ else
         pd3 = fitdist(meanFixDur,'gamma');
         alpha3=pd3.a;beta3=pd3.b;paramci3=pd3.paramci;
     catch
+        pd3 = NaN;
         alpha3=NaN;beta3=NaN;paramci3=[NaN,NaN];
     end
     
@@ -183,6 +192,7 @@ else
         pd4 = fitdist(totalPathLength,'gamma');
         alpha4=pd4.a;beta4=pd4.b;paramci4=pd4.paramci;
     catch
+        pd4 = NaN;
         alpha4=NaN;beta4=NaN;paramci4=[NaN,NaN];
     end
     
@@ -190,6 +200,7 @@ else
         pd5 = fitdist(meanPathLength,'gamma');
         alpha5=pd5.a;beta5=pd5.b;paramci5=pd5.paramci;
     catch
+        pd5 = NaN;
         alpha5=NaN;beta5=NaN;paramci5=[NaN,NaN];
     end
     
