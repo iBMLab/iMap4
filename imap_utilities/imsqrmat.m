@@ -16,7 +16,7 @@ axis square;
 % display result
 textStrings = num2str(mat(:),'%0.2f');  % Create strings from the matrix values
 textStrings = strtrim(cellstr(textStrings));  % Remove any space padding
-[x,y]       = meshgrid(1:size(mat,1));   % Create x and y coordinates for the strings
+[x,y]       = meshgrid(1:size(mat,2),1:size(mat,1));   % Create x and y coordinates for the strings
 hStrings    = text(x(~isnan(mat(:))),y(~isnan(mat(:))),textStrings(~isnan(mat(:))),...      % Plot the strings
     'HorizontalAlignment','center');
 midValue    = mean(get(gca,'CLim'));  % Get the middle value of the color range
