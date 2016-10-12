@@ -29,7 +29,6 @@ mapvalue       = StatMap.map;
 StatMap.Pmask0 = StatMap.Pmask;
 % clear old fields
 StatMap.Pmask  = [];
-StatMap.report = [];
 mask   = isnan(LMMmap.MSE)==0;
 tbl    = LMMmap.Variables;
 nonnan = find(mask);
