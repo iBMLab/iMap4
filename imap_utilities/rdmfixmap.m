@@ -1,7 +1,11 @@
-function [RDM, stRDM] = rdmfixmap(FixMap, Mask, CondiVec, SbjVec)
+function [RDM, stRDM] = rdmfixmap(FixMap, Mask, CondiVec, SbjVec, varargin)
 % compute representational dissimilarity matrix of smoothed fixation map
 % basic on Mahalanobis distance.
-
+if nargin > 4
+    plotopt = varargin{1};
+else
+    plotopt = 1;
+end    
 CondiVec   = categorical(CondiVec);
 SbjVec     = categorical(SbjVec);
 % normalized map
@@ -80,18 +84,20 @@ for ic1 = 1:Nc
     end
 end
 % RDM = RDM./max(RDM(:));
-% display output
-scrsz=get(0,'ScreenSize');% get screen size for output display
-figure('Numbertitle','off','Name',...
-    'Representational Dissimilarity Matrix (value shows multivariate distance)',...
-    'Position',[1 1 scrsz(3) scrsz(4)]);
-subplot(1,2,1)
-imagesc(stRDM);
-title('stRDM')
-axis square off;
-subplot(1,2,2)
-imsqrmat(RDM, unicd);
-title('RDM')
+if plotopt
+    % display output
+    scrsz=get(0,'ScreenSize');% get screen size for output display
+    figure('Numbertitle','off','Name',...
+        'Representational Dissimilarity Matrix (value shows multivariate distance)',...
+        'Position',[1 1 scrsz(3) scrsz(4)]);
+    subplot(1,2,1)
+    imagesc(stRDM);
+    title('stRDM')
+    axis square off;
+    subplot(1,2,2)
+    imsqrmat(RDM, unicd);
+    title('RDM')
+end
 end
 
 %---------------------------------------------
