@@ -17,8 +17,8 @@ function [ResampStat]=imapLMMresample(FixMap,LMMmap,c,h,effect,method,nboot,grou
 %            group.
 %     rmRE - 1 remove random effect, 0 keeping subject variance
 % varargin - Optional: specify a subject vector. This is important when
-%            there multiple grouping varaible exist in the mixed model such
-%            as (1|subject) + (1|stimuli)
+%            there are multiple grouping variables exist in the mixed model
+%            such as (1|subject) + (1|stimuli)
 % output: ResampStat with field {parameters} {resampleTABLE} {resampleFvalue}
 %            {resamplePvalue} {resmapleBeta}
 %
