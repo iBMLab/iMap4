@@ -1,4 +1,4 @@
-function [ResampStat]=imapLMMresample(FixMap,LMMmap,c,h,effect,method,nboot,grouping,rmRE)
+function [ResampStat]=imapLMMresample(FixMap,LMMmap,c,h,effect,method,nboot,grouping,rmRE,varargin)
 % imapLMMresample performs a nonparametric statistical test by calculating
 % Monte-Carlo estimates of the significance probabilities and/or critical values
 % from the resampling distribution.
@@ -13,7 +13,12 @@ function [ResampStat]=imapLMMresample(FixMap,LMMmap,c,h,effect,method,nboot,grou
 %   method - permutation/bootstrap
 %    nboot - number of resampling
 % grouping - specify group index to keeping the group variance constant
+%            during bootstrap. This is done by sampling independently per
+%            group.
 %     rmRE - 1 remove random effect, 0 keeping subject variance
+% varargin - Optional: specify a subject vector. This is important when
+%            there multiple grouping varaible exist in the mixed model such
+%            as (1|subject) + (1|stimuli)
 % output: ResampStat with field {parameters} {resampleTABLE} {resampleFvalue}
 %            {resamplePvalue} {resmapleBeta}
 %
@@ -36,12 +41,18 @@ effect   = lower(effect);
 Zx       = LMMmap.RandomEffects.DX;
 tbl      = LMMmap.Variables;
 fitml    = strcmp(upper(LMMmap.FitMethod),'ML');
+if nargin > 9
+    sbjvec = varargin{1};
+end
 % exclude empty trials/conditions
 outtrial               = full(sum(Zx, 2))==0;
 tbl     (outtrial,:)   = [];
 Zx      (outtrial,:)   = [];
 FixMap  (outtrial,:,:) = [];
 grouping(outtrial,:)   = [];
+if ~isempty(sbjvec)
+    sbjvec(outtrial,:)   = [];
+end
 
 if isa(tbl,'dataset')
     VarNames = tbl.Properties.VarNames;
@@ -98,6 +109,7 @@ elseif strcmp(effect,'predictor beta')
     DX      = LMMmap.SinglePred.DesignMatrix;
     effect2 = 'fixed';
 end
+
 DFmodel     = LMMmap.modelDFE;
 
 mask   = isnan(LMMmap.MSE) == 0;
@@ -110,6 +122,10 @@ parameters{3}       = effect;
 parameters{4}       = method;
 parameters{5}       = nboot;
 ResampStat.params   = parameters;
+
+if size(DX) ~= Nitem
+    error('The input FixMap is not the correct one!')
+end
 
 switch effect2
     case 'fixed'
@@ -146,9 +162,13 @@ switch effect2
             Zx(:, b) = [];
         end
         
-        indxsbj = full(Zx);
+        if ~isempty(sbjvec)
+            indxsbj = dummyvar(sbjvec);
+        else
+            indxsbj = full(Zx);
+        end
         if sum(indxsbj(:)==1) == Nitem
-            indxsbj( Zx==1 ) = 1:Nitem;
+            indxsbj( indxsbj==1 ) = 1:Nitem;
         else
             try
                 Nmatrix     = round(sum(indxsbj(:)==1)/Nitem);
@@ -177,7 +197,6 @@ switch effect2
                 error('imapLMMresample error: Can not retrieve Subject column for resampling.')
             end
         end
-        
         % take data within mask.
         npixel = size(Yfixed,2);
         switch method

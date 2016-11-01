@@ -2,17 +2,21 @@ function [StatMap_c]=imapLMMmcc(StatMap,LMMmap,mccopt,varargin)
 % {MCC related field}
 % mccopt.methods  - fdr/bonferroni/randomfield/cluster/
 %                   bootstrap/permutation
-% mccopt.bootopt  - 1 cluster mass, 2 cluster size, 3 both cluster mass and size, 4 cluster dense 
+% mccopt.bootopt  - 1 cluster mass, 2 cluster size, 3 both cluster mass and
+%                   size, 4 cluster dense 
 % mccopt.bootgroup- grouping variable for bootstrap and permutation (to 
 %                   keep group variance constant). Input must be a cell 
 %                   specifying the grouping variables in the PredictorM
+% mccopt.sbjvec   - subject vector for bootstrap. This is important when 
+%                   there multiple grouping varaible exist in the mixed 
+%                   model such as (1|subject) + (1|stimuli)
 % mccopt.nboot    - number of resampling for bootstrap or permutation
 % mccopt.sigma    - smoothing parameter (for Random field test)
 % mccopt.clustSize- cluster size threshold (for cluster test)
 % mccopt.clustVal - cluster value threshold (for cluster test)
 % mccopt.parametic- for FDR
-% mccopt.tfce   - signal enhancement base on Threshold-free cluster
-%               enhancement developed by Smith & Nichols, 2009
+% mccopt.tfce     - signal enhancement base on Threshold-free cluster
+%                   enhancement developed by Smith & Nichols, 2009
 %
 % 2015-02-12 Junpeng Lao, University of Fribourg.
 %--------------------------------------------------------------------------
@@ -163,6 +167,12 @@ if strcmp(statopt.type,'model')~=1
             end
         case 'bootstrap'
             %%
+            if isfield(mccopt,'sbjvec')==1
+                sbjvectmp = mccopt.sbjvec{1};
+                sbjvec    = eval(['tbl.' sbjvectmp]);
+            else
+                sbjvec    = [];
+            end
             grouping=nominal(ones(size(tbl,1),1));
             if isfield(mccopt,'bootgroup')==1
                 Ng=length(mccopt.bootgroup);
@@ -187,7 +197,7 @@ if strcmp(statopt.type,'model')~=1
             nboot=mccopt.nboot;
             c=statopt.c;
             h=statopt.h;
-            [ResampStat]=imapLMMresample(FixMap,LMMmap,c,h,statopt.type,'bootstrap',nboot,grouping,1);
+            [ResampStat]=imapLMMresample(FixMap,LMMmap,c,h,statopt.type,'bootstrap',nboot,grouping,1,sbjvec);
             % tfce on orignial
             if isfield(mccopt,'tfce')==1
                 if mccopt.tfce==1
