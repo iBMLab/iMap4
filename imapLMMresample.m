@@ -43,6 +43,8 @@ tbl      = LMMmap.Variables;
 fitml    = strcmp(upper(LMMmap.FitMethod),'ML');
 if nargin > 9
     sbjvec = varargin{1};
+else
+    sbjvec = [];
 end
 % exclude empty trials/conditions
 outtrial               = full(sum(Zx, 2))==0;
