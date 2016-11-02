@@ -1,4 +1,4 @@
-function [RDM, stRDM] = rdmfixmap(FixMap, Mask, CondiVec, SbjVec, varargin)
+function [RDM, stRDM, unicd] = rdmfixmap(FixMap, Mask, CondiVec, SbjVec, varargin)
 % compute representational dissimilarity matrix of smoothed fixation map
 % basic on Mahalanobis distance.
 if nargin > 4
