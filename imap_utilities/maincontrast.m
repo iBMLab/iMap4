@@ -7,25 +7,24 @@ coefname2 = cell(size(coefname));
 for icoef = 1:length(coefname)
     nametmp = coefname{icoef};
     textidx = strfind(nametmp,':');
-    if ~isempty(textidx)
-        namepart = [];
-        
-        for itx = 1:(length(textidx)+1)
-            if itx == 1
-                namepart2 = nametmp(1:(textidx(itx)-1));
-            elseif itx == (length(textidx)+1)
-                namepart2 = nametmp((textidx(itx-1)+1):end);
-            else
-                namepart2 = nametmp((textidx(itx-1)+1):(textidx(itx)-1));
-            end
-            namepart2 = removelast(namepart2);
-            namepart  = [namepart ':' namepart2];
-        end
-        coefname2{icoef} = namepart(2:end);
+    match1 = strcmp(nametmp,maplabel);
+    if sum(match1) == 1
+        coefname2{icoef} = nametmp;
     else
-        match1 = strcmp(nametmp,maplabel);
-        if sum(match1) == 1
-            coefname2{icoef} = nametmp;
+        if ~isempty(textidx)
+            namepart = [];
+            for itx = 1:(length(textidx)+1)
+                if itx == 1
+                    namepart2 = nametmp(1:(textidx(itx)-1));
+                elseif itx == (length(textidx)+1)
+                    namepart2 = nametmp((textidx(itx-1)+1):end);
+                else
+                    namepart2 = nametmp((textidx(itx-1)+1):(textidx(itx)-1));
+                end
+                namepart2 = removelast(namepart2);
+                namepart  = [namepart ':' namepart2];
+            end
+            coefname2{icoef} = namepart(2:end);
         else
             coefname2{icoef} = removelast(nametmp);
         end
