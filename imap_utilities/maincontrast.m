@@ -1,4 +1,4 @@
-function [contrast, hypothesis] = maincontrast(coefname,maplabel)
+function [contrast, hypothesis] = maincontrast(coefname,maplabel,tblvarname)
 %--------------------------------------------------------------------------
 % Copyright (C) iMap Team 2015
 
@@ -21,7 +21,10 @@ for icoef = 1:length(coefname)
                 else
                     namepart2 = nametmp((textidx(itx-1)+1):(textidx(itx)-1));
                 end
-                namepart2 = removelast(namepart2);
+                if sum(strcmp(namepart2,tblvarname)) == 0
+                    namepart2 = removelast(namepart2);
+                end
+                disp(namepart2)
                 namepart  = [namepart ':' namepart2];
             end
             coefname2{icoef} = namepart(2:end);
