@@ -1,4 +1,4 @@
-function [ResampStat]=imapLMMresample(FixMap,LMMmap,c,h,effect,method,nboot,grouping,rmRE)
+function [ResampStat]=imapLMMresample(FixMap,LMMmap,c,h,effect,method,nboot,grouping,rmRE,varargin)
 % imapLMMresample performs a nonparametric statistical test by calculating
 % Monte-Carlo estimates of the significance probabilities and/or critical values
 % from the resampling distribution.
@@ -13,7 +13,12 @@ function [ResampStat]=imapLMMresample(FixMap,LMMmap,c,h,effect,method,nboot,grou
 %   method - permutation/bootstrap
 %    nboot - number of resampling
 % grouping - specify group index to keeping the group variance constant
+%            during bootstrap. This is done by sampling independently per
+%            group.
 %     rmRE - 1 remove random effect, 0 keeping subject variance
+% varargin - Optional: specify a subject vector. This is important when
+%            there are multiple grouping variables exist in the mixed model
+%            such as (1|subject) + (1|stimuli)
 % output: ResampStat with field {parameters} {resampleTABLE} {resampleFvalue}
 %            {resamplePvalue} {resmapleBeta}
 %
@@ -28,12 +33,20 @@ effect   = lower(effect);
 Zx       = LMMmap.RandomEffects.DX;
 tbl      = LMMmap.Variables;
 fitml    = strcmp(upper(LMMmap.FitMethod),'ML');
+if nargin > 9
+    sbjvec = varargin{1};
+else
+    sbjvec = [];
+end
 % exclude empty trials/conditions
 outtrial               = full(sum(Zx, 2))==0;
 tbl     (outtrial,:)   = [];
 Zx      (outtrial,:)   = [];
 FixMap  (outtrial,:,:) = [];
 grouping(outtrial,:)   = [];
+if ~isempty(sbjvec)
+    sbjvec(outtrial,:)   = [];
+end
 
 if isa(tbl,'dataset')
     VarNames = tbl.Properties.VarNames;
@@ -90,6 +103,7 @@ elseif strcmp(effect,'predictor beta')
     DX      = LMMmap.SinglePred.DesignMatrix;
     effect2 = 'fixed';
 end
+
 DFmodel     = LMMmap.modelDFE;
 
 mask   = isnan(LMMmap.MSE) == 0;
@@ -102,6 +116,10 @@ parameters{3}       = effect;
 parameters{4}       = method;
 parameters{5}       = nboot;
 ResampStat.params   = parameters;
+
+if size(DX) ~= Nitem
+    error('The input FixMap is not the correct one!')
+end
 
 switch effect2
     case 'fixed'
@@ -138,9 +156,13 @@ switch effect2
             Zx(:, b) = [];
         end
         
-        indxsbj = full(Zx);
+        if ~isempty(sbjvec)
+            indxsbj = dummyvar(sbjvec);
+        else
+            indxsbj = full(Zx);
+        end
         if sum(indxsbj(:)==1) == Nitem
-            indxsbj( Zx==1 ) = 1:Nitem;
+            indxsbj( indxsbj==1 ) = 1:Nitem;
         else
             try
                 Nmatrix     = round(sum(indxsbj(:)==1)/Nitem);
@@ -169,7 +191,6 @@ switch effect2
                 error('imapLMMresample error: Can not retrieve Subject column for resampling.')
             end
         end
-        
         % take data within mask.
         npixel = size(Yfixed,2);
         switch method
@@ -271,14 +292,14 @@ switch effect2
                     Forg(ic,nonnan) = bMSEinv'.*proj./DF(ic,1);
                     
                     % resampling nboot times
-
+                    
                     waith = waitbar(0,'Resampling...');
                     for ib = 1:nboot
                         waitbar(ib / nboot)
                         % contruct index (we do this in this loop to adapt for unbalance design)
                         bs      = boot_index(ib,:);
                         bDX     = M(bs,:);
-
+                        
                         % orignial statistic for the fixed effect (revisit)
                         bbeta   = bDX\bY2;
                         if fitml
@@ -294,30 +315,29 @@ switch effect2
                         X = qr(bDX,0);Rtmp = triu(X);
                         R = Rtmp(1:size(Rtmp,2),:);
                         S = inv(R);
-
+                        
                         quadformCOV = cnew/R*S'*cnew';%same as (c*(S*S')*c) == (c*covb*c')
                         qualCOVinv  = inv(quadformCOV);
                         cbeta_h     = (cnew * bbeta - h2)';
-
+                        
                         I           = repmat(1:npixel,[DF(ic,1),1]);
                         trc         = cbeta_h';
                         cmt_sp      = sparse(I(:),1:npixel*DF(ic,1),trc);
-
+                        
                         covb        = repmat(qualCOVinv,[1,1,npixel]);
                         I           = repmat(reshape(1:DF(ic,1)*npixel,DF(ic,1),1,npixel),[1 DF(ic,1) 1]);
                         J           = repmat(reshape(1:DF(ic,1)*npixel,1,DF(ic,1),npixel),[DF(ic,1) 1 1]);
                         covb_sp     = sparse(I(:),J(:),covb(:));
-
+                        
                         tmp_sp      = cmt_sp*covb_sp;
                         tmpproj     = tmp_sp*cmt_sp';
                         Itmp        = speye(npixel);
                         proj        = tmpproj(logical(Itmp));
-
+                        
                         Ftmp1       = bMSEinv'.*proj./DF(ic,1);
                         resampleFvalue(ib,ic,nonnan) = Ftmp1;
                     end
                     close(waith)
-
                 end
                 ResampStat.Forg      = Forg;
                 ResampStat.resFvalue = resampleFvalue;
@@ -369,7 +389,6 @@ switch effect2
                 ResampStat.resTABLE = boot_index;
                 
                 % resampling nboot times
-
                 waith = waitbar(0,'Resampling...');
                 for ib = 1:nboot
                     waitbar(ib / nboot)
@@ -379,7 +398,7 @@ switch effect2
                     bDX     = DX(bs, :);
                     bY      = Yc(bs, :);
                     df2     = size(DX,1)-size(DX,2);
-
+                    
                     bbeta   = bDX\bY;
                     if fitml
                         bMSE    = mean((bDX*bbeta-bY).^2);
@@ -394,7 +413,7 @@ switch effect2
                     X = qr(bDX,0);Rtmp = triu(X);
                     R = Rtmp(1:size(Rtmp,2),:);
                     S = inv(R);
-
+                    
                     Ftmp1   = NaN(Nc,npixel);
                     ptmp1   = NaN(Nc,npixel);
                     betamap = NaN(Nc,npixel);
@@ -410,21 +429,21 @@ switch effect2
                         else
                             betamap(ic,:) = c2 * bbeta;
                         end
-
+                        
                         I       = repmat(1:npixel,[DF(ic,1),1]);
                         trc     = cbeta_h';
                         cmt_sp  = sparse(I(:),1:npixel*DF(ic,1),trc);
-
+                        
                         covb    = repmat(qualCOVinv,[1,1,npixel]);
                         I       = repmat(reshape(1:DF(ic,1)*npixel,DF(ic,1),1,npixel),[1 DF(ic,1) 1]);
                         J       = repmat(reshape(1:DF(ic,1)*npixel,1,DF(ic,1),npixel),[DF(ic,1) 1 1]);
                         covb_sp = sparse(I(:),J(:),covb(:));
-
+                        
                         tmp_sp  = cmt_sp * covb_sp;
                         tmpproj = tmp_sp * cmt_sp';
                         Itmp    = speye(npixel);
                         proj    = tmpproj(logical(Itmp));
-
+                        
                         Ftmp1(ic,:) = bMSEinv'.*proj./DF(ic,1);
                         ptmp1(ic,:) = 1-fcdf(Ftmp1(ic,:),DF(ic,1),df2);
                     end
