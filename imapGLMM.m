@@ -72,8 +72,13 @@ tbl.PixelIntensity = FixMap(:, indextmp);
 if isa(tbl,'dataset')
     VarNames = tbl.Properties.VarNames;
 elseif isa(tbl,'table')
-    VarNames = tbl.Properties.VariableNames;
-    tbl      = table2dataset(tbl);
+    VarNames   = tbl.Properties.VariableNames;
+    % In Matlab 2013b the LinearMixedModel class only accept dataset
+    % input. Transform input into dataset for backwards-compatible. 
+    % However, dataset format might be remove in the future release. A
+    % conditioning for Matlab version should be implemented by then. 
+    tbl        = table2dataset(tbl);
+    PredictorM = table2dataset(PredictorM);
 else
     error('Please reform your input predictor matrix as dataset!')
 end
