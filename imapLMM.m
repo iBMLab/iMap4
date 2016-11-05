@@ -151,10 +151,17 @@ if singlep ~= 0
         CatePredictor   = unique(strlabel);
         CatePredictor   = strcat({'c'},CatePredictor);
         
-        ranprediname         = cell(1,1);
-        ranprediname{1}      = {'Intercept'};
-        rangroupname{1}      = lmexample.Formula.GroupingVariableNames{:};
-        sbjvect              = eval(['tbl.' char(rangroupname{:})]);
+        rangroupname = lmexample.Formula.GroupingVariableNames;
+        ranprediname = cell(size(rangroupname));
+        groupingvar  = cell(size(rangroupname));
+        DZ           = cell(size(rangroupname));
+        groupname    = [];
+        for ir = 1:length(ranprediname)
+            ranprediname{ir} = {'Intercept'};
+            groupingvar{ir}  = eval(['tbl.' char(rangroupname{ir})]);  
+            DZ{ir}           = ones(size(groupingvar{ir}));
+            groupname=[groupname,rangroupname{ir}];
+        end
         DS                   = dummyvar(nominal(strlabel));
         CoefficientsMatrix2  = NaN(length(CatePredictor), 2,                     ySize2, xSize2);% save beta, SE
         Covb2                = NaN(length(CatePredictor), length(CatePredictor), ySize2, xSize2);
@@ -222,11 +229,11 @@ if has_fsolve == 1
                 pRsquaredMatrix       (:,ip) = [lme.Rsquared.Ordinary lme.Rsquared.Adjusted];
                 pModelCriterionMatrix (:,ip) = double(lme.ModelCriterion);% AIC,BIC,LogLikelihood,Deviance
                 pCoefficientsMatrix (:,:,ip) = double(lme.Coefficients(:,[2 3]));% save beta, SE
-                lme2 = LinearMixedModel.fitmatrix(DS,tbl.PixelIntensity,ones(size(sbjvect)),sbjvect, ...
-                    'FixedEffectPredictors',CatePredictor, ... 
-                    'ResponseVarName','PixelIntensity', ...
-                    'RandomEffectGroups',rangroupname{:}, ...
-                    'RandomEffectPredictors',ranprediname);
+                lme2 = LinearMixedModel.fitmatrix(DS,tbl.PixelIntensity,DZ,groupingvar, ...
+                                'FixedEffectPredictors',CatePredictor, ...
+                                'ResponseVarName','PixelIntensity', ...
+                                'RandomEffectGroups',groupname, ...
+                                'RandomEffectPredictors',ranprediname);
                 pCovb2              (:,:,ip) = lme2.CoefficientCovariance;
                 pCoefficientsMatrix2(:,:,ip) = double(lme2.Coefficients(:,[2 3]));% save beta, SE
                 [~,~,stat] = randomEffects(lme);
@@ -256,11 +263,11 @@ else
         pModelCriterionMatrix    (:,ip) = double(lme.ModelCriterion);% AIC,BIC,LogLikelihood,Deviance
         pCoefficientsMatrix    (:,:,ip) = double(lme.Coefficients(:,[2 3]));% save beta, SE
         if singlep~=0
-            lme2 = LinearMixedModel.fitmatrix(DS,tbl.PixelIntensity,ones(size(sbjvect)),sbjvect, ...
-                'FixedEffectPredictors',CatePredictor, ...
-                'ResponseVarName','PixelIntensity', ...
-                'RandomEffectGroups',rangroupname{:}, ...
-                'RandomEffectPredictors',ranprediname);
+            lme2 = LinearMixedModel.fitmatrix(DS,tbl.PixelIntensity,DZ,groupingvar, ...
+                                'FixedEffectPredictors',CatePredictor, ...
+                                'ResponseVarName','PixelIntensity', ...
+                                'RandomEffectGroups',groupname, ...
+                                'RandomEffectPredictors',ranprediname);
             pCovb2              (:,:,ip) = lme2.CoefficientCovariance;
             pCoefficientsMatrix2(:,:,ip) = double(lme2.Coefficients(:,[2 3]));% save beta, SE
         end
