@@ -21,7 +21,7 @@ for icoef = 1:length(coefname)
                 else
                     namepart2 = nametmp((textidx(itx-1)+1):(textidx(itx)-1));
                 end
-                if sum(strcmp(namepart2,tblvarname)) == 0
+                while sum(strcmp(namepart2,tblvarname)) == 0
                     namepart2 = removelast(namepart2);
                 end
                 disp(namepart2)
@@ -29,7 +29,12 @@ for icoef = 1:length(coefname)
             end
             coefname2{icoef} = namepart(2:end);
         else
-            coefname2{icoef} = removelast(nametmp);
+            if strcmp(nametmp,'(Intercept)')~=1
+                while sum(strcmp(nametmp,tblvarname)) == 0
+                    nametmp = removelast(nametmp);
+                end
+            end
+            coefname2{icoef} = nametmp;
         end
     end
 end
