@@ -129,23 +129,32 @@ end
 
 lmeposthoc = LinearMixedModel.fit(tbl,char(formula),varargin{:});
 
-numcomp=length(contrast);
-posthocmat=NaN(numcomp,numcomp,3);
-betao=double(lmeposthoc.Coefficients(:,2));
+numcomp    = length(contrast);
+posthocmat = NaN(numcomp,numcomp,3);
+betao      = double(lmeposthoc.Coefficients(:,2));
+betacov    = lmeposthoc.CoefficientCovariance;
+alpha      = .05;
+BetaCate   = array2table(zeros(numcomp,3),'VariableNames',{'beta' 'Lower' 'Upper'},'RowNames',CatePredictor);
+dfre       = lmeposthoc.DFE;
 
 for ia=1:numcomp
+    BetaCate.beta(ia) = contrast{ia}*betao;
+    delta = squeeze(tinv(1-alpha/2,dfre).*sqrt((contrast{ia}*betacov*contrast{ia}')))';
+    BetaCate.Lower(ia)= BetaCate.beta(ia)-delta;
+    BetaCate.Upper(ia)= BetaCate.beta(ia)+delta;
     for ib=(ia+1):numcomp
         contrst=contrast{ia}-contrast{ib};
         posthocmat(ia,ib,1)=contrst*betao;
         [posthocmat(ia,ib,3),posthocmat(ia,ib,2),df1,df2]=coefTest(lmeposthoc,contrst);%
     end
 end
-posthocmat(:,:,2)=sign(posthocmat(:,:,1)).*sqrt(posthocmat(:,:,2));
-Posthoc.SelectCluster=maskfinal;
-Posthoc.DF=[df1,df2];
-Posthoc.beta=mat2dataset(posthocmat(:,:,1),'VarNames',CatePredictor,'ObsNames',CatePredictor);
-Posthoc.Tval=mat2dataset(posthocmat(:,:,2),'VarNames',CatePredictor,'ObsNames',CatePredictor);
-Posthoc.pval=mat2dataset(posthocmat(:,:,3),'VarNames',CatePredictor,'ObsNames',CatePredictor);
+posthocmat(:,:,2) = sign(posthocmat(:,:,1)).*sqrt(posthocmat(:,:,2));
+Posthoc.SelectCluster = maskfinal;
+Posthoc.DF            = [df1,df2];
+Posthoc.betadiff      = mat2dataset(posthocmat(:,:,1),'VarNames',CatePredictor,'ObsNames',CatePredictor);
+Posthoc.Tval          = mat2dataset(posthocmat(:,:,2),'VarNames',CatePredictor,'ObsNames',CatePredictor);
+Posthoc.pval          = mat2dataset(posthocmat(:,:,3),'VarNames',CatePredictor,'ObsNames',CatePredictor);
+Posthoc.BetaCate      = BetaCate;
 if flag==1
     %%
     figure('NumberTitle','off','Name','Post-hoc Mask','Position',[1 scrsz(4)/3 scrsz(3)/2 scrsz(4)/2]);
@@ -154,14 +163,14 @@ if flag==1
    
     figure('NumberTitle','off','Name','Post-hoc Statistics (Left minus Bottom)','Position',[1 1 scrsz(3) scrsz(4)/2]);
     warning('off')
-    mat=double(Posthoc.beta);
+    mat=double(Posthoc.betadiff);
     subplot(1,3,1)
-    imsqrmat(mat, Posthoc.beta.Properties.VarNames,Posthoc.beta.Properties.ObsNames);
+    imsqrmat(mat, Posthoc.betadiff.Properties.VarNames,Posthoc.betadiff.Properties.ObsNames);
     title('Betas')
     
     mat=double(Posthoc.Tval);
     subplot(1,3,2)
-    imsqrmat(mat, Posthoc.beta.Properties.VarNames,Posthoc.beta.Properties.ObsNames);
+    imsqrmat(mat, Posthoc.betadiff.Properties.VarNames,Posthoc.betadiff.Properties.ObsNames);
     title('Tvalue')
     
     mat2=double(Posthoc.pval);
@@ -169,9 +178,9 @@ if flag==1
     imagesc(mat2<(.05/sum(~isnan(mat2(:))))); 
     axis square;     
     set(gca,'XTick',1:size(mat2,1),...                         %# Change the axes tick marks 
-        'XTickLabel',Posthoc.beta.Properties.VarNames,...  %#   and tick labels 
+        'XTickLabel',Posthoc.betadiff.Properties.VarNames,...  %#   and tick labels 
         'YTick',1:size(mat2,1),... 
-        'YTickLabel',Posthoc.beta.Properties.ObsNames,... 
+        'YTickLabel',Posthoc.betadiff.Properties.ObsNames,... 
         'TickLength',[0 0],... 
         'xdir','reverse','ydir','normal'); 
     title('pValue < .05 (Bonferroni Corrected)')
