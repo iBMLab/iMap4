@@ -73,7 +73,7 @@ switch type
        for h=min(data(:)):increment:max(data(:))
            [clustered_map, num] = bwlabel(data > h);
            extend_map = zeros(x,y); % same as cluster map but contains extend value instead
-           extent_map = integrate(clustered_map,num,extent_map);
+           extend_map = integrate(clustered_map,num,extend_map);
 %            for i=1:num
 %                extend = sum(clustered_map(:)==i);
 %                extend_map = extend_map + (clustered_map == i).*extend; % not a 'true' sum since there is no overlap
@@ -99,7 +99,7 @@ switch type
        for h=min(pos_data(:)):pos_increment:max(pos_data(:))
            [clustered_map, num] = bwlabel(pos_data > h);
            extend_map = zeros(x,y); % same as cluster map but contains extend value instead
-           extent_map = integrate(clustered_map,num,extent_map);
+           extend_map = integrate(clustered_map,num,extend_map);
 %            for i=1:num
 %                extend = sum(clustered_map(:)==i);
 %                extend_map = extend_map + (clustered_map == i).*extend;
@@ -114,7 +114,7 @@ switch type
        for h=min(neg_data(:)):neg_increment:max(neg_data(:))
            [clustered_map, num] = bwlabel(neg_data > h);
            extend_map = zeros(x,y); % same as cluster map but contains extend value instead
-           extent_map = integrate(clustered_map,num,extent_map);
+           extend_map = integrate(clustered_map,num,extend_map);
 %            for i=1:num
 %                extend = sum(clustered_map(:)==i);
 %                extend_map = extend_map + (clustered_map == i).*extend;
@@ -147,7 +147,7 @@ switch type
            for h=min(tmp_data(:)):increment:max(tmp_data(:))
                [clustered_map, num] = bwlabel(tmp_data > h);
                extend_map = zeros(x,y); % same as cluster map but contains extend value instead
-               extent_map = integrate(clustered_map,num,extent_map);
+               extend_map = integrate(clustered_map,num,extend_map);
 %                for i=1:num
 %                    extend = sum(clustered_map(:)==i);
 %                    extend_map = extend_map + (clustered_map == i).*extend;
@@ -181,7 +181,7 @@ switch type
            for h=min(pos_data(:)):pos_increment:max(pos_data(:))
                [clustered_map, num] = bwlabel(pos_data > h);
                extend_map = zeros(x,y); % same as cluster map but contains extend value instead
-               extent_map = integrate(clustered_map,num,extent_map);
+               extend_map = integrate(clustered_map,num,extend_map);
 %                for i=1:num
 %                    extend = sum(clustered_map(:)==i);
 %                    extend_map = extend_map + (clustered_map == i).*extend;
@@ -196,7 +196,7 @@ switch type
            for h=min(neg_data(:)):neg_increment:max(neg_data(:))
                [clustered_map, num] = bwlabel(neg_data > h);
                extend_map = zeros(x,y); % same as cluster map but contains extend value instead
-               extent_map = integrate(clustered_map,num,extent_map);
+               extend_map = integrate(clustered_map,num,extend_map);
 %                for i=1:num
 %                    extend = sum(clustered_map(:)==i);
 %                    extend_map = extend_map + (clustered_map == i).*extend;
