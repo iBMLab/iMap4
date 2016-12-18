@@ -1,4 +1,4 @@
-function mapwithbg(image,backgroundfile,cmap,mask)
+function mapwithbg(image,backgroundfile,cmap,range,mask)
 % map with background
 
 if ischar(backgroundfile)&&~isempty(backgroundfile)
@@ -28,10 +28,13 @@ elseif ischar(cmap)&& ~isempty(cmap)
 end
 
 if nargin<4
+    range = [min(image(:)),max(image(:))];
+end
+
+if nargin<5
     mask = [];
 end
 
-range = [min(image(:)),max(image(:))];
 imagetmp      = imresize(image,[size(im3D2,1),size(im3D2,2)],'nearest');
 toimagesg     = indtorgb(imagetmp,range(1),range(2),colourmap);
 toimagebgbeta = toimagesg.*0.7+im3D2.*0.3;
