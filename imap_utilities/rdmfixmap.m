@@ -1,6 +1,12 @@
 function [RDM, stRDM, unicd] = rdmfixmap(FixMap, Mask, CondiVec, SbjVec, varargin)
 % compute representational dissimilarity matrix of smoothed fixation map
 % basic on Mahalanobis distance.
+% Disclaimer: the multivariate distance is computed on the PCA component
+% and scaled by the % of variance explained. This approach is not yet
+% peer-reviewed but seems to work empirically (in our simulation)
+%--------------------------------------------------------------------------
+% Copyright (C) iMap Team 2016
+
 if nargin > 4
     plotopt = varargin{1};
 else

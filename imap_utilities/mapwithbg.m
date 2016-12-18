@@ -1,5 +1,14 @@
 function mapwithbg(image,backgroundfile,cmap,range,mask)
-% map with background
+% heatmap on top of a background, with a 6 level contour map to highlight
+% the value.
+% input: image, backgroundfile
+% additional:
+%             cmap  - colormap, any input accepted by matlab colormap
+%             function
+%             range - map display range
+%             mask  - display as a black contour line
+%--------------------------------------------------------------------------
+% Copyright (C) iMap Team 2016
 
 if ischar(backgroundfile)&&~isempty(backgroundfile)
     imbackground = double(imread(sprintf(backgroundfile)))/255;
@@ -35,6 +44,8 @@ if nargin<5
     mask = [];
 end
 
+ncontour = 6;
+
 imagetmp      = imresize(image,[size(im3D2,1),size(im3D2,2)],'nearest');
 toimagesg     = indtorgb(imagetmp,range(1),range(2),colourmap);
 toimagebgbeta = toimagesg.*0.7+im3D2.*0.3;
@@ -42,7 +53,7 @@ toimagebgbeta = toimagesg.*0.7+im3D2.*0.3;
 imshow(toimagebgbeta,range);hold on
 % axis off
 
-contv=linspace(min(imagetmp(:)),max(imagetmp(:)),6);
+contv=linspace(min(imagetmp(:)),max(imagetmp(:)),ncontour);
 if isfinite(contv)
     imcontour(imagetmp,contv);colorbar;caxis([0 range(end)])
 end

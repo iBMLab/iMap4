@@ -1,5 +1,8 @@
 function [himgsc,hStrings] = imsqrmat(mat, varargin)
-% nice display of small matrix
+% pretty display for small (near)square matrix
+%--------------------------------------------------------------------------
+% Copyright (C) iMap Team 2016
+
 if nargin == 1
     TickX = [];
     TickY = [];
