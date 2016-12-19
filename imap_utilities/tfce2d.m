@@ -213,3 +213,19 @@ switch type
    close(hwaitbar)
    
 end
+end
+%% faster integration a la Bruno Giordano
+function extent_map = integrate(clustered_map,num,extent_map)
+
+clustered_map=clustered_map(:);
+nv=histc(clustered_map,0:num);
+[~,idxall]=sort(clustered_map,'ascend');
+idxall(1:nv(1))=[];
+nv(1)=[];
+ends=cumsum(nv);
+inis=ends-nv+1;
+for i=1:num
+    idx=idxall(inis(i):ends(i));
+    extent_map(idx)=nv(i);
+end
+end
