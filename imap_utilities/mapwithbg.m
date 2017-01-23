@@ -36,7 +36,7 @@ elseif ischar(cmap)&& ~isempty(cmap)
     colourmap=cmap2;
 end
 
-if nargin<4
+if nargin<4 || isempty(range)
     range = [min(image(:)),max(image(:))];
 end
 
@@ -55,10 +55,11 @@ imshow(toimagebgbeta,range);hold on
 
 contv=linspace(min(imagetmp(:)),max(imagetmp(:)),ncontour);
 if isfinite(contv)
-    imcontour(imagetmp,contv);colorbar;caxis([0 range(end)])
+    imcontour(imagetmp,contv);colorbar;caxis(range)
 end
 if isfinite(mask)
-    imcontour(1:size(mask,2),1:size(mask,1),mask,1,'k','LineWidth',1)                    
+    masktmp       = imresize(mask,[size(im3D2,1),size(im3D2,2)],'nearest');
+    imcontour(1:size(masktmp,2),1:size(masktmp,1),masktmp,1,'k','LineWidth',1.5)                    
 end
 set(gca,'XTick',[],'YTick',[])
 
