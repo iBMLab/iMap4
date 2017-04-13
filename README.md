@@ -5,7 +5,7 @@
 [![Join the chat at https://gitter.im/iBMLab/iMap4](https://badges.gitter.im/iBMLab/iMap4.svg)](https://gitter.im/iBMLab/iMap4?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![GitHub release](https://img.shields.io/badge/release-v1.0-blue.svg)](https://github.com/iBMLab/iMap4/releases/download/v1.0/iMap4.mlappinstall)
 
-##Installation 
+## Installation 
 Download [iMap4.mlappinstall](https://github.com/iBMLab/iMap4/releases/download/v1.0/iMap4.mlappinstall) and intall the toolbox as a Matlab Application. 
 Example codes and dataset could be found in ./Data_Sample_with_codes/
 
@@ -15,7 +15,7 @@ Please read the [wiki](https://junpenglao.gitbooks.io/imap4_guidebook/content/) 
 ## Citing *i*Map4
 Lao, J., Miellet, S., Pernet, C., Sokhn, N., & Caldara, R. (2016). *i*Map4: An Open Source Toolbox for the Statistical Fixation Mapping of Eye Movement data with Linear Mixed Modeling. *Behavior Research Methods.* [doi: 10.3758/s13428-016-0737-x](http://link.springer.com/article/10.3758/s13428-016-0737-x)  
 
-##Published papers using *i*Map4 (Updated manually)
+## Published papers using *i*Map4 (Updated manually)
 Bovet, J., Lao, J., Bartholomée, O., Caldara, R., & Raymond, M. (2016). Mapping female bodily features of attractiveness. *Scientific Reports, 6*, 18551. [doi: 10.1038/srep18551](http://www.nature.com/articles/srep18551)  
 > We provide a subset of the data from this study as a demo of *i*Map4, see [wiki](https://junpenglao.gitbooks.io/imap4_guidebook/content/readme_eg1.html) 
 
@@ -23,14 +23,18 @@ Kuchinke, L., Dickmann, F., Edler, D., Bordewieck, M., & Bestgen, A. K. (2016). 
 
 Geangu, E., Ichikawa, H., Lao, J., Kanazawa, S., Yamaguchi, M., Caldara, R., & Turati, C. (2016). Culture shapes 7-month-olds' perceptual strategies in discriminating facial expressions of emotion. *Current Biology, 26*(14), 663-664. [doi:10.1016/j.cub.2016.05.072](http://www.sciencedirect.com/science/article/pii/S0960982216306054)  
 
-##Keep in touch!
-Updates and new release will be announced on our [lab website] (http://perso.unifr.ch/roberto.caldara/index.php?page=3).
+Sokhn, N., Bertoli, F., & Caldara, R. (2017). A left eye bias for female faces. In *Knowledge and Smart Technology (KST), 2017 9th International Conference* on (pp. 274-278). IEEE.
+
+Blais, C., Fiset, D., Roy, C., Saumure, R. C., & Gosselin, F. (2017). Eye Fixation Patterns for Categorizing Static and Dynamic Facial Expressions. *Emotion* [doi:10.1037/emo0000283](https://www.ncbi.nlm.nih.gov/pubmed/28368152)
+
+## Keep in touch!
+Updates and new release will be announced on our [lab website](http://perso.unifr.ch/roberto.caldara/index.php?page=3).
 Subscribe by following the link and we'll keep you informed!! 
 
 If you have any question, please email Junpeng.lao@unifr.ch
 
 
-#####Acknowledgments
+##### Acknowledgments
 The development of this toolbox was supported by the Swiss National Science Foundation (n° 100014_138627) awarded to Dr. Roberto Caldara
 
 
