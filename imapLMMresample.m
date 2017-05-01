@@ -125,7 +125,7 @@ parameters{4}       = method;
 parameters{5}       = nboot;
 ResampStat.params   = parameters;
 
-if size(DX) ~= Nitem
+if size(DX, 1) ~= Nitem
     error('The input FixMap is not the correct one!')
 end
 
