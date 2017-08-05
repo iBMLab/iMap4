@@ -23,7 +23,9 @@ end
 DS         = cat(2,dummyvar(CondiVec),dummyvar(SbjVec));
 [ds,ia,ic] = unique(DS,'rows');
 cv2        = CondiVec(ia);
-unicd      = categories(cv2);
+% unicd      = categories(cv2);
+unicdtmp   = unique(CondiVec,'stable');
+unicd      = unicdtmp(end:-1:1);
 Nc         = length(unicd);
 
 if size(ds,1)<size(DS,1) % compute the conditonal mean for each subject
@@ -101,7 +103,7 @@ if plotopt
     title('stRDM')
     axis square off;
     subplot(1,2,2)
-    imsqrmat(RDM, unicd);
+    imsqrmat(RDM, char(unicd));
     title('RDM')
 end
 end
