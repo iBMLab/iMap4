@@ -20,7 +20,11 @@ set(gcf,'color','w');
 r = {'Kindly select the categorical conditions to see their corresponding boxplots'};
 S.text_general = uicontrol('parent',S.fh,'style','text','string',r,'position',[50 250  200 30],...
     'HorizontalAlignment','center','FontWeight','Bold','Backgroundcolor','white');
-CName= ConditionM.Properties.VarNames;
+if isa(ConditionM,'dataset')
+    CName = ConditionM.Properties.VarNames;
+elseif isa(ConditionM,'table')
+    CName   = ConditionM.Properties.VariableNames;
+end
 % remove subject from CName
 CName(strcmp(CName,'subject')==1)=[];
 n = length(CName);

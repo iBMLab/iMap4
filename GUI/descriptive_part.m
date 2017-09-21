@@ -103,8 +103,11 @@ if exist('DescriptvM','var') && exist('FixMap','var')
     txtimapout(MeasureM,[],[],1)
     %% box plot for each catigorical condition
     
-    CName = ConditionM.Properties.VarNames;
-    
+    if isa(ConditionM,'dataset')
+        CName = ConditionM.Properties.VarNames;
+    elseif isa(ConditionM,'table')
+        CName   = ConditionM.Properties.VariableNames;
+    end
     for ic=1:length(CName)
         if isunix
             mkdir(strcat('Descriptive_STAT/',CName{ic}));
@@ -236,13 +239,13 @@ if exist('DescriptvM','var') && exist('FixMap','var')
                 addpath('Descriptive_STAT\',CNameall);
             end
             %%
-            label=cell(length(MeasureM),length(CName2));
-            strlabel=cell(length(MeasureM),1);
+            label=cell(size(DescriptvM,1),length(CName2));
+            strlabel=cell(size(DescriptvM,1),1);
             for icc=1:length(CName2)
                 try
                     label(:,icc)=cellstr(eval(['ConditionM.' CName2{icc}]));
                 catch
-                    for ii=1:length(MeasureM)
+                    for ii=1:size(DescriptvM,1)
                         label{ii,icc}=num2str(eval(['ConditionM.' CName2{icc} '(ii)']));
                     end
                 end
