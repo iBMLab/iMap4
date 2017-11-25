@@ -1,5 +1,9 @@
 function [himgsc,hStrings] = imsqrmat(mat, varargin)
 % pretty display for small (near)square matrix
+% Usage: 
+% [himgsc,hStrings] = imsqrmat(mat)
+% [himgsc,hStrings] = imsqrmat(mat, TickXY)
+% [himgsc,hStrings] = imsqrmat(mat, TickX, TickY)
 %--------------------------------------------------------------------------
 % Copyright (C) iMap Team 2016
 
@@ -33,5 +37,5 @@ set(gca,'XTick',  1:size(mat,2),...                         % Change the axes ti
     'YTick',      1:size(mat,1),...
     'YTickLabel', TickY,...
     'TickLength', [0 0],...
-    'xdir','reverse','ydir','normal');
+    'xdir','normal','ydir','reverse');
 end
